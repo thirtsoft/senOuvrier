@@ -1,6 +1,9 @@
 package com.ouvriers.models;
 
 import com.ouvriers.enums.RoleName;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
@@ -8,6 +11,9 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "role")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Role implements Serializable {
 
     @Id

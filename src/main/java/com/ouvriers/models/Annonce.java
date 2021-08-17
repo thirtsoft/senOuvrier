@@ -1,6 +1,9 @@
 package com.ouvriers.models;
 
 import com.ouvriers.enums.StatusAnnonce;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
@@ -9,6 +12,9 @@ import java.util.Date;
 
 @Entity
 @Table(name = "annonce")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Annonce implements Serializable {
 
     @Id

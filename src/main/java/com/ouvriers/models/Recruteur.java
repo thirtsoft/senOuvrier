@@ -1,10 +1,17 @@
 package com.ouvriers.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "recruteur")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Recruteur implements Serializable {
 
     @Id

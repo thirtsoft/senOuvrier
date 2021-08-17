@@ -1,6 +1,7 @@
 package com.ouvriers.models;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "metier")
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Metier implements Serializable {

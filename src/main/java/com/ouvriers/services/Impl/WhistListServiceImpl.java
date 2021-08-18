@@ -15,7 +15,7 @@ import java.util.List;
 public class WhistListServiceImpl implements WhistListService {
 
     private final WhistListRepository whistListRepository;
-    
+
     @Override
     public WhistListDto save(WhistListDto whistListDto) {
         return null;

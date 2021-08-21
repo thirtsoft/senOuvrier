@@ -15,20 +15,21 @@ import java.util.List;
 public class WhisListController implements WhistListApi {
 
     private final WhistListService whistListService;
-    
+
     @Override
     public ResponseEntity<WhistListDto> save(WhistListDto whistListDto) {
-        return null;
+        return ResponseEntity.ok(whistListService.save(whistListDto));
     }
 
     @Override
     public ResponseEntity<WhistListDto> update(Long id, WhistListDto whistListDto) {
-        return null;
+        whistListDto.setId(id);
+        return ResponseEntity.ok(whistListService.save(whistListDto));
     }
 
     @Override
     public ResponseEntity<WhistListDto> getWhistListById(Long id) {
-        return null;
+        return ResponseEntity.ok(whistListService.findById(id));
     }
 
     @Override
@@ -38,7 +39,7 @@ public class WhisListController implements WhistListApi {
 
     @Override
     public ResponseEntity<List<WhistListDto>> getAllWhistLists() {
-        return null;
+        return ResponseEntity.ok(whistListService.findAll());
     }
 
     @Override

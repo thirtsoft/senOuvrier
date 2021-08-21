@@ -10,8 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
@@ -29,7 +27,7 @@ public interface AnnonceApi {
             @ApiResponse(code = 400, message = "Aucun Annonce  crée / modifié")
 
     })
-    ResponseEntity<AnnonceDto> save(@RequestBody AnnonceDto AnnonceDto);
+    ResponseEntity<AnnonceDto> save(@RequestBody AnnonceDto annonceDto);
 
     @PutMapping(value = "/annonces/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Modifier un Annonce par son ID",
@@ -38,7 +36,7 @@ public interface AnnonceApi {
             @ApiResponse(code = 200, message = "L'Annonce a été modifié"),
             @ApiResponse(code = 400, message = "Aucun Annonce modifié")
     })
-    ResponseEntity<AnnonceDto> update(@PathVariable("idAnnonce") Long id, @RequestBody AnnonceDto AnnonceDto);
+    ResponseEntity<AnnonceDto> update(@PathVariable("idAnnonce") Long id, @RequestBody AnnonceDto annonceDto);
 
     @GetMapping(value = APP_ROOT + "/annonces/{idAnnonce}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Rechercher un Annonce par ID",
@@ -110,16 +108,16 @@ public interface AnnonceApi {
                             @PathVariable("idAnnonce") Long idAnnonce) throws IOException;
 
     @GetMapping(value = APP_ROOT + "/annonces/searchAnnonceByLocalityPageables", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Page<AnnonceDto> getAnnonceByLocalityPageables(@RequestParam("id") Long addId,
-                                                          @RequestParam(name = "page") int page,
-                                                          @RequestParam(name = "size") int size);
+    Page<AnnonceDto> getAnnonceByLocalityPageables(@RequestParam("id") Long addId,
+                                                   @RequestParam(name = "page") int page,
+                                                   @RequestParam(name = "size") int size);
 
     @GetMapping(value = APP_ROOT + "/annonces/searchAnnonceByMetierPageables",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public Page<AnnonceDto> getAnnonceByMetierPageables(
-                            @RequestParam("id") Long permisId,
-                            @RequestParam(name = "page") int page,
-                            @RequestParam(name = "size") int size);
+    Page<AnnonceDto> getAnnonceByMetierPageables(
+            @RequestParam("id") Long metierId,
+            @RequestParam(name = "page") int page,
+            @RequestParam(name = "size") int size);
 
 
 }

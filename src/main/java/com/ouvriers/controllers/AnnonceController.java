@@ -5,6 +5,8 @@ import com.ouvriers.dtos.AnnonceDto;
 import com.ouvriers.services.AnnonceService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,48 +22,45 @@ public class AnnonceController implements AnnonceApi {
     private final AnnonceService annonceService;
 
     @Override
-    public ResponseEntity<AnnonceDto> save(AnnonceDto AnnonceDto) {
-        return null;
+    public ResponseEntity<AnnonceDto> save(AnnonceDto annonceDto) {
+        return ResponseEntity.ok(annonceService.save(annonceDto));
     }
 
     @Override
-    public ResponseEntity<AnnonceDto> update(Long id, AnnonceDto AnnonceDto) {
-        return null;
+    public ResponseEntity<AnnonceDto> update(Long id, AnnonceDto annonceDto) {
+        annonceDto.setId(id);
+        return ResponseEntity.ok(annonceService.save(annonceDto));
+
     }
 
     @Override
     public ResponseEntity<AnnonceDto> getAnnonceById(Long id) {
-        return null;
+        return ResponseEntity.ok(annonceService.findById(id));
     }
 
     @Override
     public ResponseEntity<AnnonceDto> getAnnonceByRerefence(String reference) {
-        return null;
+        return ResponseEntity.ok(annonceService.findByReference(reference));
     }
 
     @Override
     public ResponseEntity<List<AnnonceDto>> getAllAnnonces() {
-        return null;
+        return ResponseEntity.ok(annonceService.findAll());
     }
 
     @Override
     public ResponseEntity<List<AnnonceDto>> getListOfAnnoncesByMetiers(Long pId) {
-        return null;
+        return ResponseEntity.ok(annonceService.findListAnnonceByMetier(pId));
     }
 
     @Override
     public ResponseEntity<List<AnnonceDto>> getListOfAnnoncesByKeyword(String keyword) {
-        return null;
+        return ResponseEntity.ok(annonceService.findListAnnonceByKeyword("%" + keyword + "%"));
     }
 
     @Override
     public BigDecimal getNumbersOfAnnonces() {
-        return null;
-    }
-
-    @Override
-    public Page<AnnonceDto> getListAnnonceByPageable(int page, int size) {
-        return null;
+        return annonceService.countNumbersOfAnnonces();
     }
 
     @Override
@@ -75,12 +74,19 @@ public class AnnonceController implements AnnonceApi {
     }
 
     @Override
+    public Page<AnnonceDto> getListAnnonceByPageable(int page, int size) {
+        final Pageable pageable = PageRequest.of(page, size);
+        return annonceService.findAnnonceByPageable(pageable);
+    }
+
+    @Override
     public Page<AnnonceDto> getAnnonceByLocalityPageables(Long addId, int page, int size) {
         return null;
     }
 
     @Override
-    public Page<AnnonceDto> getAnnonceByMetierPageables(Long permisId, int page, int size) {
-        return null;
+    public Page<AnnonceDto> getAnnonceByMetierPageables(Long metierId, int page, int size) {
+        final Pageable pageable = PageRequest.of(page, size);
+        return annonceService.findAnnonceByMetierByPageable(metierId, pageable);
     }
 }

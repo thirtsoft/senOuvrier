@@ -18,18 +18,19 @@ public class RecruteurController implements RecruteurApi {
     private final RecruteurService recruteurService;
 
     @Override
-    public ResponseEntity<RecruteurDto> save(RecruteurDto RecruteurDto) {
-        return null;
+    public ResponseEntity<RecruteurDto> save(RecruteurDto recruteurDto) {
+        return ResponseEntity.ok(recruteurService.save(recruteurDto));
     }
 
     @Override
-    public ResponseEntity<RecruteurDto> update(Long id, RecruteurDto RecruteurDto) {
-        return null;
+    public ResponseEntity<RecruteurDto> update(Long id, RecruteurDto recruteurDto) {
+        recruteurDto.setId(id);
+        return ResponseEntity.ok(recruteurService.save(recruteurDto));
     }
 
     @Override
     public ResponseEntity<RecruteurDto> getRecruteurById(Long id) {
-        return null;
+        return ResponseEntity.ok(recruteurService.findById(id));
     }
 
     @Override
@@ -39,7 +40,7 @@ public class RecruteurController implements RecruteurApi {
 
     @Override
     public ResponseEntity<List<RecruteurDto>> getAllRecruteurs() {
-        return null;
+        return ResponseEntity.ok(recruteurService.findAll());
     }
 
     @Override
@@ -49,7 +50,7 @@ public class RecruteurController implements RecruteurApi {
 
     @Override
     public BigDecimal getNumbersOfRecruteurs() {
-        return null;
+        return recruteurService.countNumbersOfRecruteurs();
     }
 
     @Override

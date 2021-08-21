@@ -18,17 +18,18 @@ public class TarifController implements TarifApi {
 
     @Override
     public ResponseEntity<TarifDto> save(TarifDto tarifDto) {
-        return null;
+        return ResponseEntity.ok(tarifService.save(tarifDto));
     }
 
     @Override
     public ResponseEntity<TarifDto> update(Long id, TarifDto tarifDto) {
-        return null;
+        tarifDto.setId(id);
+        return ResponseEntity.ok(tarifService.save(tarifDto));
     }
 
     @Override
     public ResponseEntity<TarifDto> getTarifById(Long id) {
-        return null;
+        return ResponseEntity.ok(tarifService.findById(id));
     }
 
     @Override
@@ -38,7 +39,7 @@ public class TarifController implements TarifApi {
 
     @Override
     public ResponseEntity<List<TarifDto>> getAllTarifs() {
-        return null;
+        return ResponseEntity.ok(tarifService.findAll());
     }
 
     @Override

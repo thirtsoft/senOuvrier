@@ -19,37 +19,38 @@ public class MetierController implements MetierApi {
 
     @Override
     public ResponseEntity<MetierDto> save(MetierDto metierDto) {
-        return null;
+        return ResponseEntity.ok(metierService.save(metierDto));
     }
 
     @Override
-    public ResponseEntity<MetierDto> update(Long id, MetierDto MetierDto) {
-        return null;
+    public ResponseEntity<MetierDto> update(Long id, MetierDto metierDto) {
+        metierDto.setId(id);
+        return ResponseEntity.ok(metierService.save(metierDto));
     }
 
     @Override
     public ResponseEntity<MetierDto> getMetierById(Long id) {
-        return null;
+        return ResponseEntity.ok(metierService.findById(id));
     }
 
     @Override
     public ResponseEntity<MetierDto> getMetierByRerefence(String reference) {
-        return null;
+        return ResponseEntity.ok(metierService.findByReference("%" + reference + "%"));
     }
 
     @Override
     public ResponseEntity<List<MetierDto>> getAllMetiers() {
-        return null;
+        return ResponseEntity.ok(metierService.findAll());
     }
 
     @Override
     public ResponseEntity<List<MetierDto>> getListOfMetiersByKeyword(String keyword) {
-        return null;
+        return ResponseEntity.ok(metierService.findListMetierByReference("%" + keyword + "%"));
     }
 
     @Override
     public BigDecimal getNumbersOfMetiers() {
-        return null;
+        return metierService.countNumbersOfMetiers();
     }
 
     @Override

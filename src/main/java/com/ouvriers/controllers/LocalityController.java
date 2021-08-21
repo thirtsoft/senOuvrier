@@ -19,17 +19,18 @@ public class LocalityController implements LocalityApi {
 
     @Override
     public ResponseEntity<AddresseDto> save(AddresseDto addresseDto) {
-        return null;
+        return ResponseEntity.ok(addresseService.save(addresseDto));
     }
 
     @Override
-    public ResponseEntity<AddresseDto> update(Long id, AddresseDto AddresseDto) {
-        return null;
+    public ResponseEntity<AddresseDto> update(Long id, AddresseDto addresseDto) {
+        addresseDto.setId(id);
+        return ResponseEntity.ok(addresseService.save(addresseDto));
     }
 
     @Override
     public ResponseEntity<AddresseDto> getAddressById(Long id) {
-        return null;
+        return ResponseEntity.ok(addresseService.findById(id));
     }
 
     @Override
@@ -39,7 +40,7 @@ public class LocalityController implements LocalityApi {
 
     @Override
     public ResponseEntity<List<AddresseDto>> getAllLocalities() {
-        return null;
+        return ResponseEntity.ok(addresseService.findAll());
     }
 
     @Override

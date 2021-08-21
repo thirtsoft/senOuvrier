@@ -27,7 +27,7 @@ public interface RecruteurApi {
             @ApiResponse(code = 400, message = "Aucun Recruteur  crée / modifié")
 
     })
-    ResponseEntity<RecruteurDto> save(@RequestBody RecruteurDto RecruteurDto);
+    ResponseEntity<RecruteurDto> save(@RequestBody RecruteurDto recruteurDto);
 
     @PutMapping(value = "/recruteurs/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -37,7 +37,7 @@ public interface RecruteurApi {
             @ApiResponse(code = 200, message = "L'Recruteur a été modifié"),
             @ApiResponse(code = 400, message = "Aucun Recruteur modifié")
     })
-    ResponseEntity<RecruteurDto> update(@PathVariable("idRecruteur") Long id, @RequestBody RecruteurDto RecruteurDto);
+    ResponseEntity<RecruteurDto> update(@PathVariable("idRecruteur") Long id, @RequestBody RecruteurDto recruteurDto);
 
     @GetMapping(value = APP_ROOT + "/recruteurs/{idRecruteur}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Rechercher un Recruteur par ID",

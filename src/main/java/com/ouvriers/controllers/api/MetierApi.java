@@ -35,7 +35,7 @@ public interface MetierApi {
             @ApiResponse(code = 200, message = "L'Metier a été modifié"),
             @ApiResponse(code = 400, message = "Aucun Metier modifié")
     })
-    ResponseEntity<MetierDto> update(@PathVariable("idMetier") Long id, @RequestBody MetierDto MetierDto);
+    ResponseEntity<MetierDto> update(@PathVariable("idMetier") Long id, @RequestBody MetierDto metierDto);
 
     @GetMapping(value = APP_ROOT + "/metiers/{idMetier}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Rechercher un Metier par ID",
@@ -88,10 +88,10 @@ public interface MetierApi {
     @GetMapping(value = APP_ROOT + "/metiers/searchmetiersByPageables",
             produces = MediaType.APPLICATION_JSON_VALUE)
     Page<MetierDto> getListMetierByPageable(@RequestParam(name = "page") int page,
-                                               @RequestParam(name = "size") int size);
+                                            @RequestParam(name = "size") int size);
 
     @GetMapping(value = APP_ROOT + "/metiers/searchMetierByLocalityPageables", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Page<MetierDto> getMetierByLocalityPageables(@RequestParam("id") Long addId,
-                                                           @RequestParam(name = "page") int page,
-                                                           @RequestParam(name = "size") int size);
+    Page<MetierDto> getMetierByLocalityPageables(@RequestParam("id") Long addId,
+                                                 @RequestParam(name = "page") int page,
+                                                 @RequestParam(name = "size") int size);
 }

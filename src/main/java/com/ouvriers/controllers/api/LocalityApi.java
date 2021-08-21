@@ -35,7 +35,7 @@ public interface LocalityApi {
             @ApiResponse(code = 200, message = "L'Address a été modifié"),
             @ApiResponse(code = 400, message = "Aucun Address modifié")
     })
-    ResponseEntity<AddresseDto> update(@PathVariable("idAddress") Long id, @RequestBody AddresseDto AddresseDto);
+    ResponseEntity<AddresseDto> update(@PathVariable("idAddress") Long id, @RequestBody AddresseDto addresseDto);
 
     @GetMapping(value = APP_ROOT + "/localities/{idAddress}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Rechercher un Address par ID",
@@ -88,10 +88,10 @@ public interface LocalityApi {
     @GetMapping(value = APP_ROOT + "/localities/searchlocalitiesByPageables",
             produces = MediaType.APPLICATION_JSON_VALUE)
     Page<AddresseDto> getListAddressByPageable(@RequestParam(name = "page") int page,
-                                                  @RequestParam(name = "size") int size);
+                                               @RequestParam(name = "size") int size);
 
     @GetMapping(value = APP_ROOT + "/localities/searchAddressByLocalityPageables", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Page<AddresseDto> getAddressByLocalityPageables(@RequestParam("id") Long addId,
-                                                              @RequestParam(name = "page") int page,
-                                                              @RequestParam(name = "size") int size);
+    Page<AddresseDto> getAddressByLocalityPageables(@RequestParam("id") Long addId,
+                                                    @RequestParam(name = "page") int page,
+                                                    @RequestParam(name = "size") int size);
 }

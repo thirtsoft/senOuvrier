@@ -40,9 +40,23 @@ public interface OuvrierApi {
 
     })
     ResponseEntity<OuvrierDto> saveOuvrierWithFiles(
-            @RequestPart(name = "ouvrier") String OuvrierDto,
+            @RequestPart(name = "ouvrier") String ouvrierDto,
             @RequestParam(name = "photoOuvrier") MultipartFile photoOuvrier,
             @RequestParam(name = "cvOuvrier") MultipartFile cvOuvrier) throws IOException;
+
+    @PostMapping(value = APP_ROOT + "/ouvriers/createWithFiles")
+    @ApiOperation(value = "Enregistrer un ouvrier avec une photo et un cv",
+            notes = "Cette méthode permet d'enregistrer un ouvrier avec sa photo et son cv", response = OuvrierDto.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "L'ouvrier a été crée / modifié"),
+            @ApiResponse(code = 400, message = "Aucun ouvrier  crée / modifié")
+
+    })
+    ResponseEntity<OuvrierDto> saveOuvrierWithPhotoAndCv(
+            @RequestPart(name = "ouvrier") String ouvrierDto,
+            @RequestParam(name = "photoOuvrier") MultipartFile photoOuvrier,
+            @RequestParam(name = "cvOuvrier") MultipartFile cvOuvrier) throws IOException;
+
 
     @PutMapping(value = "/ouvriers/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Modifier un ouvrier par son ID",
@@ -129,37 +143,35 @@ public interface OuvrierApi {
 
     @PostMapping(path = APP_ROOT + "/ouvriers/uploadOuvrierPhoto/{idOuvrier}")
     void uploadPhotoOuvrier(@RequestParam(name = "photoArticle") MultipartFile photoOuvrier,
-                              @PathVariable("idOuvrier") Long idOuvrier) throws IOException;
+                            @PathVariable("idOuvrier") Long idOuvrier) throws IOException;
 
     @GetMapping(value = APP_ROOT + "/ouvriers/cvOuvrier/{idOuvrier}")
     byte[] getCvOuvrier(@PathVariable("idOuvrier") Long id) throws Exception;
 
     @PostMapping(path = APP_ROOT + "/ouvriers/uploadOuvrierCv/{idOuvrier}")
     void uploadCvOuvrier(@RequestParam(name = "cvOuvrier") MultipartFile cvOuvrier,
-                           @PathVariable("idOuvrier") Long idOuvrier) throws IOException;
+                         @PathVariable("idOuvrier") Long idOuvrier) throws IOException;
 
     @RequestMapping(value = APP_ROOT + "/ouvriers/downloadContratFile/{fileName:.+}")
-    public void downloadOuvrierFile(HttpServletRequest request, HttpServletResponse response,
-                                    @PathVariable("fileName") String fileName) throws IOException;
+    void downloadOuvrierFile(HttpServletRequest request, HttpServletResponse response,
+                             @PathVariable("fileName") String fileName) throws IOException;
 
     @GetMapping(value = APP_ROOT + "/ouvriers/searchOuvrierByDisponibityByPageables", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Page<OuvrierDto> getOuvrierByKeywordByPageable(@RequestParam(name = "dispo") String mc,
-                                                              @RequestParam(name = "page") int page,
-                                                              @RequestParam(name = "size") int size);
+    Page<OuvrierDto> getOuvrierByKeywordByPageable(@RequestParam(name = "dispo") String mc,
+                                                   @RequestParam(name = "page") int page,
+                                                   @RequestParam(name = "size") int size);
 
     @GetMapping(value = APP_ROOT + "/ouvriers/searchOuvrierByLocalityPageables", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Page<OuvrierDto> getOuvrierByLocalityPageables(@RequestParam("id") Long addId,
-                                                              @RequestParam(name = "page") int page,
-                                                              @RequestParam(name = "size") int size);
+    Page<OuvrierDto> getOuvrierByLocalityPageables(@RequestParam("id") Long addId,
+                                                   @RequestParam(name = "page") int page,
+                                                   @RequestParam(name = "size") int size);
 
     @GetMapping(value = APP_ROOT + "/ouvriers/searchOuvrierByMetierPageables",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public Page<OuvrierDto> getOuvrierByMetierPageables(
-                            @RequestParam("id") Long permisId,
-                            @RequestParam(name = "page") int page,
-                            @RequestParam(name = "size") int size);
-
-
+    Page<OuvrierDto> getOuvrierByMetierPageables(
+            @RequestParam("id") Long permisId,
+            @RequestParam(name = "page") int page,
+            @RequestParam(name = "size") int size);
 
 
 }

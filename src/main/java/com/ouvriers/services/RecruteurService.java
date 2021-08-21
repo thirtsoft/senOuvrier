@@ -1,6 +1,5 @@
 package com.ouvriers.services;
 
-import com.ouvriers.dtos.AddresseDto;
 import com.ouvriers.dtos.RecruteurDto;
 
 import java.math.BigDecimal;
@@ -14,10 +13,11 @@ public interface RecruteurService {
 
     RecruteurDto findById(Long id);
 
+    BigDecimal countNumbersOfRecruteurs();
+
     List<RecruteurDto> findAll();
 
     void delete(Long id);
 
-    BigDecimal countNumbersOfRecruteurs();
 
 }

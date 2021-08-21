@@ -27,11 +27,9 @@ public class AnnonceDto {
 
     private String salaire;
 
-    private String modeCandidature;
-
     private String time;
 
-    private int anneeExperience;
+    private String anneeExperience;
 
     private String description;
 

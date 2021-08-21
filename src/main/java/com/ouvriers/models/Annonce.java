@@ -40,7 +40,7 @@ public class Annonce implements Serializable {
     private String time;
 
     @Column(name = "anneeExperience")
-    private int anneeExperience;
+    private String anneeExperience;
 
     @Column(name = "description", length = 200)
     @Lob

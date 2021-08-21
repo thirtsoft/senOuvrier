@@ -26,22 +26,22 @@ public interface OuvrierService {
 
     List<OuvrierDto> findAll();
 
-    List<OuvrierDto> findListOuvrierByMetier(Long pId);
+    List<OuvrierDto> findListOfOuvriersByMetier(Long pId);
 
-    List<OuvrierDto> findListOuvrierByKeyword(String keyword);
+    List<OuvrierDto> findListOfOuvriersByKeyword(String keyword);
 
-    List<OuvrierDto> findOuvrierByDisponibility(String disponility);
+    List<OuvrierDto> findListOfOuvriersByDisponibility(String disponility);
 
     BigDecimal countNumbersOfOuvriers();
 
-    Page<OuvrierDto> findOuvrierByPageable(Pageable pageable);
+    Page<OuvrierDto> findOuvriersByPageable(Pageable pageable);
 
-    Page<OuvrierDto> findOuvrierByKeywordByPageable(String mc, Pageable pageable);
+    Page<OuvrierDto> findOuvriersByKeywordByPageable(String mc, Pageable pageable);
 
 
-    Page<OuvrierDto> findOuvrierByLocalityPageables(Long addId, Pageable pageable);
+    Page<OuvrierDto> findOuvriersByLocalityPageables(Long addId, Pageable pageable);
 
-    Page<OuvrierDto> findOuvrierByMetierPageables(@Param("permId") Long MetierId, Pageable pageable);
+    Page<OuvrierDto> findOuvriersByMetierPageables(@Param("permId") Long metierId, Pageable pageable);
 
     void delete(Long id);
 

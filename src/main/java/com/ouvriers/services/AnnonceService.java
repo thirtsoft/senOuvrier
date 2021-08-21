@@ -24,15 +24,13 @@ public interface AnnonceService {
 
     List<AnnonceDto> findListAnnonceByLibelle(String libelle);
 
-    List<AnnonceDto> findListAnnonceByPermis(Long pId);
+    List<AnnonceDto> findListAnnonceByMetier(Long pId);
 
     BigDecimal countNumbersOfAnnonces();
 
     Page<AnnonceDto> findAnnonceByPageable(Pageable pageable);
 
-    Page<AnnonceDto> findAnnonceByPermisByPageable(Long permisId, Pageable pageable);
-
-
+    Page<AnnonceDto> findAnnonceByMetierByPageable(Long metierId, Pageable pageable);
 
     void delete(Long id);
 

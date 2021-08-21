@@ -28,17 +28,17 @@ public class OuvrierDto {
 
     private String email;
 
-    private String phoneChauffeur;
+    private String phoneOuvrier;
 
-    private Integer nbreAnneeExperience;
+    private String nbreAnneeExperience;
 
-    private Double pretentionSalaire;
+    private double pretentionSalaire;
 
-    private String cvChauffeur;
+    private String cvOuvrier;
 
     private String mobilite;
 
-    private String photoChauffeur;
+    private String photoOuvrier;
 
     private MetierDto metierDto;
 
@@ -56,14 +56,14 @@ public class OuvrierDto {
                 .lastName(ouvrier.getLastName())
                 .sexe(ouvrier.getSexe())
                 .email(ouvrier.getEmail())
-                .phoneChauffeur(ouvrier.getPhoneOuvrier())
+                .phoneOuvrier(ouvrier.getPhoneOuvrier())
                 .nbreAnneeExperience(ouvrier.getNbreAnneeExperience())
                 .pretentionSalaire(ouvrier.getPretentionSalaire())
                 .addressActuel(ouvrier.getAddressActuel())
                 .disponibity(ouvrier.getDisponibity())
-                .cvChauffeur(ouvrier.getCvOuvrier())
+                .cvOuvrier(ouvrier.getCvOuvrier())
                 .mobilite(ouvrier.getMobilite())
-                .photoChauffeur(ouvrier.getPhotoOuvrier())
+                .photoOuvrier(ouvrier.getPhotoOuvrier())
                 .metierDto(MetierDto.fromEntityToDto(ouvrier.getMetier()))
                 .addresseDto(AddresseDto.fromEntityToDto(ouvrier.getAddresse()))
                 .build();
@@ -81,14 +81,14 @@ public class OuvrierDto {
         ouvrier.setLastName(ouvrierDto.getLastName());
         ouvrier.setSexe(ouvrierDto.getSexe());
         ouvrier.setEmail(ouvrierDto.getEmail());
-        ouvrier.setPhoneOuvrier(ouvrierDto.getPhoneChauffeur());
+        ouvrier.setPhoneOuvrier(ouvrierDto.getPhoneOuvrier());
         ouvrier.setNbreAnneeExperience(ouvrierDto.getNbreAnneeExperience());
         ouvrier.setPretentionSalaire(ouvrierDto.getPretentionSalaire());
-        ouvrier.setCvOuvrier(ouvrierDto.getCvChauffeur());
+        ouvrier.setCvOuvrier(ouvrierDto.getCvOuvrier());
         ouvrier.setAddressActuel(ouvrierDto.getAddressActuel());
         ouvrier.setDisponibity(ouvrierDto.getDisponibity());
         ouvrier.setMobilite(ouvrierDto.getMobilite());
-        ouvrier.setPhotoOuvrier(ouvrierDto.getPhotoChauffeur());
+        ouvrier.setPhotoOuvrier(ouvrierDto.getPhotoOuvrier());
         ouvrier.setMetier(MetierDto.fromDtoToEntity(ouvrierDto.getMetierDto()));
         ouvrier.setAddresse(AddresseDto.fromDtoToEntity(ouvrierDto.getAddresseDto()));
 

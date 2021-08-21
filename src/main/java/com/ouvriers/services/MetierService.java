@@ -2,6 +2,7 @@ package com.ouvriers.services;
 
 import com.ouvriers.dtos.MetierDto;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface MetierService {
@@ -12,7 +13,15 @@ public interface MetierService {
 
     MetierDto findById(Long id);
 
+    MetierDto findByReference(String reference);
+
+    MetierDto findByDesignation(String designation);
+
     List<MetierDto> findAll();
+
+    List<MetierDto> findListMetierByReference(String keyword);
+
+    BigDecimal countNumbersOfMetiers();
 
     void delete(Long id);
 

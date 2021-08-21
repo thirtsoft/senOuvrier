@@ -42,10 +42,10 @@ public class Ouvrier implements Serializable {
     private String phoneOuvrier;
 
     @Column(name = "experience", length = 50)
-    private Integer nbreAnneeExperience;
+    private String nbreAnneeExperience;
 
     @Column(name = "pretentionSalaire", length = 90)
-    private Double pretentionSalaire;
+    private double pretentionSalaire;
 
     @Column(name = "mobilite", length = 100)
     private String mobilite;

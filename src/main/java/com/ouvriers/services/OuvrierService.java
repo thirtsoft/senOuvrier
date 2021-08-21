@@ -1,6 +1,5 @@
 package com.ouvriers.services;
 
-import com.ouvriers.dtos.AddresseDto;
 import com.ouvriers.dtos.OuvrierDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,11 +14,11 @@ public interface OuvrierService {
 
     OuvrierDto save(OuvrierDto ouvrierDto);
 
-    OuvrierDto update(Long idChauffeur, OuvrierDto ouvrierDto);
+    OuvrierDto update(Long idOuvrier, OuvrierDto ouvrierDto);
 
     OuvrierDto saveOuvrierWithFiles(String ouvrierDto,
-                                      MultipartFile photoChauffeur,
-                                      MultipartFile cvChauffeur) throws IOException;
+                                    MultipartFile photoOuvrier,
+                                    MultipartFile cvOuvrier) throws IOException;
 
     OuvrierDto findById(Long id);
 
@@ -27,22 +26,22 @@ public interface OuvrierService {
 
     List<OuvrierDto> findAll();
 
-    List<OuvrierDto> findListChauffeurByPermis(Long pId);
+    List<OuvrierDto> findListOuvrierByMetier(Long pId);
 
-    List<OuvrierDto> findListChauffeurByKeyword(String keyword);
+    List<OuvrierDto> findListOuvrierByKeyword(String keyword);
 
-    List<OuvrierDto> findChauffeurByDisponibility(String disponility);
+    List<OuvrierDto> findOuvrierByDisponibility(String disponility);
 
-    BigDecimal countNumbersOfChauffeurs();
+    BigDecimal countNumbersOfOuvriers();
 
-    Page<OuvrierDto> findChauffeurByPageable(Pageable pageable);
+    Page<OuvrierDto> findOuvrierByPageable(Pageable pageable);
 
-    Page<OuvrierDto> findChauffeurByKeywordByPageable(String mc, Pageable pageable);
+    Page<OuvrierDto> findOuvrierByKeywordByPageable(String mc, Pageable pageable);
 
 
-    Page<OuvrierDto> findChauffeurByLocalityPageables(Long addId, Pageable pageable);
+    Page<OuvrierDto> findOuvrierByLocalityPageables(Long addId, Pageable pageable);
 
-    Page<OuvrierDto> findChauffeurByPermisPageables(@Param("permId") Long permisId, Pageable pageable);
+    Page<OuvrierDto> findOuvrierByMetierPageables(@Param("permId") Long MetierId, Pageable pageable);
 
     void delete(Long id);
 

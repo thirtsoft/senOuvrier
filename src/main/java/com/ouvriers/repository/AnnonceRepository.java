@@ -17,7 +17,27 @@ public interface AnnonceRepository extends JpaRepository<Annonce, Long> {
 
     Optional<Annonce> findByReference(String reference);
 
-    @Query("select annnonce from Annonce art where annnonce.reference like :x")
+    @Query("select count(p) from Annonce p ")
+    BigDecimal countNumberOfAnnonces();
+
+    @Query("select count(c) from Annonce c where month(c.createdDate) = month(current_date)")
+    BigDecimal countNumberOfAnnoncesInMonth();
+
+    @Query("select count(c) from Annonce c where c.status = 'ENCOURS' ")
+    BigDecimal countNumberOfAnnonceByStatusPending();
+
+    @Query("select count(c) from Annonce c where c.status = 'VALID' ")
+    BigDecimal countNumberOfAnnonceByStatusValidated();
+
+    @Query("select count(c) from Annonce c where c.status = 'REFUSED' ")
+    BigDecimal countNumberOfAnnonceByStatusRefused();
+
+    List<Annonce> findByOrderByIdDesc();
+
+    @Query("select art from Annonce art where art.selected = true")
+    List<Annonce> findAnnonceBySelected();
+
+    @Query("select annnonce from Annonce annnonce where annnonce.reference like :x")
     List<Annonce> findAnnonceByKeyword(@Param("x") String mc);
 
     @Query("select art from Annonce art where art.libelle like :y")
@@ -26,8 +46,28 @@ public interface AnnonceRepository extends JpaRepository<Annonce, Long> {
     @Query("select p from Annonce p where p.metier.id =:mId")
     List<Annonce> findListAnnonceByMetier(@Param("mId") Long metierId);
 
-    @Query("select count(p) from Annonce p ")
-    BigDecimal countNumberOfAnnonces();
+    List<Annonce> findTop8ByOrderByIdDesc();
+
+    @Query("select p from Annonce p where p.utilisateur.id =:user")
+    Optional<Annonce> FindAnnonceByCustomerId(@Param("user") Long userId);
+
+    @Query("select p from Annonce p where p.utilisateur.id =:user order by id Desc")
+    List<Annonce> FindListAnnonceByCustomerId(@Param("user") Long userId);
+
+    @Query("select c from Annonce c where c.status = 'ENCOURS' order by id Desc ")
+    List<Annonce> findListAnnonceByStatusPending();
+
+    @Query("select c from Annonce c where c.status = 'VALID' order by id Desc ")
+    List<Annonce> findListAnnonceByStatusValid();
+
+    @Query("select c from Annonce c where c.status = 'REFUSED' order by id Desc ")
+    List<Annonce> findListAnnonceByStatusRefused();
+
+    @Query("select EXTRACT(month from(c.createdDate)), count(c) from Annonce c group by EXTRACT(month from(c.createdDate))")
+    List<?> countNumberOfAnnonceByMonth();
+
+    @Query("select EXTRACT(year from(c.createdDate)), count(c) from Annonce c group by EXTRACT(year from(c.createdDate))")
+    List<?> countNumberOfAnnonceByYear();
 
     @Query("select p from Annonce p")
     Page<Annonce> findAnnonceByPageable(Pageable pageable);

@@ -21,6 +21,8 @@ public interface MetierService {
 
     List<MetierDto> findListMetierByReference(String keyword);
 
+    List<MetierDto> findByMetierByIdDesc();
+
     BigDecimal countNumbersOfMetiers();
 
     void delete(Long id);

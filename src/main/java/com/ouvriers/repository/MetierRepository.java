@@ -22,6 +22,8 @@ public interface MetierRepository extends JpaRepository<Metier, Long> {
     @Query("select art from Metier art where art.reference like :y")
     List<Metier> findListMetierByReference(@Param("y") String reference);
 
+    List<Metier> findListOfMetierByOrderByIdDesc();
+
     @Query("select count(p) from Metier p ")
     BigDecimal countNumberOfMetiers();
 

@@ -7,6 +7,8 @@ import com.ouvriers.repository.TarifRepository;
 import com.ouvriers.services.TarifService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -77,6 +79,42 @@ public class TarifServiceImpl implements TarifService {
                 .stream()
                 .map(TarifDto::fromEntityToDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<TarifDto> findByTarifByIdDesc() {
+        return tarifRepository.findTarifByOrderByIdDesc()
+                .stream()
+                .map(TarifDto::fromEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<TarifDto> findListTarifDtoByKeyword(String keyword) {
+        return tarifRepository.findTarifByKeyword(keyword)
+                .stream()
+                .map(TarifDto::fromEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<TarifDto> findListTarifDtoByAnnonce(Long pId) {
+        return tarifRepository.findTarifByAnnonce(pId)
+                .stream()
+                .map(TarifDto::fromEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Page<TarifDto> findTarifByPageable(Pageable pageable) {
+        return tarifRepository.findTarif(pageable)
+                .map(TarifDto::fromEntityToDto);
+    }
+
+    @Override
+    public Page<TarifDto> findTarifByAnnonceByPageable(Long annonceId, Pageable pageable) {
+        return tarifRepository.findTarifByAnnoncePageables(annonceId, pageable)
+                .map(TarifDto::fromEntityToDto);
     }
 
     @Override

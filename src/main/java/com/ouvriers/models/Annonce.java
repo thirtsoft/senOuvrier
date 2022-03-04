@@ -42,6 +42,12 @@ public class Annonce implements Serializable {
     @Column(name = "anneeExperience")
     private String anneeExperience;
 
+    @Column(name = "typeContrat")
+    private String typeContrat;
+
+    @Column(name = "isSelected")
+    private boolean selected;
+
     @Column(name = "description", length = 200)
     @Lob
     private String description;
@@ -57,6 +63,9 @@ public class Annonce implements Serializable {
     @Column(length = 90)
     private StatusAnnonce statusAnnonce;
 
+    @Column(name = "status")
+    private String status;
+
     @ManyToOne
     @JoinColumn(name = "metierId")
     private Metier metier;
@@ -65,8 +74,16 @@ public class Annonce implements Serializable {
     @JoinColumn(name = "recrId")
     private Recruteur recruteur;
 
-    @ManyToOne
+/*    @ManyToOne
     @JoinColumn(name = "villeId")
-    private Ville ville;
+    private Ville ville;*/
+
+    @ManyToOne
+    @JoinColumn(name = "addresseId")
+    private Addresse addresse;
+
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private Utilisateur utilisateur;
 
 }

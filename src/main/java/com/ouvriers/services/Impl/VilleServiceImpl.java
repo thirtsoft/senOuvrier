@@ -79,6 +79,15 @@ public class VilleServiceImpl implements VilleService {
     }
 
     @Override
+    public List<VilleDto> findByVillesByIdDesc() {
+        return villeRepository.findVilleByOrderByIdDesc()
+                .stream()
+                .map(VilleDto::fromEntityToDto)
+                .collect(Collectors.toList());
+
+    }
+
+    @Override
     public void delete(Long id) {
         if (id == null) {
             log.error("Ville Id is null");

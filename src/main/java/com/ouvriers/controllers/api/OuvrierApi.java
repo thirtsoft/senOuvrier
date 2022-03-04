@@ -44,6 +44,8 @@ public interface OuvrierApi {
             @RequestParam(name = "photoOuvrier") MultipartFile photoOuvrier,
             @RequestParam(name = "cvOuvrier") MultipartFile cvOuvrier) throws IOException;
 
+
+    /*
     @PostMapping(value = APP_ROOT + "/ouvriers/createWithFiles")
     @ApiOperation(value = "Enregistrer un ouvrier avec une photo et un cv",
             notes = "Cette méthode permet d'enregistrer un ouvrier avec sa photo et son cv", response = OuvrierDto.class)
@@ -56,9 +58,9 @@ public interface OuvrierApi {
             @RequestPart(name = "ouvrier") String ouvrierDto,
             @RequestParam(name = "photoOuvrier") MultipartFile photoOuvrier,
             @RequestParam(name = "cvOuvrier") MultipartFile cvOuvrier) throws IOException;
+*/
 
-
-    @PutMapping(value = "/ouvriers/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/ouvriers/update/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Modifier un ouvrier par son ID",
             notes = "Cette méthode permet de modifier un ouvrier par son ID", response = OuvrierDto.class)
     @ApiResponses(value = {
@@ -67,7 +69,7 @@ public interface OuvrierApi {
     })
     ResponseEntity<OuvrierDto> update(@PathVariable("idOuvrier") Long id, @RequestBody OuvrierDto ouvrierDto);
 
-    @GetMapping(value = APP_ROOT + "/ouvriers/{idOuvrier}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = APP_ROOT + "/ouvriers/findById/{idOuvrier}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Rechercher un Ouvrier par ID",
             notes = "Cette méthode permet de chercher un Ouvrier par son ID", response = OuvrierDto.class
     )
@@ -78,7 +80,7 @@ public interface OuvrierApi {
     })
     ResponseEntity<OuvrierDto> getOuvrierById(@PathVariable("idOuvrier") Long id);
 
-    @GetMapping(value = "ouvriers/searchOuvrierByReference", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "ouvriers/findByReference/searchOuvrierByReference", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Rechercher un Ouvrier par Reference",
             notes = "Cette méthode permet de chercher un Ouvrier par son Reference", response = OuvrierDto.class
     )

@@ -1,31 +1,37 @@
 package com.ouvriers.services;
 
-import com.ouvriers.dtos.TarifDto;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.ouvriers.dtos.UtilisateurDto;
+import com.ouvriers.enums.RoleName;
 
 import java.util.List;
 
 public interface UtilisateurService {
 
-    TarifDto save(TarifDto tarifDto);
+    UtilisateurDto save(UtilisateurDto utilisateurDto);
 
-    TarifDto update(Long idTarif, TarifDto tarifDto);
+    UtilisateurDto update(Long id, UtilisateurDto utilisateurDto);
 
-    TarifDto findById(Long id);
+    void addRoleToUser(String username, RoleName roleName);
 
-    TarifDto findByReference(String reference);
+    UtilisateurDto findById(Long id);
 
-    List<TarifDto> findAll();
+    UtilisateurDto findByUsername(String username);
 
-    List<TarifDto> findListTarifDtoByKeyword(String keyword);
+    boolean updateUsernameOfUtilisateurByUsername(String username, String newUsername);
 
-    List<TarifDto> findListTarifDtoByAnnonce(Long pId);
+    boolean updateUsernameOfUtilisateurByUserId(String id, String newUsername);
 
-    Page<TarifDto> findTarifByPageable(Pageable pageable);
+    boolean updateCustomerPasswordByUsername(String username, String oldPass, String newPass);
 
-    Page<TarifDto> findTarifByAnnonceByPageable(Long annonceId, Pageable pageable);
+    boolean updateCustomerPasswordByUserId(String id, String oldPass, String newPass);
+
+    boolean updateCustomerProfileByUsername(String username, String name, String newUsername, String email, String mobile);
+
+    List<UtilisateurDto> findAll();
+
+    List<UtilisateurDto> findByOrderByIdDesc();
 
     void delete(Long id);
+
 
 }

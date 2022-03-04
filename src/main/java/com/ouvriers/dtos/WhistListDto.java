@@ -1,11 +1,12 @@
 package com.ouvriers.dtos;
 
-import com.ouvriers.models.Metier;
 import com.ouvriers.models.WhistList;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Date;
 
 @Data
 @Builder
@@ -15,14 +16,15 @@ public class WhistListDto {
 
     private Long id;
 
-    private String reference;
-
-    private String nbreEtoile;
+    private float nbreEtoile;
 
     private String observation;
 
+    private Date createdDate;
+
     private OuvrierDto ouvrierDto;
 
+    private UtilisateurDto utilisateurDto;
 
     public static WhistListDto fromEntityToDto(WhistList whistList) {
         if (whistList == null) {
@@ -31,10 +33,11 @@ public class WhistListDto {
 
         return WhistListDto.builder()
                 .id(whistList.getId())
-                .reference(whistList.getReference())
                 .nbreEtoile(whistList.getNbreEtoile())
                 .observation(whistList.getObservation())
                 .ouvrierDto(OuvrierDto.fromEntityToDto(whistList.getOuvrier()))
+                .createdDate(whistList.getCreatedDate())
+                .utilisateurDto(UtilisateurDto.fromEntityToDto(whistList.getUtilisateur()))
                 .build();
 
     }
@@ -45,10 +48,11 @@ public class WhistListDto {
         }
         WhistList whistList = new WhistList();
         whistList.setId(whistListDto.getId());
-        whistList.setReference(whistListDto.getReference());
         whistList.setNbreEtoile(whistListDto.getNbreEtoile());
         whistList.setObservation(whistListDto.getObservation());
+        whistList.setCreatedDate(whistListDto.getCreatedDate());
         whistList.setOuvrier(OuvrierDto.fromDtoToEntity(whistListDto.getOuvrierDto()));
+        whistList.setUtilisateur(UtilisateurDto.fromDtoToEntity(whistListDto.getUtilisateurDto()));
 
         return whistList;
     }

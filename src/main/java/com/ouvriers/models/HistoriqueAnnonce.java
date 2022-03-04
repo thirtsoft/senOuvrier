@@ -6,28 +6,31 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
-@Table(name = "tarif")
+@Table(name = "historiqueAnnonce")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Tarif implements Serializable {
+public class HistoriqueAnnonce implements Serializable {
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "reference", length = 50)
-    private String reference;
+    private String action;
 
-    @Column(name = "montant", length = 50)
-    private double montantTarif;
-
-    @Column(name = "description", length = 100)
-    private String description;
+    private Date createdDate;
 
     @ManyToOne
     @JoinColumn(name = "annonceId")
     private Annonce annonce;
+
+
 }

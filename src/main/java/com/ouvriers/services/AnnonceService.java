@@ -18,7 +18,19 @@ public interface AnnonceService {
 
     AnnonceDto findByReference(String reference);
 
+    AnnonceDto FindAnnonceByCustomerId(Long userId);
+
+    BigDecimal countNumbersOfAnnonces();
+
+    BigDecimal countNumberOfAnnoncesInMonth();
+
+    BigDecimal countNumberOfAnnonceByStatusPending();
+
     List<AnnonceDto> findAll();
+
+    List<AnnonceDto> findByAnnonceByIdDesc();
+
+    List<AnnonceDto> findListAnnonceBySelected();
 
     List<AnnonceDto> findListAnnonceByKeyword(String keyword);
 
@@ -26,7 +38,19 @@ public interface AnnonceService {
 
     List<AnnonceDto> findListAnnonceByMetier(Long pId);
 
-    BigDecimal countNumbersOfAnnonces();
+    List<AnnonceDto> FindListAnnonceByCustomerId(Long userId);
+
+    List<AnnonceDto> find5LatestRecordsByOrderByIdDesc();
+
+    List<AnnonceDto> findListAnnonceByStatusPending();
+
+    List<AnnonceDto> findListAnnonceByStatusValid();
+
+    List<AnnonceDto> findListAnnonceByStatusRejet();
+
+    List<?> countNumberTotalOfAnnonceByMonth();
+
+    List<?> countNumberTotalOfAnnonceByYear();
 
     Page<AnnonceDto> findAnnonceByPageable(Pageable pageable);
 

@@ -117,6 +117,13 @@ public class MetierServiceImpl implements MetierService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<MetierDto> findByMetierByIdDesc() {
+        return metierRepository.findListOfMetierByOrderByIdDesc().stream()
+                .map(MetierDto::fromEntityToDto)
+                .collect(Collectors.toList());
+    }
+
 
     @Override
     public BigDecimal countNumbersOfMetiers() {

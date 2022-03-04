@@ -9,11 +9,11 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "whistList")
+@Table(name = "jeton")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class WhistList implements Serializable {
+public class Jeton implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -21,17 +21,14 @@ public class WhistList implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nbreEtoile", length = 60)
-    private float nbreEtoile;
+    @Column(name = "montant")
+    private float montant;
 
-    @Column(name = "observation", length = 200)
-    private String observation;
+    @Column(name = "etat")
+    private String etat;
 
     @Column(name = "createdDate")
     private Date createdDate;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Ouvrier ouvrier;
 
     @ManyToOne
     @JoinColumn(name = "userId")

@@ -21,6 +21,7 @@ import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 @AllArgsConstructor
@@ -37,6 +38,7 @@ public class OuvrierController implements OuvrierApi {
         return ResponseEntity.ok(ouvrierService.save(ouvrierDto));
     }
 
+
     @Override
     public ResponseEntity<OuvrierDto> saveOuvrierWithFiles(String ouvrierDto,
                                                            MultipartFile photoOuvrier,
@@ -44,12 +46,13 @@ public class OuvrierController implements OuvrierApi {
         return ResponseEntity.ok(ouvrierService.saveOuvrierWithFiles(ouvrierDto, photoOuvrier, cvOuvrier));
     }
 
+    /*
     @Override
-    public ResponseEntity<OuvrierDto> saveOuvrierWithPhotoAndCv(String chauffeur,
+    public ResponseEntity<OuvrierDto> saveOuvrierWithPhotoAndCv(String ouvrier,
                                                                 MultipartFile photoOuvrier,
                                                                 MultipartFile cvOuvrier) throws IOException {
 
-        OuvrierDto ouvrierDtoDto = new ObjectMapper().readValue(chauffeur, OuvrierDto.class);
+        OuvrierDto ouvrierDtoDto = new ObjectMapper().readValue(ouvrier, OuvrierDto.class);
 
         if (photoOuvrier != null && !photoOuvrier.isEmpty()) {
             ouvrierDtoDto.setPhotoOuvrier(photoOuvrier.getOriginalFilename());
@@ -63,6 +66,7 @@ public class OuvrierController implements OuvrierApi {
 
         return ResponseEntity.ok(ouvrierService.save(ouvrierDtoDto));
     }
+    */
 
     @Override
     public ResponseEntity<OuvrierDto> update(Long id, OuvrierDto ouvrierDto) {

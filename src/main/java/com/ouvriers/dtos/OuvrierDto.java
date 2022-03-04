@@ -26,6 +26,8 @@ public class OuvrierDto {
 
     private String disponibity;
 
+    private boolean selected;
+
     private String email;
 
     private String phoneOuvrier;
@@ -34,11 +36,12 @@ public class OuvrierDto {
 
     private double pretentionSalaire;
 
-    private String cvOuvrier;
-
     private String mobilite;
 
     private String photoOuvrier;
+
+    private String cvOuvrier;
+
 
     private MetierDto metierDto;
 
@@ -61,6 +64,7 @@ public class OuvrierDto {
                 .pretentionSalaire(ouvrier.getPretentionSalaire())
                 .addressActuel(ouvrier.getAddressActuel())
                 .disponibity(ouvrier.getDisponibity())
+                .selected(ouvrier.isSelected())
                 .cvOuvrier(ouvrier.getCvOuvrier())
                 .mobilite(ouvrier.getMobilite())
                 .photoOuvrier(ouvrier.getPhotoOuvrier())
@@ -87,6 +91,7 @@ public class OuvrierDto {
         ouvrier.setCvOuvrier(ouvrierDto.getCvOuvrier());
         ouvrier.setAddressActuel(ouvrierDto.getAddressActuel());
         ouvrier.setDisponibity(ouvrierDto.getDisponibity());
+        ouvrier.setSelected(ouvrierDto.isSelected());
         ouvrier.setMobilite(ouvrierDto.getMobilite());
         ouvrier.setPhotoOuvrier(ouvrierDto.getPhotoOuvrier());
         ouvrier.setMetier(MetierDto.fromDtoToEntity(ouvrierDto.getMetierDto()));

@@ -54,13 +54,16 @@ public class AnnonceServiceImpl implements AnnonceService {
         annonceDtoResult.setSalaire(annonceDto.getSalaire());
         annonceDtoResult.setTime(annonceDto.getTime());
         annonceDtoResult.setAnneeExperience(annonceDto.getAnneeExperience());
+        annonceDtoResult.setTypeContrat(annonceDto.getTypeContrat());
+        annonceDtoResult.setSelected(annonceDto.isSelected());
+        annonceDtoResult.setStatus(annonceDto.getStatus());
         annonceDtoResult.setStatusAnnonce(annonceDto.getStatusAnnonce());
         annonceDtoResult.setDescription(annonceDto.getDescription());
         annonceDtoResult.setDateCandidature(annonceDto.getDateCandidature());
         annonceDtoResult.setDateCloture(annonceDto.getDateCloture());
-        annonceDtoResult.setVilleDto(annonceDto.getVilleDto());
         annonceDtoResult.setMetierDto(annonceDto.getMetierDto());
-        annonceDtoResult.setRecruteurDto(annonceDto.getRecruteurDto());
+        annonceDtoResult.setAddresseDto(annonceDto.getAddresseDto());
+        annonceDtoResult.setUtilisateurDto(annonceDto.getUtilisateurDto());
 
         return AnnonceDto.fromEntityToDto(
                 annonceRepository.save(
@@ -100,8 +103,37 @@ public class AnnonceServiceImpl implements AnnonceService {
     }
 
     @Override
+    public AnnonceDto FindAnnonceByCustomerId(Long userId) {
+        if (userId == null) {
+            log.error("Annonce by customer id not found");
+            return null;
+        }
+        Optional<Annonce> optionalAnnonce = annonceRepository.FindAnnonceByCustomerId(userId);
+
+        return Optional.of(AnnonceDto.fromEntityToDto(optionalAnnonce.get())).orElseThrow(() ->
+                new ResourceNotFoundException(
+                        "Aucnun Annonce avec l'Id = " + userId + "n'a été trouvé")
+        );
+
+    }
+
+    @Override
     public List<AnnonceDto> findAll() {
         return annonceRepository.findAll().stream()
+                .map(AnnonceDto::fromEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<AnnonceDto> findByAnnonceByIdDesc() {
+        return annonceRepository.findByOrderByIdDesc().stream()
+                .map(AnnonceDto::fromEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<AnnonceDto> findListAnnonceBySelected() {
+        return annonceRepository.findAnnonceBySelected().stream()
                 .map(AnnonceDto::fromEntityToDto)
                 .collect(Collectors.toList());
     }
@@ -136,8 +168,67 @@ public class AnnonceServiceImpl implements AnnonceService {
     }
 
     @Override
+    public List<AnnonceDto> FindListAnnonceByCustomerId(Long userId) {
+        return annonceRepository.FindListAnnonceByCustomerId(userId).stream()
+                .map(AnnonceDto::fromEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<AnnonceDto> find5LatestRecordsByOrderByIdDesc() {
+        return annonceRepository.findTop8ByOrderByIdDesc().stream()
+                .map(AnnonceDto::fromEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<AnnonceDto> findListAnnonceByStatusPending() {
+        return annonceRepository.findListAnnonceByStatusPending().stream()
+                .map(AnnonceDto::fromEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<AnnonceDto> findListAnnonceByStatusValid() {
+        return annonceRepository.findListAnnonceByStatusValid().stream()
+                .map(AnnonceDto::fromEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<AnnonceDto> findListAnnonceByStatusRejet() {
+        return annonceRepository.findListAnnonceByStatusRefused().stream()
+                .map(AnnonceDto::fromEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public BigDecimal countNumbersOfAnnonces() {
         return annonceRepository.countNumberOfAnnonces();
+    }
+
+    @Override
+    public BigDecimal countNumberOfAnnoncesInMonth() {
+        return annonceRepository.countNumberOfAnnoncesInMonth();
+    }
+
+    @Override
+    public BigDecimal countNumberOfAnnonceByStatusPending() {
+        return annonceRepository.countNumberOfAnnonceByStatusPending();
+    }
+
+    @Override
+    public List<?> countNumberTotalOfAnnonceByMonth() {
+        return annonceRepository.countNumberOfAnnonceByMonth()
+                .stream()
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<?> countNumberTotalOfAnnonceByYear() {
+        return annonceRepository.countNumberOfAnnonceByYear()
+                .stream()
+                .collect(Collectors.toList());
     }
 
     @Override

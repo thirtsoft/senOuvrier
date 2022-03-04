@@ -130,6 +130,20 @@ public class OuvrierServiceImpl implements OuvrierService {
     }
 
     @Override
+    public List<OuvrierDto> findByOuvrierByIdDesc() {
+        return ouvrierRepository.findOuvrierByOrderByIdDesc().stream()
+                .map(OuvrierDto::fromEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<OuvrierDto> findListOuvrierBySelected() {
+        return ouvrierRepository.findOuvrierBySelected().stream()
+                .map(OuvrierDto::fromEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<OuvrierDto> findListOfOuvriersByMetier(Long pId) {
         return ouvrierRepository.findListOuvriersByMetier(pId)
                 .stream()

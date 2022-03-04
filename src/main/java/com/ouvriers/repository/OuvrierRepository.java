@@ -17,10 +17,15 @@ public interface OuvrierRepository extends JpaRepository<Ouvrier, Long> {
 
     Optional<Ouvrier> findByReference(String reference);
 
-    Optional<Ouvrier> findByDisponibility(String disponibility);
+    Optional<Ouvrier> findByDisponibity(String disponibity);
 
     @Query("select count(p) from Ouvrier p ")
     BigDecimal countNumberOfOuvriers();
+
+    List<Ouvrier> findOuvrierByOrderByIdDesc();
+
+    @Query("select art from Ouvrier art where art.selected = true")
+    List<Ouvrier> findOuvrierBySelected();
 
     @Query("select p from Ouvrier p where p.metier.id =:mId")
     List<Ouvrier> findListOuvriersByMetier(@Param("mId") Long metierId);

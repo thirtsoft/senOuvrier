@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -32,6 +33,11 @@ public class WhistListServiceImpl implements WhistListService {
     }
 
     @Override
+    public WhistListDto saveNoteToOuvrier(Long idOuv, WhistListDto whistListDto) {
+        return null;
+    }
+
+    @Override
     public WhistListDto update(Long idWhistList, WhistListDto whistListDto) {
         if (!whistListRepository.existsById(idWhistList)) {
             throw new ResourceNotFoundException("WhistList not found");
@@ -44,7 +50,6 @@ public class WhistListServiceImpl implements WhistListService {
         }
 
         WhistListDto whistListDtoResult = WhistListDto.fromEntityToDto(optionalWhistList.get());
-        whistListDtoResult.setReference(whistListDto.getReference());
         whistListDtoResult.setNbreEtoile(whistListDto.getNbreEtoile());
         whistListDtoResult.setObservation(whistListDto.getObservation());
         whistListDtoResult.setOuvrierDto(whistListDto.getOuvrierDto());
@@ -77,6 +82,40 @@ public class WhistListServiceImpl implements WhistListService {
                 .stream()
                 .map(WhistListDto::fromEntityToDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<WhistListDto> findTop3RatingOrderByCreatedDateDesc() {
+        return whistListRepository.findTop3ByOrderByCreatedDateDesc()
+                .stream()
+                .map(WhistListDto::fromEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<WhistListDto> findByOrderByIdDesc() {
+        return whistListRepository.findByOrderByIdDesc()
+                .stream()
+                .map(WhistListDto::fromEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<WhistListDto> findTop4ByOrderByCreatedDateDescByOuvrierId(String ouvRef) {
+        return whistListRepository.findTop4WhistListOrderByCreatedDateDesc(ouvRef)
+                .stream()
+                .map(WhistListDto::fromEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public BigDecimal countNumberOfNotificationByOuvrierId(String ouvRef) {
+        return whistListRepository.countNumberOfWhistListByOuvrierId(ouvRef);
+    }
+
+    @Override
+    public BigDecimal countNumberOfNotification() {
+        return whistListRepository.countNumberOfWhistList();
     }
 
     @Override

@@ -16,7 +16,7 @@ public class TarifDto {
 
     private String reference;
 
-    private Double montantTarif;
+    private double montantTarif;
 
     private String description;
 

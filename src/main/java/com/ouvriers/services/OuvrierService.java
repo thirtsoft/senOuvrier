@@ -26,6 +26,10 @@ public interface OuvrierService {
 
     List<OuvrierDto> findAll();
 
+    List<OuvrierDto> findByOuvrierByIdDesc();
+
+    List<OuvrierDto> findListOuvrierBySelected();
+
     List<OuvrierDto> findListOfOuvriersByMetier(Long pId);
 
     List<OuvrierDto> findListOfOuvriersByKeyword(String keyword);
@@ -37,7 +41,6 @@ public interface OuvrierService {
     Page<OuvrierDto> findOuvriersByPageable(Pageable pageable);
 
     Page<OuvrierDto> findOuvriersByKeywordByPageable(String mc, Pageable pageable);
-
 
     Page<OuvrierDto> findOuvriersByLocalityPageables(Long addId, Pageable pageable);
 

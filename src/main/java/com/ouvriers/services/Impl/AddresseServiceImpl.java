@@ -82,6 +82,13 @@ public class AddresseServiceImpl implements AddresseService {
     }
 
     @Override
+    public List<AddresseDto> findByAddresseByIdDesc() {
+        return addresseRepository.findAddresseByOrderByIdDesc().stream()
+                .map(AddresseDto::fromEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public void delete(Long id) {
         if (id == null) {
             log.error("Addresse Id is null");

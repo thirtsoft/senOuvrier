@@ -14,6 +14,8 @@ public interface AddresseService {
 
     List<AddresseDto> findAll();
 
+    List<AddresseDto> findByAddresseByIdDesc();
+
     void delete(Long id);
 
 }

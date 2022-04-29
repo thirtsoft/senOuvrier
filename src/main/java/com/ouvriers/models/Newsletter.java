@@ -26,4 +26,8 @@ public class Newsletter implements Serializable {
 
     @Column(name = "createdDate")
     private Date createdDate;
+
+    private String subject;
+
+    private String message;
 }

@@ -1,10 +1,10 @@
 package com.ouvriers.controllers;
 
 import com.ouvriers.controllers.api.TarifApi;
-import com.ouvriers.dtos.TarifDto;
+import com.ouvriers.models.Tarif;
 import com.ouvriers.services.TarifService;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,43 +17,40 @@ public class TarifController implements TarifApi {
     private final TarifService tarifService;
 
     @Override
-    public ResponseEntity<TarifDto> save(TarifDto tarifDto) {
-        return ResponseEntity.ok(tarifService.save(tarifDto));
+    public ResponseEntity<Tarif> save(Tarif tarif) {
+        Tarif tarifDtoResult = tarifService.save(tarif);
+        return new ResponseEntity<>(tarifDtoResult, HttpStatus.CREATED);
     }
 
     @Override
-    public ResponseEntity<TarifDto> update(Long id, TarifDto tarifDto) {
-        tarifDto.setId(id);
-        return ResponseEntity.ok(tarifService.save(tarifDto));
+    public ResponseEntity<Tarif> update(Long id, Tarif tarif) {
+        tarif.setId(id);
+        Tarif tarifDtoResult = tarifService.save(tarif);
+        return new ResponseEntity<>(tarifDtoResult, HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<TarifDto> getTarifById(Long id) {
-        return ResponseEntity.ok(tarifService.findById(id));
+    public ResponseEntity<Tarif> getTarifById(Long id) {
+        Tarif tarifDtoResult = tarifService.findById(id);
+        return new ResponseEntity<>(tarifDtoResult, HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<TarifDto> getTarifByRerefence(String reference) {
-        return null;
+    public ResponseEntity<List<Tarif>> getAllTarifs() {
+        List<Tarif> tarifList = tarifService.findAll();
+        return new ResponseEntity<>(tarifList, HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<List<TarifDto>> getAllTarifs() {
-        return ResponseEntity.ok(tarifService.findAll());
+    public ResponseEntity<List<Tarif>> getAllTarifsOrderByIdDesc() {
+        List<Tarif> tarifList = tarifService.findByTarifByIdDesc();
+        return new ResponseEntity<>(tarifList, HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<List<TarifDto>> getListOfTarifsByKeyword(String keyword) {
-        return null;
+    public void delete(Long id) {
+        tarifService.delete(id);
     }
 
-    @Override
-    public Page<TarifDto> getListTarifByPageable(int page, int size) {
-        return null;
-    }
 
-    @Override
-    public Page<TarifDto> getTarifByLocalityPageables(Long addId, int page, int size) {
-        return null;
-    }
 }

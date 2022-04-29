@@ -1,11 +1,11 @@
 package com.ouvriers.models;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "ouvrier")
@@ -60,18 +60,25 @@ public class Ouvrier implements Serializable {
     @Column(name = "photoOuvrier", length = 150)
     private String photoOuvrier;
 
+    @Column(name = "dateInscription", length = 70)
+    private Date dateInscription;
+
+    private String subject;
+
+    private String message;
+
     @ManyToOne
     @JoinColumn(name = "metierId")
     private Metier metier;
 
     @ManyToOne
     @JoinColumn(name = "addressId")
-    private Addresse addresse;
+    private Address address;
 
     public Ouvrier(Long id, String reference, String firstName, String lastName, String sexe,
                    String addressActuel, String email, String phoneOuvrier,
                    String nbreAnneeExperience, double pretentionSalaire, String disponibity,
-                   String mobilite, String photoOuvrier, String cvOuvrier, Metier metier, Addresse addresse) {
+                   String mobilite, String photoOuvrier, String cvOuvrier, Metier metier, Address address) {
         this.id = id;
         this.reference = reference;
         this.firstName = firstName;
@@ -87,6 +94,6 @@ public class Ouvrier implements Serializable {
         this.cvOuvrier = cvOuvrier;
         this.photoOuvrier = photoOuvrier;
         this.metier = metier;
-        this.addresse = addresse;
+        this.address = address;
     }
 }

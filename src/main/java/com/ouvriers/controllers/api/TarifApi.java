@@ -1,6 +1,6 @@
 package com.ouvriers.controllers.api;
 
-import com.ouvriers.dtos.TarifDto;
+import com.ouvriers.models.Tarif;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -18,70 +18,61 @@ public interface TarifApi {
     @PostMapping(value = APP_ROOT + "/tarifs/create", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Enregistrer un Tarif",
-            notes = "Cette méthode permet d'enregistrer un Tarif", response = TarifDto.class)
+            notes = "Cette méthode permet d'enregistrer un Tarif", response = Tarif.class)
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "L'Tarif a été crée / modifié"),
             @ApiResponse(code = 400, message = "Aucun Tarif  crée / modifié")
 
     })
-    ResponseEntity<TarifDto> save(@RequestBody TarifDto tarifDto);
+    ResponseEntity<Tarif> save(@RequestBody Tarif tarif);
 
     @PutMapping(value = "/tarifs/{idTarif}", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Modifier un Tarif par son ID",
-            notes = "Cette méthode permet de modifier un Tarif par son ID", response = TarifDto.class)
+            notes = "Cette méthode permet de modifier un Tarif par son ID", response = Tarif.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "L'Tarif a été modifié"),
             @ApiResponse(code = 400, message = "Aucun Tarif modifié")
     })
-    ResponseEntity<TarifDto> update(@PathVariable("idTarif") Long id, @RequestBody TarifDto tarifDto);
+    ResponseEntity<Tarif> update(@PathVariable("idTarif") Long id, @RequestBody Tarif tarif);
 
     @GetMapping(value = APP_ROOT + "/tarifs/{idTarif}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Rechercher un Tarif par ID",
-            notes = "Cette méthode permet de chercher un Tarif par son ID", response = TarifDto.class
+            notes = "Cette méthode permet de chercher un Tarif par son ID", response = Tarif.class
     )
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Tarif a été trouver"),
             @ApiResponse(code = 404, message = "Aucun Tarif n'existe avec cette ID pas dans la BD")
 
     })
-    ResponseEntity<TarifDto> getTarifById(@PathVariable("idTarif") Long id);
-
-    @GetMapping(value = "tarifs/searchTarifByReference", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Rechercher un Tarif par Reference",
-            notes = "Cette méthode permet de chercher un Tarif par son Reference", response = TarifDto.class
-    )
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Tarif a été trouver"),
-            @ApiResponse(code = 404, message = "Aucun Tarif n'existe avec cette reference pas dans la BD")
-
-    })
-    ResponseEntity<TarifDto> getTarifByRerefence(@RequestParam(name = "ref") String reference);
+    ResponseEntity<Tarif> getTarifById(@PathVariable("idTarif") Long id);
 
     @GetMapping(value = "/tarifs/all", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Renvoi la liste des tarifs",
-            notes = "Cette méthode permet de chercher et renvoyer la liste des tarifs", responseContainer = "List<TarifDto>")
+            notes = "Cette méthode permet de chercher et renvoyer la liste des tarifs", responseContainer = "List<Tarif>")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "La liste des tarifs / une liste vide")
     })
-    ResponseEntity<List<TarifDto>> getAllTarifs();
+    ResponseEntity<List<Tarif>> getAllTarifs();
 
-    @GetMapping(value = "/tarifs/searchListOfTarifByKeyword", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Renvoi la liste des tarifs par mot clé",
-            notes = "Cette méthode permet de chercher et renvoyer la liste des tarifs par mot clé",
-            responseContainer = "List<TarifDto>")
+    @GetMapping(value = "/tarifs/searchAllTarifsOrderByIdDesc", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Renvoi la liste des tarifs",
+            notes = "Cette méthode permet de chercher et renvoyer la liste des tarifs", responseContainer = "List<Tarif>")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "La liste des tarifs / une liste vide")
     })
-    ResponseEntity<List<TarifDto>> getListOfTarifsByKeyword(@RequestParam(name = "keyword") String keyword);
+    ResponseEntity<List<Tarif>> getAllTarifsOrderByIdDesc();
 
-    @GetMapping(value = APP_ROOT + "/tarifs/searchtarifsByPageables",
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    Page<TarifDto> getListTarifByPageable(@RequestParam(name = "page") int page,
-                                            @RequestParam(name = "size") int size);
 
-    @GetMapping(value = APP_ROOT + "/tarifs/searchTarifByLocalityPageables", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Page<TarifDto> getTarifByLocalityPageables(@RequestParam("id") Long addId,
-                                                        @RequestParam(name = "page") int page,
-                                                        @RequestParam(name = "size") int size);
+    @DeleteMapping(value = APP_ROOT + "/tarifs/delete/{idTaf}")
+    @ApiOperation(value = "Supprimer un Notification par son ID",
+            notes = "Cette méthode permet de supprimer un Notification par son ID")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Le Notification a été supprimé")
+
+    })
+    void delete(@PathVariable("idTaf") Long id);
+
+
+
 }

@@ -1,7 +1,6 @@
 package com.ouvriers.services;
 
-import com.ouvriers.dtos.AddresseDto;
-import com.ouvriers.dtos.AnnonceDto;
+import com.ouvriers.models.Annonce;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -10,15 +9,15 @@ import java.util.List;
 
 public interface AnnonceService {
 
-    AnnonceDto save(AnnonceDto annonceDto);
+    Annonce save(Annonce annonce);
 
-    AnnonceDto update(Long idAnnonce, AnnonceDto annonceDto);
+    Annonce update(Long idAnnonce, Annonce annonce);
 
-    AnnonceDto findById(Long id);
+    Annonce findById(Long id);
 
-    AnnonceDto findByReference(String reference);
+    Annonce findByReference(String reference);
 
-    AnnonceDto FindAnnonceByCustomerId(Long userId);
+    Annonce FindAnnonceByCustomerId(Long userId);
 
     BigDecimal countNumbersOfAnnonces();
 
@@ -26,35 +25,35 @@ public interface AnnonceService {
 
     BigDecimal countNumberOfAnnonceByStatusPending();
 
-    List<AnnonceDto> findAll();
+    List<Annonce> findAll();
 
-    List<AnnonceDto> findByAnnonceByIdDesc();
+    List<Annonce> findByAnnonceByIdDesc();
 
-    List<AnnonceDto> findListAnnonceBySelected();
+    List<Annonce> findListAnnonceBySelected();
 
-    List<AnnonceDto> findListAnnonceByKeyword(String keyword);
+    List<Annonce> findListAnnonceByKeyword(String keyword);
 
-    List<AnnonceDto> findListAnnonceByLibelle(String libelle);
+    List<Annonce> findListAnnonceByLibelle(String libelle);
 
-    List<AnnonceDto> findListAnnonceByMetier(Long pId);
+    List<Annonce> findListAnnonceByMetier(Long pId);
 
-    List<AnnonceDto> FindListAnnonceByCustomerId(Long userId);
+    List<Annonce> FindListAnnonceByCustomerId(Long userId);
 
-    List<AnnonceDto> find5LatestRecordsByOrderByIdDesc();
+    List<Annonce> find5LatestRecordsByOrderByIdDesc();
 
-    List<AnnonceDto> findListAnnonceByStatusPending();
+    List<Annonce> findListAnnonceByStatusPending();
 
-    List<AnnonceDto> findListAnnonceByStatusValid();
+    List<Annonce> findListAnnonceByStatusValid();
 
-    List<AnnonceDto> findListAnnonceByStatusRejet();
+    List<Annonce> findListAnnonceByStatusRejet();
 
     List<?> countNumberTotalOfAnnonceByMonth();
 
     List<?> countNumberTotalOfAnnonceByYear();
 
-    Page<AnnonceDto> findAnnonceByPageable(Pageable pageable);
+    Page<Annonce> findAnnonceByPageable(Pageable pageable);
 
-    Page<AnnonceDto> findAnnonceByMetierByPageable(Long metierId, Pageable pageable);
+    Page<Annonce> findAnnonceByMetierByPageable(Long metierId, Pageable pageable);
 
     void delete(Long id);
 

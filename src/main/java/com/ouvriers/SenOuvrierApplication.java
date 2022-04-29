@@ -20,7 +20,7 @@ public class SenOuvrierApplication implements CommandLineRunner {
 	private static final Logger LOG = LoggerFactory.getLogger(SenOuvrierApplication.class);
 
 	@Autowired
-	private AddresseRepository addresseRepository;
+	private AddressRepository addressRepository;
 	@Autowired
 	private MetierRepository metierRepository;
 	@Autowired
@@ -87,10 +87,10 @@ public class SenOuvrierApplication implements CommandLineRunner {
 		Metier m9 = metierRepository.save(new Metier(9L, "peint", "PEINTRE", "Peint"));
 		Metier m10 = metierRepository.save(new Metier(10L, "chauff", "CHAUFFEUR", "chauff"));
 
-		Addresse a1 = addresseRepository.save(new Addresse(1L, "man", "Hann-Mariste", "rue 250", "233", "Dakar", "Senegal"));
-		Addresse a2 = addresseRepository.save(new Addresse(2L, "sac", "Sacré Coeur", "rue 250", "233", "Dakar", "Senegal"));
-		Addresse a3 = addresseRepository.save(new Addresse(3L, "al", "Almadies", "rue 250", "233", "Dakar", "Senegal"));
-		Addresse a4 = addresseRepository.save(new Addresse(4L, "pa", "Parcelle", "rue 250", "233", "Dakar", "Senegal"));
+		Address a1 = addressRepository.save(new Address("DK", "Dakar"));
+		Address a2 = addressRepository.save(new Address("ZG", "Ziguinchor"));
+		Address a3 = addressRepository.save(new Address("KL", "Kaolack"));
+		Address a4 = addressRepository.save(new Address("Th", "Thies"));
 
 		Ouvrier o1 = ouvrierRepository.save(new Ouvrier(1L, "PLOMBIER", "tairou","diallo","Masculin","Hann-Mariste","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo1.jpg","cv1.pdf",m1,a1));
 		Ouvrier o2 = ouvrierRepository.save(new Ouvrier(2L, "ELECTRICIEN", "Saliou","diallo","Masculin","Hann-Mariste","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo1.jpg","cv1.pdf",m1,a1));
@@ -119,15 +119,15 @@ public class SenOuvrierApplication implements CommandLineRunner {
 		Annonce an1 = new Annonce(); Annonce an2 = new Annonce(); Annonce an3 = new Annonce();
 		Annonce an4 = new Annonce(); Annonce an5 = new Annonce();
 		an1.setId(1L);an1.setReference("pl");an1.setLibelle("PLOMBIER");an1.setAnneeExperience("1 à 5ans");
-		an1.setEmailPoste("an1@gmail.com");an1.setMetier(m1);an1.setRecruteur(r1);
+		an1.setEmailPoste("an1@gmail.com");an1.setMetier(m1);
 		an2.setId(2L);an2.setReference("el");an1.setLibelle("ELECTRICIEN");an2.setAnneeExperience("1 à 2ans");
-		an2.setEmailPoste("an2@gmail.com");an2.setMetier(m2);an1.setRecruteur(r2);
+		an2.setEmailPoste("an2@gmail.com");an2.setMetier(m2);;
 		an3.setId(3L);an3.setReference("frig");an3.setLibelle("FRIGORISTE");an3.setAnneeExperience("15 à 25ans");
-		an3.setEmailPoste("an3@gmail.com");an3.setMetier(m3);an3.setRecruteur(r3);
+		an3.setEmailPoste("an3@gmail.com");an3.setMetier(m3);
 		an4.setId(4L);an4.setReference("pt");an4.setLibelle("PEINTRE");an4.setAnneeExperience("10 à 15ans");
-		an4.setEmailPoste("an4@gmail.com");an4.setMetier(m4);an4.setRecruteur(r4);
+		an4.setEmailPoste("an4@gmail.com");an4.setMetier(m4);
 		an5.setId(5L);an5.setReference("mec");an5.setLibelle("MECANICIEN");an5.setAnneeExperience("5 à 10ans");
-		an5.setEmailPoste("an5@gmail.com");an5.setMetier(m5);an5.setRecruteur(r5);
+		an5.setEmailPoste("an5@gmail.com");an5.setMetier(m5);
 
 		annonceRepository.save(an1); annonceRepository.save(an2); annonceRepository.save(an3);
 		annonceRepository.save(an4); annonceRepository.save(an5);

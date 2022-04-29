@@ -1,65 +1,61 @@
 package com.ouvriers.controllers;
 
 import com.ouvriers.controllers.api.LocalityApi;
-import com.ouvriers.dtos.AddresseDto;
-import com.ouvriers.services.AddresseService;
+import com.ouvriers.models.Locality;
+import com.ouvriers.services.LocalityService;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
 @AllArgsConstructor
 public class LocalityController implements LocalityApi {
 
-    private final AddresseService addresseService;
+    private final LocalityService localityService;
+
 
     @Override
-    public ResponseEntity<AddresseDto> save(AddresseDto addresseDto) {
-        return ResponseEntity.ok(addresseService.save(addresseDto));
+    public ResponseEntity<Locality> saveLocality(Locality locality) {
+        Locality localityResult = localityService.save(locality);
+        return new ResponseEntity<>(localityResult, HttpStatus.CREATED);
     }
 
     @Override
-    public ResponseEntity<AddresseDto> update(Long id, AddresseDto addresseDto) {
-        addresseDto.setId(id);
-        return ResponseEntity.ok(addresseService.save(addresseDto));
+    public ResponseEntity<Locality> updateLocality(Long locId, Locality locality) {
+        locality.setId(locId);
+        Locality localityResult = localityService.save(locality);
+        return new ResponseEntity<>(localityResult, HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<AddresseDto> getAddressById(Long id) {
-        return ResponseEntity.ok(addresseService.findById(id));
+    public ResponseEntity<Locality> getLocalityById(Long locId) {
+        Locality localityResult = localityService.findById(locId);
+        return new ResponseEntity<>(localityResult, HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<AddresseDto> getAddressByRerefence(String reference) {
-        return null;
+    public ResponseEntity<List<Locality>> getAllLocalities() {
+        List<Locality> localityResult = localityService.findAll();
+        return new ResponseEntity<>(localityResult, HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<List<AddresseDto>> getAllLocalities() {
-        return ResponseEntity.ok(addresseService.findAll());
+    public ResponseEntity<List<Locality>> getAllLocalitiesOrderByIdDesc() {
+        List<Locality> localityResult = localityService.findByLocalityByIdDesc();
+        return new ResponseEntity<>(localityResult, HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<List<AddresseDto>> getListOfLocalitiesByKeyword(String keyword) {
-        return null;
+    public ResponseEntity<List<Locality>> getAllLocalityByCountryCode(String code) {
+        List<Locality> localityResult = localityService.findAllLocalitiesByAddressCode(code);
+        return new ResponseEntity<>(localityResult, HttpStatus.OK);
     }
 
     @Override
-    public BigDecimal getNumbersOfLocalities() {
-        return null;
-    }
-
-    @Override
-    public Page<AddresseDto> getListAddressByPageable(int page, int size) {
-        return null;
-    }
-
-    @Override
-    public Page<AddresseDto> getAddressByLocalityPageables(Long addId, int page, int size) {
-        return null;
+    public void deleteState(Long stateId) {
+        localityService.delete(stateId);
     }
 }

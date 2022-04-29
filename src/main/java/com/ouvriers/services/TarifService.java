@@ -1,6 +1,6 @@
 package com.ouvriers.services;
 
-import com.ouvriers.dtos.TarifDto;
+import com.ouvriers.models.Tarif;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -8,23 +8,23 @@ import java.util.List;
 
 public interface TarifService {
 
-    TarifDto save(TarifDto tarifDto);
+    Tarif save(Tarif tarif);
 
-    TarifDto update(Long idTarif, TarifDto tarifDto);
+    Tarif update(Long idTarif, Tarif tarif);
 
-    TarifDto findById(Long id);
+    Tarif findById(Long id);
 
-    List<TarifDto> findAll();
+    List<Tarif> findAll();
 
-    List<TarifDto> findByTarifByIdDesc();
+    List<Tarif> findByTarifByIdDesc();
 
-    List<TarifDto> findListTarifDtoByKeyword(String keyword);
+    List<Tarif> findListTarifByKeyword(String keyword);
 
-    List<TarifDto> findListTarifDtoByAnnonce(Long pId);
+    List<Tarif> findListTarifByAnnonce(Long pId);
 
-    Page<TarifDto> findTarifByPageable(Pageable pageable);
+    Page<Tarif> findTarifByPageable(Pageable pageable);
 
-    Page<TarifDto> findTarifByAnnonceByPageable(Long annonceId, Pageable pageable);
+    Page<Tarif> findTarifByAnnonceByPageable(Long annonceId, Pageable pageable);
 
     void delete(Long id);
 

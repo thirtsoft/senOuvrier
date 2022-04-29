@@ -1,6 +1,5 @@
 package com.ouvriers.services.Impl;
 
-import com.ouvriers.dtos.HistoriqueLoginDto;
 import com.ouvriers.exceptions.ResourceNotFoundException;
 import com.ouvriers.models.HistoriqueLogin;
 import com.ouvriers.repository.HistoriqueLoginRepository;
@@ -9,10 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -26,16 +23,12 @@ public class HistoriqueLoginServiceImpl implements HistoriqueLoginService {
     }
 
     @Override
-    public HistoriqueLoginDto save(HistoriqueLoginDto historiqueLoginDto) {
-        return HistoriqueLoginDto.fromEntityToDto(
-                historiqueLoginRepository.save(
-                        HistoriqueLoginDto.fromDtoToEntity(historiqueLoginDto)
-                )
-        );
+    public HistoriqueLogin save(HistoriqueLogin historiqueLogin) {
+        return historiqueLoginRepository.save(historiqueLogin);
     }
 
     @Override
-    public HistoriqueLoginDto update(Long idLogin, HistoriqueLoginDto historiqueLoginDto) {
+    public HistoriqueLogin update(Long idLogin, HistoriqueLogin historiqueLogin) {
         if (!historiqueLoginRepository.existsById(idLogin)) {
             throw new ResourceNotFoundException("HistoriqueLogin not found");
         }
@@ -46,20 +39,16 @@ public class HistoriqueLoginServiceImpl implements HistoriqueLoginService {
             throw new ResourceNotFoundException("HistoriqueLogin not found");
         }
 
-        HistoriqueLoginDto historiqueLoginDtoResult = HistoriqueLoginDto.fromEntityToDto(optionalHistoriqueLogin.get());
-        historiqueLoginDtoResult.setAction(historiqueLoginDto.getAction());
-        historiqueLoginDtoResult.setCreatedDate(historiqueLoginDto.getCreatedDate());
-        historiqueLoginDtoResult.setUtilisateurDto(historiqueLoginDto.getUtilisateurDto());
+        HistoriqueLogin historiqueLoginResult = optionalHistoriqueLogin.get();
+        historiqueLoginResult.setAction(historiqueLogin.getAction());
+        historiqueLoginResult.setCreatedDate(historiqueLogin.getCreatedDate());
+        historiqueLoginResult.setUtilisateur(historiqueLogin.getUtilisateur());
 
-        return HistoriqueLoginDto.fromEntityToDto(
-                historiqueLoginRepository.save(
-                        HistoriqueLoginDto.fromDtoToEntity(historiqueLoginDtoResult)
-                )
-        );
+        return historiqueLoginRepository.save(historiqueLoginResult);
     }
 
     @Override
-    public HistoriqueLoginDto findById(Long id) {
+    public HistoriqueLogin findById(Long id) {
         if (id == null) {
             log.error("HistoriqueLogin not found");
             return null;
@@ -67,7 +56,7 @@ public class HistoriqueLoginServiceImpl implements HistoriqueLoginService {
 
         Optional<HistoriqueLogin> optionalHistoriqueLogin = historiqueLoginRepository.findById(id);
 
-        return Optional.of(HistoriqueLoginDto.fromEntityToDto(optionalHistoriqueLogin.get())).orElseThrow(() ->
+        return Optional.of(optionalHistoriqueLogin.get()).orElseThrow(() ->
                 new ResourceNotFoundException(
                         "Aucnun HistoriqueLogin avec l'Id = " + id + "n'a été trouvé")
         );
@@ -75,22 +64,18 @@ public class HistoriqueLoginServiceImpl implements HistoriqueLoginService {
     }
 
     @Override
-    public List<HistoriqueLoginDto> findAll() {
-        return historiqueLoginRepository.findAll().stream()
-                .map(HistoriqueLoginDto::fromEntityToDto)
-                .collect(Collectors.toList());
+    public List<HistoriqueLogin> findAll() {
+        return historiqueLoginRepository.findAll();
     }
 
     @Override
-    public List<HistoriqueLoginDto> findHistoriqueLoginByOrderByIdDesc() {
-        return historiqueLoginRepository.findHistoriqueLoginByOrderByIdDesc().stream()
-                .map(HistoriqueLoginDto::fromEntityToDto)
-                .collect(Collectors.toList());
+    public List<HistoriqueLogin> findHistoriqueLoginByOrderByIdDesc() {
+        return historiqueLoginRepository.findHistoriqueLoginByOrderByIdDesc();
     }
 
     @Override
-    public BigDecimal countNumbersOfHistoriqueLogins() {
-        return historiqueLoginRepository.countNumberOfHistoriqueLogins();
+    public long countNumbersOfHistoriqueLogins() {
+        return historiqueLoginRepository.count();
     }
 
     @Override

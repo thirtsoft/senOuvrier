@@ -14,21 +14,20 @@ import java.util.Optional;
 @Repository
 public interface TarifRepository extends JpaRepository<Tarif, Long> {
 
-    Optional<Tarif> findTarifByReference(String reference);
-
     List<Tarif> findTarifByOrderByIdDesc();
 
     @Query("select taf from Tarif taf where taf.reference like :x")
     List<Tarif> findTarifByKeyword(@Param("x") String mc);
 
-    @Query("select taf from Tarif taf where taf.annonce.id =:pId")
+    @Query("select taf from Tarif taf where taf.typeAnnonce.id =:pId")
     List<Tarif> findTarifByAnnonce(@Param("pId") Long annonceId);
 
     @Query("select taf from Tarif taf")
     Page<Tarif> findTarif(Pageable pageable);
 
-    @Query("select taf from Tarif taf where taf.annonce.id =:annonceId")
+    @Query("select taf from Tarif taf where taf.typeAnnonce.id =:annonceId")
     Page<Tarif> findTarifByAnnoncePageables(@Param("annonceId") Long annonceId, Pageable pageable);
+
 
 
 }

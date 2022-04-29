@@ -1,7 +1,6 @@
 package com.ouvriers.services.Impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ouvriers.dtos.OuvrierDto;
 import com.ouvriers.exceptions.ResourceNotFoundException;
 import com.ouvriers.models.Ouvrier;
 import com.ouvriers.repository.OuvrierRepository;
@@ -30,16 +29,12 @@ public class OuvrierServiceImpl implements OuvrierService {
 
 
     @Override
-    public OuvrierDto save(OuvrierDto ouvrierDto) {
-        return OuvrierDto.fromEntityToDto(
-                ouvrierRepository.save(
-                        OuvrierDto.fromDtoToEntity(ouvrierDto)
-                )
-        );
+    public Ouvrier save(Ouvrier ouvrier) {
+        return ouvrierRepository.save(ouvrier);
     }
 
     @Override
-    public OuvrierDto update(Long idOuvrier, OuvrierDto ouvrierDto) {
+    public Ouvrier update(Long idOuvrier, Ouvrier ouvrier) {
         if (!ouvrierRepository.existsById(idOuvrier)) {
             throw new ResourceNotFoundException("Ouvrier not found");
         }
@@ -50,50 +45,42 @@ public class OuvrierServiceImpl implements OuvrierService {
             throw new ResourceNotFoundException("Metier not found");
         }
 
-        OuvrierDto ouvrierDtoResult = OuvrierDto.fromEntityToDto(optionalOuvrier.get());
-        ouvrierDtoResult.setReference(ouvrierDto.getReference());
-        ouvrierDtoResult.setFirstName(ouvrierDto.getFirstName());
-        ouvrierDtoResult.setLastName(ouvrierDto.getLastName());
-        ouvrierDtoResult.setSexe(ouvrierDto.getSexe());
-        ouvrierDtoResult.setAddressActuel(ouvrierDto.getAddressActuel());
-        ouvrierDtoResult.setPhoneOuvrier(ouvrierDto.getPhoneOuvrier());
-        ouvrierDtoResult.setEmail(ouvrierDto.getEmail());
-        ouvrierDtoResult.setNbreAnneeExperience(ouvrierDto.getNbreAnneeExperience());
-        ouvrierDtoResult.setPretentionSalaire(ouvrierDto.getPretentionSalaire());
-        ouvrierDtoResult.setDisponibity(ouvrierDto.getDisponibity());
-        ouvrierDtoResult.setMobilite(ouvrierDto.getMobilite());
-        ouvrierDtoResult.setCvOuvrier(ouvrierDto.getCvOuvrier());
-        ouvrierDtoResult.setPhotoOuvrier(ouvrierDto.getPhotoOuvrier());
-        ouvrierDtoResult.setMetierDto(ouvrierDto.getMetierDto());
-        ouvrierDtoResult.setAddresseDto(ouvrierDto.getAddresseDto());
+        Ouvrier ouvrierResult = optionalOuvrier.get();
+        ouvrierResult.setReference(ouvrier.getReference());
+        ouvrierResult.setFirstName(ouvrier.getFirstName());
+        ouvrierResult.setLastName(ouvrier.getLastName());
+        ouvrierResult.setSexe(ouvrier.getSexe());
+        ouvrierResult.setAddressActuel(ouvrier.getAddressActuel());
+        ouvrierResult.setPhoneOuvrier(ouvrier.getPhoneOuvrier());
+        ouvrierResult.setEmail(ouvrier.getEmail());
+        ouvrierResult.setNbreAnneeExperience(ouvrier.getNbreAnneeExperience());
+        ouvrierResult.setPretentionSalaire(ouvrier.getPretentionSalaire());
+        ouvrierResult.setDisponibity(ouvrier.getDisponibity());
+        ouvrierResult.setMobilite(ouvrier.getMobilite());
+        ouvrierResult.setCvOuvrier(ouvrier.getCvOuvrier());
+        ouvrierResult.setPhotoOuvrier(ouvrier.getPhotoOuvrier());
+        ouvrierResult.setMetier(ouvrier.getMetier());
+        ouvrierResult.setAddress(ouvrier.getAddress());
 
-        return OuvrierDto.fromEntityToDto(
-                ouvrierRepository.save(
-                        OuvrierDto.fromDtoToEntity(ouvrierDtoResult)
-                )
-        );
+        return ouvrierRepository.save(ouvrierResult);
     }
 
     @Override
-    public OuvrierDto saveOuvrierWithFiles(String ouvrierDto,
+    public Ouvrier saveOuvrierWithFiles(String ouvrier,
                                            MultipartFile photoOuvrier,
                                            MultipartFile cvOuvrier) throws IOException {
-        OuvrierDto ouvrierDtoMapper = new ObjectMapper().readValue(ouvrierDto, OuvrierDto.class);
-        System.out.println(ouvrierDtoMapper);
 
-        ouvrierDtoMapper.setPhotoOuvrier(photoOuvrier.getOriginalFilename());
+        Ouvrier ouvrierMapper = new ObjectMapper().readValue(ouvrier, Ouvrier.class);
 
-        ouvrierDtoMapper.setCvOuvrier(cvOuvrier.getOriginalFilename());
+        ouvrierMapper.setPhotoOuvrier(photoOuvrier.getOriginalFilename());
 
-        return OuvrierDto.fromEntityToDto(
-                ouvrierRepository.save(
-                        OuvrierDto.fromDtoToEntity(ouvrierDtoMapper)
-                )
-        );
+        ouvrierMapper.setCvOuvrier(cvOuvrier.getOriginalFilename());
+
+        return ouvrierRepository.save(ouvrierMapper);
     }
 
     @Override
-    public OuvrierDto findById(Long id) {
+    public Ouvrier findById(Long id) {
         if (id == null) {
             log.error("Ouvrier Id is null");
             return null;
@@ -101,14 +88,14 @@ public class OuvrierServiceImpl implements OuvrierService {
 
         Optional<Ouvrier> optionalOuvrier = ouvrierRepository.findById(id);
 
-        return Optional.of(OuvrierDto.fromEntityToDto(optionalOuvrier.get())).orElseThrow(() ->
+        return Optional.of(optionalOuvrier.get()).orElseThrow(() ->
                 new ResourceNotFoundException(
                         "Aucnun Ouvrier avec l'Id = " + id + "n'a été trouvé")
         );
     }
 
     @Override
-    public OuvrierDto findByReference(String reference) {
+    public Ouvrier findByReference(String reference) {
         if (reference == null) {
             log.error("Ouvrier Id is null");
             return null;
@@ -116,55 +103,40 @@ public class OuvrierServiceImpl implements OuvrierService {
 
         Optional<Ouvrier> optionalOuvrier = ouvrierRepository.findByReference(reference);
 
-        return Optional.of(OuvrierDto.fromEntityToDto(optionalOuvrier.get())).orElseThrow(() ->
+        return Optional.of(optionalOuvrier.get()).orElseThrow(() ->
                 new ResourceNotFoundException(
                         "Aucnun Ouvrier avec l'Id = " + reference + "n'a été trouvé")
         );
     }
 
     @Override
-    public List<OuvrierDto> findAll() {
-        return ouvrierRepository.findAll().stream()
-                .map(OuvrierDto::fromEntityToDto)
-                .collect(Collectors.toList());
+    public List<Ouvrier> findAll() {
+        return ouvrierRepository.findAll();
     }
 
     @Override
-    public List<OuvrierDto> findByOuvrierByIdDesc() {
-        return ouvrierRepository.findOuvrierByOrderByIdDesc().stream()
-                .map(OuvrierDto::fromEntityToDto)
-                .collect(Collectors.toList());
+    public List<Ouvrier> findByOuvrierByIdDesc() {
+        return ouvrierRepository.findOuvrierByOrderByIdDesc();
     }
 
     @Override
-    public List<OuvrierDto> findListOuvrierBySelected() {
-        return ouvrierRepository.findOuvrierBySelected().stream()
-                .map(OuvrierDto::fromEntityToDto)
-                .collect(Collectors.toList());
+    public List<Ouvrier> findListOuvrierBySelected() {
+        return ouvrierRepository.findOuvrierBySelected();
     }
 
     @Override
-    public List<OuvrierDto> findListOfOuvriersByMetier(Long pId) {
-        return ouvrierRepository.findListOuvriersByMetier(pId)
-                .stream()
-                .map(OuvrierDto::fromEntityToDto)
-                .collect(Collectors.toList());
+    public List<Ouvrier> findListOfOuvriersByMetier(Long pId) {
+        return ouvrierRepository.findListOuvriersByMetier(pId);
     }
 
     @Override
-    public List<OuvrierDto> findListOfOuvriersByKeyword(String keyword) {
-        return ouvrierRepository.findListOfOuvriersByKeyword(keyword)
-                .stream()
-                .map(OuvrierDto::fromEntityToDto)
-                .collect(Collectors.toList());
+    public List<Ouvrier> findListOfOuvriersByKeyword(String keyword) {
+        return ouvrierRepository.findListOfOuvriersByKeyword(keyword);
     }
 
     @Override
-    public List<OuvrierDto> findListOfOuvriersByDisponibility(String disponility) {
-        return ouvrierRepository.findListOfOuvrierByDisponibility(disponility)
-                .stream()
-                .map(OuvrierDto::fromEntityToDto)
-                .collect(Collectors.toList());
+    public List<Ouvrier> findListOfOuvriersByDisponibility(String disponility) {
+        return ouvrierRepository.findListOfOuvrierByDisponibility(disponility);
     }
 
     @Override
@@ -173,27 +145,23 @@ public class OuvrierServiceImpl implements OuvrierService {
     }
 
     @Override
-    public Page<OuvrierDto> findOuvriersByPageable(Pageable pageable) {
-        return ouvrierRepository.findOuvriersByPageable(pageable)
-                .map(OuvrierDto::fromEntityToDto);
+    public Page<Ouvrier> findOuvriersByPageable(Pageable pageable) {
+        return ouvrierRepository.findOuvriersByPageable(pageable);
     }
 
     @Override
-    public Page<OuvrierDto> findOuvriersByKeywordByPageable(String mc, Pageable pageable) {
-        return ouvrierRepository.findOuvriersByKeywordByPageable(mc, pageable)
-                .map(OuvrierDto::fromEntityToDto);
+    public Page<Ouvrier> findOuvriersByKeywordByPageable(String mc, Pageable pageable) {
+        return ouvrierRepository.findOuvriersByKeywordByPageable(mc, pageable);
     }
 
     @Override
-    public Page<OuvrierDto> findOuvriersByLocalityPageables(Long addId, Pageable pageable) {
-        return ouvrierRepository.findOuvriersByLocalityPageables(addId, pageable)
-                .map(OuvrierDto::fromEntityToDto);
+    public Page<Ouvrier> findOuvriersByLocalityPageables(Long addId, Pageable pageable) {
+        return ouvrierRepository.findOuvriersByLocalityPageables(addId, pageable);
     }
 
     @Override
-    public Page<OuvrierDto> findOuvriersByMetierPageables(Long metierId, Pageable pageable) {
-        return ouvrierRepository.findOuvriersByMetierPageables(metierId, pageable)
-                .map(OuvrierDto::fromEntityToDto);
+    public Page<Ouvrier> findOuvriersByMetierPageables(Long metierId, Pageable pageable) {
+        return ouvrierRepository.findOuvriersByMetierPageables(metierId, pageable);
     }
 
     @Override

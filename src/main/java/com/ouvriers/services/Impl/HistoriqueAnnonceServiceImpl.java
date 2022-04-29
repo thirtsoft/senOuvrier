@@ -1,6 +1,5 @@
 package com.ouvriers.services.Impl;
 
-import com.ouvriers.dtos.HistoriqueAnnonceDto;
 import com.ouvriers.exceptions.ResourceNotFoundException;
 import com.ouvriers.models.HistoriqueAnnonce;
 import com.ouvriers.repository.HistoriqueAnnonceRepository;
@@ -9,10 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -26,16 +23,12 @@ public class HistoriqueAnnonceServiceImpl implements HistoriqueAnnonceService {
     }
 
     @Override
-    public HistoriqueAnnonceDto save(HistoriqueAnnonceDto historiqueAnnonceDto) {
-        return HistoriqueAnnonceDto.fromEntityToDto(
-                historiqueAnnonceRepository.save(
-                        HistoriqueAnnonceDto.fromDtoToEntity(historiqueAnnonceDto)
-                )
-        );
+    public HistoriqueAnnonce save(HistoriqueAnnonce historiqueAnnonceDto) {
+        return historiqueAnnonceRepository.save(historiqueAnnonceDto);
     }
 
     @Override
-    public HistoriqueAnnonceDto update(Long id, HistoriqueAnnonceDto historiqueAnnonceDto) {
+    public HistoriqueAnnonce update(Long id, HistoriqueAnnonce historiqueAnnonceDto) {
         if (!historiqueAnnonceRepository.existsById(id)) {
             throw new ResourceNotFoundException("HistoriqueAnnonce not found");
         }
@@ -45,20 +38,16 @@ public class HistoriqueAnnonceServiceImpl implements HistoriqueAnnonceService {
         if (!optionalHistoriqueAnnonce.isPresent()) {
             throw new ResourceNotFoundException("HistoriqueAnnonceDto not found");
         }
-        HistoriqueAnnonceDto historiqueAnnonceDtoResult = HistoriqueAnnonceDto.fromEntityToDto(optionalHistoriqueAnnonce.get());
+        HistoriqueAnnonce historiqueAnnonceDtoResult = optionalHistoriqueAnnonce.get();
         historiqueAnnonceDtoResult.setAction(historiqueAnnonceDto.getAction());
         historiqueAnnonceDtoResult.setCreatedDate(historiqueAnnonceDto.getCreatedDate());
-        historiqueAnnonceDtoResult.setAnnonceDto(historiqueAnnonceDto.getAnnonceDto());
+        historiqueAnnonceDtoResult.setAnnonce(historiqueAnnonceDto.getAnnonce());
 
-        return HistoriqueAnnonceDto.fromEntityToDto(
-                historiqueAnnonceRepository.save(
-                        HistoriqueAnnonceDto.fromDtoToEntity(historiqueAnnonceDtoResult)
-                )
-        );
+        return historiqueAnnonceRepository.save(historiqueAnnonceDtoResult);
     }
 
     @Override
-    public HistoriqueAnnonceDto findById(Long id) {
+    public HistoriqueAnnonce findById(Long id) {
         if (id == null) {
             log.error("HistoriqueAnnonce Id is null");
             return null;
@@ -66,29 +55,25 @@ public class HistoriqueAnnonceServiceImpl implements HistoriqueAnnonceService {
 
         Optional<HistoriqueAnnonce> optionalHistoriqueAnnonce = historiqueAnnonceRepository.findById(id);
 
-        return Optional.of(HistoriqueAnnonceDto.fromEntityToDto(optionalHistoriqueAnnonce.get())).orElseThrow(() ->
+        return Optional.of(optionalHistoriqueAnnonce.get()).orElseThrow(() ->
                 new ResourceNotFoundException(
                         "Aucnun HistoriqueAnnonce avec l'Id = " + id + "n'a été trouvé")
         );
     }
 
     @Override
-    public List<HistoriqueAnnonceDto> findAll() {
-        return historiqueAnnonceRepository.findAll().stream()
-                .map(HistoriqueAnnonceDto::fromEntityToDto)
-                .collect(Collectors.toList());
+    public List<HistoriqueAnnonce> findAll() {
+        return historiqueAnnonceRepository.findAll();
     }
 
     @Override
-    public List<HistoriqueAnnonceDto> findHistoriqueAnnonceByOrderByIdDesc() {
-        return historiqueAnnonceRepository.findHistoriqueAnnonceByOrderByIdDesc().stream()
-                .map(HistoriqueAnnonceDto::fromEntityToDto)
-                .collect(Collectors.toList());
+    public List<HistoriqueAnnonce> findHistoriqueAnnonceByOrderByIdDesc() {
+        return historiqueAnnonceRepository.findHistoriqueAnnonceByOrderByIdDesc();
     }
 
     @Override
-    public BigDecimal countNumbersOfHistoriqueAnnonces() {
-        return historiqueAnnonceRepository.countNumberOfHistoriqueAnnonces();
+    public long countNumbersOfHistoriqueAnnonces() {
+        return historiqueAnnonceRepository.count();
     }
 
     @Override

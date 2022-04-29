@@ -1,6 +1,5 @@
 package com.ouvriers.services.Impl;
 
-import com.ouvriers.dtos.TarifDto;
 import com.ouvriers.exceptions.ResourceNotFoundException;
 import com.ouvriers.models.Tarif;
 import com.ouvriers.repository.TarifRepository;
@@ -25,16 +24,12 @@ public class TarifServiceImpl implements TarifService {
     private final TarifRepository tarifRepository;
 
     @Override
-    public TarifDto save(TarifDto tarifDto) {
-        return TarifDto.fromEntityToDto(
-                tarifRepository.save(
-                        TarifDto.fromDtoToEntity(tarifDto)
-                )
-        );
+    public Tarif save(Tarif tarif) {
+        return tarifRepository.save(tarif);
     }
 
     @Override
-    public TarifDto update(Long idTarif, TarifDto tarifDto) {
+    public Tarif update(Long idTarif, Tarif tarif) {
         if (!tarifRepository.existsById(idTarif)) {
             throw new ResourceNotFoundException("Tarif not found");
         }
@@ -45,21 +40,17 @@ public class TarifServiceImpl implements TarifService {
             throw new ResourceNotFoundException("Tarif not found");
         }
 
-        TarifDto tarifDtoResult = TarifDto.fromEntityToDto(optionalTarif.get());
-        tarifDtoResult.setReference(tarifDto.getReference());
-        tarifDtoResult.setMontantTarif(tarifDto.getMontantTarif());
-        tarifDtoResult.setDescription(tarifDto.getDescription());
-        tarifDtoResult.setAnnonceDto(tarifDto.getAnnonceDto());
+        Tarif tarifResult = optionalTarif.get();
+        tarifResult.setReference(tarif.getReference());
+        tarifResult.setMontantTarif(tarif.getMontantTarif());
+        tarifResult.setDescription(tarif.getDescription());
+        tarifResult.setTypeAnnonce(tarif.getTypeAnnonce());
 
-        return TarifDto.fromEntityToDto(
-                tarifRepository.save(
-                        TarifDto.fromDtoToEntity(tarifDtoResult)
-                )
-        );
+        return tarifRepository.save(tarifResult);
     }
 
     @Override
-    public TarifDto findById(Long id) {
+    public Tarif findById(Long id) {
         if (id == null) {
             log.error("Metier Id is null");
             return null;
@@ -67,54 +58,40 @@ public class TarifServiceImpl implements TarifService {
 
         Optional<Tarif> optionalTarif = tarifRepository.findById(id);
 
-        return Optional.of(TarifDto.fromEntityToDto(optionalTarif.get())).orElseThrow(() ->
+        return Optional.of(optionalTarif.get()).orElseThrow(() ->
                 new ResourceNotFoundException(
                         "Aucnun Tarif avec l'Id = " + id + "n'a été trouvé")
         );
     }
 
     @Override
-    public List<TarifDto> findAll() {
-        return tarifRepository.findAll()
-                .stream()
-                .map(TarifDto::fromEntityToDto)
-                .collect(Collectors.toList());
+    public List<Tarif> findAll() {
+        return tarifRepository.findAll();
     }
 
     @Override
-    public List<TarifDto> findByTarifByIdDesc() {
-        return tarifRepository.findTarifByOrderByIdDesc()
-                .stream()
-                .map(TarifDto::fromEntityToDto)
-                .collect(Collectors.toList());
+    public List<Tarif> findByTarifByIdDesc() {
+        return tarifRepository.findTarifByOrderByIdDesc();
     }
 
     @Override
-    public List<TarifDto> findListTarifDtoByKeyword(String keyword) {
-        return tarifRepository.findTarifByKeyword(keyword)
-                .stream()
-                .map(TarifDto::fromEntityToDto)
-                .collect(Collectors.toList());
+    public List<Tarif> findListTarifByKeyword(String keyword) {
+        return tarifRepository.findTarifByKeyword(keyword);
     }
 
     @Override
-    public List<TarifDto> findListTarifDtoByAnnonce(Long pId) {
-        return tarifRepository.findTarifByAnnonce(pId)
-                .stream()
-                .map(TarifDto::fromEntityToDto)
-                .collect(Collectors.toList());
+    public List<Tarif> findListTarifByAnnonce(Long pId) {
+        return tarifRepository.findTarifByAnnonce(pId);
     }
 
     @Override
-    public Page<TarifDto> findTarifByPageable(Pageable pageable) {
-        return tarifRepository.findTarif(pageable)
-                .map(TarifDto::fromEntityToDto);
+    public Page<Tarif> findTarifByPageable(Pageable pageable) {
+        return tarifRepository.findTarif(pageable);
     }
 
     @Override
-    public Page<TarifDto> findTarifByAnnonceByPageable(Long annonceId, Pageable pageable) {
-        return tarifRepository.findTarifByAnnoncePageables(annonceId, pageable)
-                .map(TarifDto::fromEntityToDto);
+    public Page<Tarif> findTarifByAnnonceByPageable(Long annonceId, Pageable pageable) {
+        return tarifRepository.findTarifByAnnoncePageables(annonceId, pageable);
     }
 
     @Override

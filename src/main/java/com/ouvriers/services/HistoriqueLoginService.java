@@ -1,23 +1,22 @@
 package com.ouvriers.services;
 
-import com.ouvriers.dtos.HistoriqueLoginDto;
+import com.ouvriers.models.HistoriqueLogin;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public interface HistoriqueLoginService {
 
-    HistoriqueLoginDto save(HistoriqueLoginDto historiqueLoginDto);
+    HistoriqueLogin save(HistoriqueLogin historiqueLogin);
 
-    HistoriqueLoginDto update(Long idLogin, HistoriqueLoginDto historiqueLoginDto);
+    HistoriqueLogin update(Long idLogin, HistoriqueLogin historiqueLogin);
 
-    HistoriqueLoginDto findById(Long id);
+    HistoriqueLogin findById(Long id);
 
-    List<HistoriqueLoginDto> findAll();
+    List<HistoriqueLogin> findAll();
 
-    List<HistoriqueLoginDto> findHistoriqueLoginByOrderByIdDesc();
+    List<HistoriqueLogin> findHistoriqueLoginByOrderByIdDesc();
 
-    BigDecimal countNumbersOfHistoriqueLogins();
+    long countNumbersOfHistoriqueLogins();
 
     void delete(Long id);
 

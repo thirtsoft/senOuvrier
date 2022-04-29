@@ -28,6 +28,6 @@ public class Tarif implements Serializable {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "annonceId")
-    private Annonce annonce;
+    @JoinColumn(name = "typeAnnonceId")
+    private TypeAnnonce typeAnnonce;
 }

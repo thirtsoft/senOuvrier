@@ -11,8 +11,5 @@ import java.util.List;
 @Repository
 public interface HistoriqueAnnonceRepository extends JpaRepository<HistoriqueAnnonce, Long> {
 
-    @Query("select count(p) from HistoriqueAnnonce p ")
-    BigDecimal countNumberOfHistoriqueAnnonces();
-
     List<HistoriqueAnnonce> findHistoriqueAnnonceByOrderByIdDesc();
 }

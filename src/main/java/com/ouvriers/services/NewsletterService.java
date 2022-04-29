@@ -1,23 +1,22 @@
 package com.ouvriers.services;
 
-import com.ouvriers.dtos.NewsletterDto;
+import com.ouvriers.models.Newsletter;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public interface NewsletterService {
 
-    NewsletterDto save(NewsletterDto newsletterDto);
+    Newsletter save(Newsletter newsletter);
 
-    NewsletterDto update(Long id, NewsletterDto newsletterDto);
+    Newsletter update(Long id, Newsletter newsletter);
 
-    NewsletterDto findById(Long id);
+    Newsletter findById(Long id);
 
-    List<NewsletterDto> findAll();
+    List<Newsletter> findAll();
 
-    List<NewsletterDto> findAllNewslettersByOrderByIdDesc();
+    List<Newsletter> findAllNewslettersByOrderByIdDesc();
 
-    BigDecimal countNumbersOfNewsletters();
+    long countNumbersOfNewsletters();
 
     void delete(Long id);
 }

@@ -1,6 +1,5 @@
 package com.ouvriers.services.Impl;
 
-import com.ouvriers.dtos.UtilisateurDto;
 import com.ouvriers.enums.RoleName;
 import com.ouvriers.exceptions.ResourceNotFoundException;
 import com.ouvriers.models.Role;
@@ -10,14 +9,11 @@ import com.ouvriers.repository.UtilisateurRepository;
 import com.ouvriers.services.UtilisateurService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -43,17 +39,12 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     }
 
     @Override
-    public UtilisateurDto save(UtilisateurDto utilisateurDto) {
-
-        return UtilisateurDto.fromEntityToDto(
-                utilisateurRepository.save(
-                        UtilisateurDto.fromDtoToEntity(utilisateurDto)
-                )
-        );
+    public Utilisateur save(Utilisateur utilisateur) {
+        return utilisateurRepository.save(utilisateur);
     }
 
     @Override
-    public UtilisateurDto update(Long id, UtilisateurDto utilisateurDto) {
+    public Utilisateur update(Long id, Utilisateur utilisateur) {
         if (!utilisateurRepository.existsById(id)) {
             throw new ResourceNotFoundException("State not found");
         }
@@ -64,24 +55,20 @@ public class UtilisateurServiceImpl implements UtilisateurService {
             throw new ResourceNotFoundException("State not found");
         }
 
-        UtilisateurDto utilisateurDtoResult = UtilisateurDto.fromEntityToDto(optionalUtilisateur.get());
+        Utilisateur utilisateurResult = optionalUtilisateur.get();
 
-        utilisateurDtoResult.setName(utilisateurDto.getName());
-        utilisateurDtoResult.setUsername(utilisateurDto.getUsername());
-        utilisateurDtoResult.setEmail(utilisateurDto.getEmail());
-        utilisateurDtoResult.setMobile(utilisateurDto.getMobile());
-        utilisateurDtoResult.setAddressRecruteur(utilisateurDto.getAddressRecruteur());
-        utilisateurDtoResult.setVilleRecruteur(utilisateurDto.getVilleRecruteur());
-        utilisateurDtoResult.setNomEntreprise(utilisateurDto.getNomEntreprise());
-        utilisateurDtoResult.setSecteurActivite(utilisateurDto.getSecteurActivite());
-        utilisateurDtoResult.setWebsite(utilisateurDto.getWebsite());
-        utilisateurDtoResult.setInformation(utilisateurDto.getInformation());
+        utilisateurResult.setName(utilisateur.getName());
+        utilisateurResult.setUsername(utilisateur.getUsername());
+        utilisateurResult.setEmail(utilisateur.getEmail());
+        utilisateurResult.setMobile(utilisateur.getMobile());
+        utilisateurResult.setAddressRecruteur(utilisateur.getAddressRecruteur());
+        utilisateurResult.setVilleRecruteur(utilisateur.getVilleRecruteur());
+        utilisateurResult.setNomEntreprise(utilisateur.getNomEntreprise());
+        utilisateurResult.setSecteurActivite(utilisateur.getSecteurActivite());
+        utilisateurResult.setWebsite(utilisateur.getWebsite());
+        utilisateurResult.setInformation(utilisateur.getInformation());
 
-        return UtilisateurDto.fromEntityToDto(
-                utilisateurRepository.save(
-                        UtilisateurDto.fromDtoToEntity(utilisateurDtoResult)
-                )
-        );
+        return utilisateurRepository.save(utilisateur);
 
     }
 
@@ -165,7 +152,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     }
 
     @Override
-    public UtilisateurDto findById(Long id) {
+    public Utilisateur findById(Long id) {
         if (id == null) {
             log.error("Produit Id is null");
             return null;
@@ -173,14 +160,14 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
         Optional<Utilisateur> utiliOptional = utilisateurRepository.findById(id);
 
-        return Optional.of(UtilisateurDto.fromEntityToDto(utiliOptional.get())).orElseThrow(() ->
+        return Optional.of(utiliOptional.get()).orElseThrow(() ->
                 new ResourceNotFoundException(
                         "Aucnun chauffeur avec l'Id = " + id + "n'a été trouvé")
         );
     }
 
     @Override
-    public UtilisateurDto findByUsername(String username) {
+    public Utilisateur findByUsername(String username) {
         if (username == null) {
             log.error("Utilisateur with this username is null");
             return null;
@@ -188,7 +175,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
         Optional<Utilisateur> utilisateur = utilisateurRepository.findByUsername(username);
 
-        return Optional.of(UtilisateurDto.fromEntityToDto(utilisateur.get())).orElseThrow(() ->
+        return Optional.of(utilisateur.get()).orElseThrow(() ->
                 new ResourceNotFoundException(
                         "Aucnun Utilisateur avec l'Id = " + username + "n'a été trouvé")
         );
@@ -196,17 +183,13 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
 
     @Override
-    public List<UtilisateurDto> findAll() {
-        return utilisateurRepository.findAll().stream()
-                .map(UtilisateurDto::fromEntityToDto)
-                .collect(Collectors.toList());
+    public List<Utilisateur> findAll() {
+        return utilisateurRepository.findAll();
     }
 
     @Override
-    public List<UtilisateurDto> findByOrderByIdDesc() {
-        return utilisateurRepository.findByOrderByIdDesc().stream()
-                .map(UtilisateurDto::fromEntityToDto)
-                .collect(Collectors.toList());
+    public List<Utilisateur> findByOrderByIdDesc() {
+        return utilisateurRepository.findByOrderByIdDesc();
     }
 
     @Override

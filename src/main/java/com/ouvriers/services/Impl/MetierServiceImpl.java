@@ -1,6 +1,5 @@
 package com.ouvriers.services.Impl;
 
-import com.ouvriers.dtos.MetierDto;
 import com.ouvriers.exceptions.ResourceNotFoundException;
 import com.ouvriers.models.Metier;
 import com.ouvriers.repository.MetierRepository;
@@ -10,10 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -25,16 +22,12 @@ public class MetierServiceImpl implements MetierService {
 
 
     @Override
-    public MetierDto save(MetierDto metierDto) {
-        return MetierDto.fromEntityToDto(
-                metierRepository.save(
-                        MetierDto.fromDtoToEntity(metierDto)
-                )
-        );
+    public Metier save(Metier metier) {
+        return metierRepository.save(metier);
     }
 
     @Override
-    public MetierDto update(Long idMetier, MetierDto metierDto) {
+    public Metier update(Long idMetier, Metier metier) {
         if (!metierRepository.existsById(idMetier)) {
             throw new ResourceNotFoundException("Metier not found");
         }
@@ -45,20 +38,16 @@ public class MetierServiceImpl implements MetierService {
             throw new ResourceNotFoundException("Metier not found");
         }
 
-        MetierDto metierDtoResult = MetierDto.fromEntityToDto(optionalMetier.get());
-        metierDtoResult.setReference(metierDto.getReference());
-        metierDtoResult.setDesignation(metierDto.getDesignation());
-        metierDtoResult.setDescription(metierDto.getDescription());
+        Metier metierResult = optionalMetier.get();
+        metierResult.setReference(metier.getReference());
+        metierResult.setDesignation(metier.getDesignation());
+        metierResult.setDescription(metier.getDescription());
 
-        return MetierDto.fromEntityToDto(
-                metierRepository.save(
-                        MetierDto.fromDtoToEntity(metierDtoResult)
-                )
-        );
+        return metierRepository.save(metier);
     }
 
     @Override
-    public MetierDto findById(Long id) {
+    public Metier findById(Long id) {
         if (id == null) {
             log.error("Metier Id is null");
             return null;
@@ -66,68 +55,27 @@ public class MetierServiceImpl implements MetierService {
 
         Optional<Metier> optionalMetier = metierRepository.findById(id);
 
-        return Optional.of(MetierDto.fromEntityToDto(optionalMetier.get())).orElseThrow(() ->
+        return Optional.of(optionalMetier.get()).orElseThrow(() ->
                 new ResourceNotFoundException(
                         "Aucnun Metier avec l'Id = " + id + "n'a été trouvé")
         );
     }
 
+
     @Override
-    public MetierDto findByReference(String reference) {
-        if (reference == null) {
-            log.error("Metier Id is null");
-            return null;
-        }
-
-        Optional<Metier> optionalMetier = metierRepository.findByReference(reference);
-
-        return Optional.of(MetierDto.fromEntityToDto(optionalMetier.get())).orElseThrow(() ->
-                new ResourceNotFoundException(
-                        "Aucnun Metier avec l'Id = " + reference + "n'a été trouvé")
-        );
+    public List<Metier> findAll() {
+        return metierRepository.findAll();
     }
 
     @Override
-    public MetierDto findByDesignation(String designation) {
-        if (designation == null) {
-            log.error("Metier Id is null");
-            return null;
-        }
-
-        Optional<Metier> optionalMetier = metierRepository.findByDesignation(designation);
-
-        return Optional.of(MetierDto.fromEntityToDto(optionalMetier.get())).orElseThrow(() ->
-                new ResourceNotFoundException(
-                        "Aucnun Metier avec l'Id = " + designation + "n'a été trouvé")
-        );
-    }
-
-    @Override
-    public List<MetierDto> findAll() {
-        return metierRepository.findAll().stream()
-                .map(MetierDto::fromEntityToDto)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<MetierDto> findListMetierByReference(String keyword) {
-        return metierRepository.findListMetierByReference(keyword)
-                .stream()
-                .map(MetierDto::fromEntityToDto)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<MetierDto> findByMetierByIdDesc() {
-        return metierRepository.findListOfMetierByOrderByIdDesc().stream()
-                .map(MetierDto::fromEntityToDto)
-                .collect(Collectors.toList());
+    public List<Metier> findByMetierByIdDesc() {
+        return metierRepository.findListOfMetierByOrderByIdDesc();
     }
 
 
     @Override
-    public BigDecimal countNumbersOfMetiers() {
-        return metierRepository.countNumberOfMetiers();
+    public long countNumbersOfMetiers() {
+        return metierRepository.count();
     }
 
     @Override

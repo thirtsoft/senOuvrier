@@ -1,7 +1,5 @@
 package com.ouvriers.services;
 
-import com.ouvriers.dtos.AddresseDto;
-
 import java.util.List;
 
 public interface RoleService {

@@ -1,23 +1,26 @@
 package com.ouvriers.services;
 
-import com.ouvriers.dtos.JetonDto;
+import com.ouvriers.models.Jeton;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public interface JetonService {
 
-    JetonDto save(JetonDto jetonDto);
+    Jeton save(Jeton jeton);
 
-    JetonDto update(Long id, JetonDto jetonDto);
+    Jeton update(Long id, Jeton jeton);
 
-    JetonDto findById(Long id);
+    Jeton updateEtatOfJetonDto(String etat, String id);
 
-    List<JetonDto> findAll();
+    Jeton findById(Long id);
 
-    List<JetonDto> findAllJetonsByOrderByIdDesc();
+    List<Jeton> findAll();
 
-    BigDecimal countNumbersOfJetons();
+    List<Jeton> findAllJetonsByOrderByIdDesc();
+
+    List<Jeton> FindListJetonByCustomerId(Long userId);
+
+    long countNumbersOfJetons();
 
     void delete(Long id);
 

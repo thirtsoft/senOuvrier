@@ -1,6 +1,6 @@
 package com.ouvriers.services;
 
-import com.ouvriers.dtos.OuvrierDto;
+import com.ouvriers.models.Ouvrier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
@@ -12,39 +12,39 @@ import java.util.List;
 
 public interface OuvrierService {
 
-    OuvrierDto save(OuvrierDto ouvrierDto);
+    Ouvrier save(Ouvrier ouvrier);
 
-    OuvrierDto update(Long idOuvrier, OuvrierDto ouvrierDto);
+    Ouvrier update(Long idOuvrier, Ouvrier ouvrier);
 
-    OuvrierDto saveOuvrierWithFiles(String ouvrierDto,
+    Ouvrier saveOuvrierWithFiles(String ouvrier,
                                     MultipartFile photoOuvrier,
                                     MultipartFile cvOuvrier) throws IOException;
 
-    OuvrierDto findById(Long id);
+    Ouvrier findById(Long id);
 
-    OuvrierDto findByReference(String reference);
+    Ouvrier findByReference(String reference);
 
-    List<OuvrierDto> findAll();
+    List<Ouvrier> findAll();
 
-    List<OuvrierDto> findByOuvrierByIdDesc();
+    List<Ouvrier> findByOuvrierByIdDesc();
 
-    List<OuvrierDto> findListOuvrierBySelected();
+    List<Ouvrier> findListOuvrierBySelected();
 
-    List<OuvrierDto> findListOfOuvriersByMetier(Long pId);
+    List<Ouvrier> findListOfOuvriersByMetier(Long pId);
 
-    List<OuvrierDto> findListOfOuvriersByKeyword(String keyword);
+    List<Ouvrier> findListOfOuvriersByKeyword(String keyword);
 
-    List<OuvrierDto> findListOfOuvriersByDisponibility(String disponility);
+    List<Ouvrier> findListOfOuvriersByDisponibility(String disponility);
 
     BigDecimal countNumbersOfOuvriers();
 
-    Page<OuvrierDto> findOuvriersByPageable(Pageable pageable);
+    Page<Ouvrier> findOuvriersByPageable(Pageable pageable);
 
-    Page<OuvrierDto> findOuvriersByKeywordByPageable(String mc, Pageable pageable);
+    Page<Ouvrier> findOuvriersByKeywordByPageable(String mc, Pageable pageable);
 
-    Page<OuvrierDto> findOuvriersByLocalityPageables(Long addId, Pageable pageable);
+    Page<Ouvrier> findOuvriersByLocalityPageables(Long addId, Pageable pageable);
 
-    Page<OuvrierDto> findOuvriersByMetierPageables(@Param("permId") Long metierId, Pageable pageable);
+    Page<Ouvrier> findOuvriersByMetierPageables(@Param("permId") Long metierId, Pageable pageable);
 
     void delete(Long id);
 

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -32,7 +33,7 @@ public class Utilisateur implements Serializable {
     @Column(name = "email", length = 50)
     private String email;
 
-    private String photo;
+    private String photo = "avatar.jpg";
 
     @Column(name = "nomEntreprise", length = 90)
     private String nomEntreprise;
@@ -55,6 +56,14 @@ public class Utilisateur implements Serializable {
 
     @Column(name = "password", length = 90)
     private String password;
+
+    private String subject;
+
+    private String message;
+
+    private boolean isActive;
+
+    private Date dateInscription;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
@@ -220,4 +229,35 @@ public class Utilisateur implements Serializable {
         this.information = information;
     }
 
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public Date getDateInscription() {
+        return dateInscription;
+    }
+
+    public void setDateInscription(Date dateInscription) {
+        this.dateInscription = dateInscription;
+    }
 }

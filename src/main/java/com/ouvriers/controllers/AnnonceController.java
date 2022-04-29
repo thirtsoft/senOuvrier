@@ -1,7 +1,7 @@
 package com.ouvriers.controllers;
 
 import com.ouvriers.controllers.api.AnnonceApi;
-import com.ouvriers.dtos.AnnonceDto;
+import com.ouvriers.models.Annonce;
 import com.ouvriers.services.AnnonceService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -22,39 +22,39 @@ public class AnnonceController implements AnnonceApi {
     private final AnnonceService annonceService;
 
     @Override
-    public ResponseEntity<AnnonceDto> save(AnnonceDto annonceDto) {
-        return ResponseEntity.ok(annonceService.save(annonceDto));
+    public ResponseEntity<Annonce> save(Annonce Annonce) {
+        return ResponseEntity.ok(annonceService.save(Annonce));
     }
 
     @Override
-    public ResponseEntity<AnnonceDto> update(Long id, AnnonceDto annonceDto) {
-        annonceDto.setId(id);
-        return ResponseEntity.ok(annonceService.save(annonceDto));
+    public ResponseEntity<Annonce> update(Long id, Annonce Annonce) {
+        Annonce.setId(id);
+        return ResponseEntity.ok(annonceService.save(Annonce));
 
     }
 
     @Override
-    public ResponseEntity<AnnonceDto> getAnnonceById(Long id) {
+    public ResponseEntity<Annonce> getAnnonceById(Long id) {
         return ResponseEntity.ok(annonceService.findById(id));
     }
 
     @Override
-    public ResponseEntity<AnnonceDto> getAnnonceByRerefence(String reference) {
+    public ResponseEntity<Annonce> getAnnonceByRerefence(String reference) {
         return ResponseEntity.ok(annonceService.findByReference(reference));
     }
 
     @Override
-    public ResponseEntity<List<AnnonceDto>> getAllAnnonces() {
+    public ResponseEntity<List<Annonce>> getAllAnnonces() {
         return ResponseEntity.ok(annonceService.findAll());
     }
 
     @Override
-    public ResponseEntity<List<AnnonceDto>> getListOfAnnoncesByMetiers(Long pId) {
+    public ResponseEntity<List<Annonce>> getListOfAnnoncesByMetiers(Long pId) {
         return ResponseEntity.ok(annonceService.findListAnnonceByMetier(pId));
     }
 
     @Override
-    public ResponseEntity<List<AnnonceDto>> getListOfAnnoncesByKeyword(String keyword) {
+    public ResponseEntity<List<Annonce>> getListOfAnnoncesByKeyword(String keyword) {
         return ResponseEntity.ok(annonceService.findListAnnonceByKeyword("%" + keyword + "%"));
     }
 
@@ -74,18 +74,18 @@ public class AnnonceController implements AnnonceApi {
     }
 
     @Override
-    public Page<AnnonceDto> getListAnnonceByPageable(int page, int size) {
+    public Page<Annonce> getListAnnonceByPageable(int page, int size) {
         final Pageable pageable = PageRequest.of(page, size);
         return annonceService.findAnnonceByPageable(pageable);
     }
 
     @Override
-    public Page<AnnonceDto> getAnnonceByLocalityPageables(Long addId, int page, int size) {
+    public Page<Annonce> getAnnonceByLocalityPageables(Long addId, int page, int size) {
         return null;
     }
 
     @Override
-    public Page<AnnonceDto> getAnnonceByMetierPageables(Long metierId, int page, int size) {
+    public Page<Annonce> getAnnonceByMetierPageables(Long metierId, int page, int size) {
         final Pageable pageable = PageRequest.of(page, size);
         return annonceService.findAnnonceByMetierByPageable(metierId, pageable);
     }

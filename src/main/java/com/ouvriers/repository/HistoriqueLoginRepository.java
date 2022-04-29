@@ -11,9 +11,6 @@ import java.util.List;
 @Repository
 public interface HistoriqueLoginRepository extends JpaRepository<HistoriqueLogin, Long> {
 
-    @Query("select count(p) from HistoriqueLogin p ")
-    BigDecimal countNumberOfHistoriqueLogins();
-
     List<HistoriqueLogin> findHistoriqueLoginByOrderByIdDesc();
 
 }

@@ -36,6 +36,12 @@ public interface OuvrierRepository extends JpaRepository<Ouvrier, Long> {
     @Query("select ouv from Ouvrier ouv where ouv.disponibity like :z")
     List<Ouvrier> findListOfOuvrierByDisponibility(@Param("z") String disponibity);
 
+    @Query("select EXTRACT(month from(c.dateInscription)), count(c) from Ouvrier c group by EXTRACT(month from(c.dateInscription))")
+    List<?> countNumberOfOuvrierPeerMonth();
+
+    @Query("select EXTRACT(year from(c.dateInscription)), count(c) from Ouvrier c group by EXTRACT(year from(c.dateInscription))")
+    List<?> countNumberOfOuvriersPeerYear();
+
     @Query("select p from Ouvrier p")
     Page<Ouvrier> findOuvriersByPageable(Pageable pageable);
 
@@ -47,6 +53,18 @@ public interface OuvrierRepository extends JpaRepository<Ouvrier, Long> {
 
     @Query("select ouv from Ouvrier ouv where ouv.metier.id =:metierId")
     Page<Ouvrier> findOuvriersByMetierPageables(@Param("metierId") Long metierId, Pageable pageable);
+
+    Page<Ouvrier> findByAddresseId(Long id, Pageable pageable);
+
+    // Like  key%  %key  %key%
+    Page<Ouvrier> findByDisponibityContaining(String disponibity, Pageable pageable);
+
+    @Query("select count(id) from Ouvrier where addresse.id = ?1")
+    long getOuvrierLengthByAddressId(long id);
+
+    @Query("select count(id) from Ouvrier where disponibity LIKE %?1%")
+    long getOuvrierSizeByKey(String disponibity);
+
 
 
 }

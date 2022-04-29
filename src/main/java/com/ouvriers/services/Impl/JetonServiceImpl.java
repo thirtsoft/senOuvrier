@@ -1,6 +1,5 @@
 package com.ouvriers.services.Impl;
 
-import com.ouvriers.dtos.JetonDto;
 import com.ouvriers.exceptions.ResourceNotFoundException;
 import com.ouvriers.models.Jeton;
 import com.ouvriers.repository.JetonRepository;
@@ -9,10 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -26,37 +23,40 @@ public class JetonServiceImpl implements JetonService {
     }
 
     @Override
-    public JetonDto save(JetonDto jetonDto) {
-        return JetonDto.fromEntityToDto(
-                jetonRepository.save(
-                        JetonDto.fromDtoToEntity(jetonDto)
-                )
-        );
+    public Jeton save(Jeton jeton) {
+        return jetonRepository.save(jeton);
     }
 
     @Override
-    public JetonDto update(Long id, JetonDto jetonDto) {
+    public Jeton update(Long id, Jeton jeton) {
         if (!jetonRepository.existsById(id)) {
             throw new ResourceNotFoundException("Jeton not found");
         }
 
         Optional<Jeton> optionalJeton = jetonRepository.findById(id);
 
-        JetonDto jetonDtoResult = JetonDto.fromEntityToDto(optionalJeton.get());
-        jetonDtoResult.setMontant(jetonDto.getMontant());
-        jetonDtoResult.setEtat(jetonDto.getEtat());
-        jetonDtoResult.setCreatedDate(jetonDto.getCreatedDate());
-        jetonDtoResult.setUtilisateurDto(jetonDto.getUtilisateurDto());
+        Jeton jetonResult = optionalJeton.get();
+        jetonResult.setMontant(jeton.getMontant());
+        jetonResult.setEtat(jeton.getEtat());
+        jetonResult.setCreatedDate(jeton.getCreatedDate());
+        jetonResult.setUtilisateur(jeton.getUtilisateur());
 
-        return JetonDto.fromEntityToDto(
-                jetonRepository.save(
-                        JetonDto.fromDtoToEntity(jetonDtoResult)
-                )
-        );
+        return jetonRepository.save(jetonResult);
     }
 
     @Override
-    public JetonDto findById(Long id) {
+    public Jeton updateEtatOfJetonDto(String etat, String id) {
+        Optional<Jeton> jetonOptional = jetonRepository.findById(Long.valueOf(id));
+
+        Jeton jetonDtoResult = jetonOptional.get();
+
+        jetonDtoResult.setEtat(etat);
+
+        return jetonRepository.save(jetonDtoResult);
+    }
+
+    @Override
+    public Jeton findById(Long id) {
         if (id == null) {
             log.error("Jeton not found");
             return null;
@@ -64,7 +64,7 @@ public class JetonServiceImpl implements JetonService {
 
         Optional<Jeton> optionalJeton = jetonRepository.findById(id);
 
-        return Optional.of(JetonDto.fromEntityToDto(optionalJeton.get())).orElseThrow(() ->
+        return Optional.of(optionalJeton.get()).orElseThrow(() ->
                 new ResourceNotFoundException(
                         "Aucnun Jeton avec l'Id = " + id + "n'a été trouvé")
         );
@@ -72,22 +72,23 @@ public class JetonServiceImpl implements JetonService {
     }
 
     @Override
-    public List<JetonDto> findAll() {
-        return jetonRepository.findAll().stream()
-                .map(JetonDto::fromEntityToDto)
-                .collect(Collectors.toList());
+    public List<Jeton> findAll() {
+        return jetonRepository.findAll();
     }
 
     @Override
-    public List<JetonDto> findAllJetonsByOrderByIdDesc() {
-        return jetonRepository.findListOfJetonByOrderByIdDesc().stream()
-                .map(JetonDto::fromEntityToDto)
-                .collect(Collectors.toList());
+    public List<Jeton> findAllJetonsByOrderByIdDesc() {
+        return jetonRepository.findListOfJetonByOrderByIdDesc();
     }
 
     @Override
-    public BigDecimal countNumbersOfJetons() {
-        return jetonRepository.countNumberOfJetons();
+    public List<Jeton> FindListJetonByCustomerId(Long userId) {
+        return jetonRepository.FindListJetonByCustomerId(userId);
+    }
+
+    @Override
+    public long countNumbersOfJetons() {
+        return jetonRepository.count();
     }
 
     @Override

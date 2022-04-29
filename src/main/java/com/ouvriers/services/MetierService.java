@@ -1,29 +1,22 @@
 package com.ouvriers.services;
 
-import com.ouvriers.dtos.MetierDto;
+import com.ouvriers.models.Metier;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public interface MetierService {
 
-    MetierDto save(MetierDto metierDto);
+    Metier save(Metier metier);
 
-    MetierDto update(Long idMetier, MetierDto metierDto);
+    Metier update(Long idMetier, Metier metier);
 
-    MetierDto findById(Long id);
+    Metier findById(Long id);
 
-    MetierDto findByReference(String reference);
+    List<Metier> findAll();
 
-    MetierDto findByDesignation(String designation);
+    List<Metier> findByMetierByIdDesc();
 
-    List<MetierDto> findAll();
-
-    List<MetierDto> findListMetierByReference(String keyword);
-
-    List<MetierDto> findByMetierByIdDesc();
-
-    BigDecimal countNumbersOfMetiers();
+    long countNumbersOfMetiers();
 
     void delete(Long id);
 

@@ -1,6 +1,5 @@
 package com.ouvriers.services.Impl;
 
-import com.ouvriers.dtos.AnnonceDto;
 import com.ouvriers.exceptions.ResourceNotFoundException;
 import com.ouvriers.models.Annonce;
 import com.ouvriers.repository.AnnonceRepository;
@@ -15,7 +14,6 @@ import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -26,16 +24,12 @@ public class AnnonceServiceImpl implements AnnonceService {
     private final AnnonceRepository annonceRepository;
 
     @Override
-    public AnnonceDto save(AnnonceDto annonceDto) {
-        return AnnonceDto.fromEntityToDto(
-                annonceRepository.save(
-                        AnnonceDto.fromDtoToEntity(annonceDto)
-                )
-        );
+    public Annonce save(Annonce annonce) {
+        return annonceRepository.save(annonce);
     }
 
     @Override
-    public AnnonceDto update(Long idAnnonce, AnnonceDto annonceDto) {
+    public Annonce update(Long idAnnonce, Annonce annonce) {
         if (!annonceRepository.existsById(idAnnonce)) {
             throw new ResourceNotFoundException("Annonce not found");
         }
@@ -46,34 +40,28 @@ public class AnnonceServiceImpl implements AnnonceService {
             throw new ResourceNotFoundException("Annonce not found");
         }
 
-        AnnonceDto annonceDtoResult = AnnonceDto.fromEntityToDto(optionalAnnonce.get());
-        annonceDtoResult.setReference(annonceDto.getReference());
-        annonceDtoResult.setLibelle(annonceDto.getLibelle());
-        annonceDtoResult.setEmailPoste(annonceDto.getEmailPoste());
-        annonceDtoResult.setLieuPoste(annonceDto.getLieuPoste());
-        annonceDtoResult.setSalaire(annonceDto.getSalaire());
-        annonceDtoResult.setTime(annonceDto.getTime());
-        annonceDtoResult.setAnneeExperience(annonceDto.getAnneeExperience());
-        annonceDtoResult.setTypeContrat(annonceDto.getTypeContrat());
-        annonceDtoResult.setSelected(annonceDto.isSelected());
-        annonceDtoResult.setStatus(annonceDto.getStatus());
-        annonceDtoResult.setStatusAnnonce(annonceDto.getStatusAnnonce());
-        annonceDtoResult.setDescription(annonceDto.getDescription());
-        annonceDtoResult.setDateCandidature(annonceDto.getDateCandidature());
-        annonceDtoResult.setDateCloture(annonceDto.getDateCloture());
-        annonceDtoResult.setMetierDto(annonceDto.getMetierDto());
-        annonceDtoResult.setAddresseDto(annonceDto.getAddresseDto());
-        annonceDtoResult.setUtilisateurDto(annonceDto.getUtilisateurDto());
+        Annonce annonceResult = optionalAnnonce.get();
+        annonceResult.setReference(annonce.getReference());
+        annonceResult.setLibelle(annonce.getLibelle());
+        annonceResult.setEmailPoste(annonce.getEmailPoste());
+        annonceResult.setLieuPoste(annonce.getLieuPoste());
+        annonceResult.setSalaire(annonce.getSalaire());
+        annonceResult.setTime(annonce.getTime());
+        annonceResult.setAnneeExperience(annonce.getAnneeExperience());
+        annonceResult.setTypeContrat(annonce.getTypeContrat());
+        annonceResult.setSelected(annonce.isSelected());
+        annonceResult.setStatus(annonce.getStatus());
+        annonceResult.setDescription(annonce.getDescription());
+        annonceResult.setCreatedDate(annonce.getCreatedDate());
+        annonceResult.setDateCloture(annonce.getDateCloture());
+        annonceResult.setMetier(annonce.getMetier());
+        annonceResult.setUtilisateur(annonce.getUtilisateur());
 
-        return AnnonceDto.fromEntityToDto(
-                annonceRepository.save(
-                        AnnonceDto.fromDtoToEntity(annonceDtoResult)
-                )
-        );
+        return annonceRepository.save(annonceResult);
     }
 
     @Override
-    public AnnonceDto findById(Long id) {
+    public Annonce findById(Long id) {
         if (id == null) {
             log.error("Annonce Id is null");
             return null;
@@ -81,14 +69,14 @@ public class AnnonceServiceImpl implements AnnonceService {
 
         Optional<Annonce> optionalAnnonce = annonceRepository.findById(id);
 
-        return Optional.of(AnnonceDto.fromEntityToDto(optionalAnnonce.get())).orElseThrow(() ->
+        return Optional.of(optionalAnnonce.get()).orElseThrow(() ->
                 new ResourceNotFoundException(
                         "Aucnun Annonce avec l'Id = " + id + "n'a été trouvé")
         );
     }
 
     @Override
-    public AnnonceDto findByReference(String reference) {
+    public Annonce findByReference(String reference) {
         if (reference == null) {
             log.error("Annonce Id is null");
             return null;
@@ -96,21 +84,21 @@ public class AnnonceServiceImpl implements AnnonceService {
 
         Optional<Annonce> optionalAnnonce = annonceRepository.findByReference(reference);
 
-        return Optional.of(AnnonceDto.fromEntityToDto(optionalAnnonce.get())).orElseThrow(() ->
+        return Optional.of(optionalAnnonce.get()).orElseThrow(() ->
                 new ResourceNotFoundException(
                         "Aucnun Annonce avec l'Id = " + reference + "n'a été trouvé")
         );
     }
 
     @Override
-    public AnnonceDto FindAnnonceByCustomerId(Long userId) {
+    public Annonce FindAnnonceByCustomerId(Long userId) {
         if (userId == null) {
             log.error("Annonce by customer id not found");
             return null;
         }
         Optional<Annonce> optionalAnnonce = annonceRepository.FindAnnonceByCustomerId(userId);
 
-        return Optional.of(AnnonceDto.fromEntityToDto(optionalAnnonce.get())).orElseThrow(() ->
+        return Optional.of(optionalAnnonce.get()).orElseThrow(() ->
                 new ResourceNotFoundException(
                         "Aucnun Annonce avec l'Id = " + userId + "n'a été trouvé")
         );
@@ -118,88 +106,65 @@ public class AnnonceServiceImpl implements AnnonceService {
     }
 
     @Override
-    public List<AnnonceDto> findAll() {
-        return annonceRepository.findAll().stream()
-                .map(AnnonceDto::fromEntityToDto)
-                .collect(Collectors.toList());
+    public List<Annonce> findAll() {
+        return annonceRepository.findAll();
     }
 
     @Override
-    public List<AnnonceDto> findByAnnonceByIdDesc() {
-        return annonceRepository.findByOrderByIdDesc().stream()
-                .map(AnnonceDto::fromEntityToDto)
-                .collect(Collectors.toList());
+    public List<Annonce> findByAnnonceByIdDesc() {
+        return annonceRepository.findByOrderByIdDesc();
     }
 
     @Override
-    public List<AnnonceDto> findListAnnonceBySelected() {
-        return annonceRepository.findAnnonceBySelected().stream()
-                .map(AnnonceDto::fromEntityToDto)
-                .collect(Collectors.toList());
+    public List<Annonce> findListAnnonceBySelected() {
+        return annonceRepository.findAnnonceBySelected();
     }
 
     @Override
-    public List<AnnonceDto> findListAnnonceByKeyword(String keyword) {
+    public List<Annonce> findListAnnonceByKeyword(String keyword) {
         if (keyword == null) {
             log.error("Annonce not found");
         }
-        return annonceRepository.findAnnonceByKeyword(keyword).stream()
-                .map(AnnonceDto::fromEntityToDto)
-                .collect(Collectors.toList());
+        return annonceRepository.findAnnonceByKeyword(keyword);
     }
 
     @Override
-    public List<AnnonceDto> findListAnnonceByLibelle(String libelle) {
+    public List<Annonce> findListAnnonceByLibelle(String libelle) {
         if (libelle == null) {
             log.error("Annonce not found");
         }
-        return annonceRepository.findListAnnonceByLibelle(libelle)
-                .stream()
-                .map(AnnonceDto::fromEntityToDto)
-                .collect(Collectors.toList());
+        return annonceRepository.findListAnnonceByLibelle(libelle);
     }
 
     @Override
-    public List<AnnonceDto> findListAnnonceByMetier(Long mId) {
+    public List<Annonce> findListAnnonceByMetier(Long mId) {
         return annonceRepository.findListAnnonceByMetier(mId)
-                .stream()
-                .map(AnnonceDto::fromEntityToDto)
-                .collect(Collectors.toList());
+                ;
     }
 
     @Override
-    public List<AnnonceDto> FindListAnnonceByCustomerId(Long userId) {
-        return annonceRepository.FindListAnnonceByCustomerId(userId).stream()
-                .map(AnnonceDto::fromEntityToDto)
-                .collect(Collectors.toList());
+    public List<Annonce> FindListAnnonceByCustomerId(Long userId) {
+        return annonceRepository.FindListAnnonceByCustomerId(userId);
     }
 
     @Override
-    public List<AnnonceDto> find5LatestRecordsByOrderByIdDesc() {
-        return annonceRepository.findTop8ByOrderByIdDesc().stream()
-                .map(AnnonceDto::fromEntityToDto)
-                .collect(Collectors.toList());
+    public List<Annonce> find5LatestRecordsByOrderByIdDesc() {
+        return annonceRepository.findTop8ByOrderByIdDesc();
     }
 
     @Override
-    public List<AnnonceDto> findListAnnonceByStatusPending() {
-        return annonceRepository.findListAnnonceByStatusPending().stream()
-                .map(AnnonceDto::fromEntityToDto)
-                .collect(Collectors.toList());
+    public List<Annonce> findListAnnonceByStatusPending() {
+        return annonceRepository.findListAnnonceByStatusPending();
     }
 
     @Override
-    public List<AnnonceDto> findListAnnonceByStatusValid() {
-        return annonceRepository.findListAnnonceByStatusValid().stream()
-                .map(AnnonceDto::fromEntityToDto)
-                .collect(Collectors.toList());
+    public List<Annonce> findListAnnonceByStatusValid() {
+        return annonceRepository.findListAnnonceByStatusValid();
     }
 
     @Override
-    public List<AnnonceDto> findListAnnonceByStatusRejet() {
-        return annonceRepository.findListAnnonceByStatusRefused().stream()
-                .map(AnnonceDto::fromEntityToDto)
-                .collect(Collectors.toList());
+    public List<Annonce> findListAnnonceByStatusRejet() {
+        return annonceRepository.findListAnnonceByStatusRefused();
     }
 
     @Override
@@ -219,28 +184,22 @@ public class AnnonceServiceImpl implements AnnonceService {
 
     @Override
     public List<?> countNumberTotalOfAnnonceByMonth() {
-        return annonceRepository.countNumberOfAnnonceByMonth()
-                .stream()
-                .collect(Collectors.toList());
+        return annonceRepository.countNumberOfAnnonceByMonth();
     }
 
     @Override
     public List<?> countNumberTotalOfAnnonceByYear() {
-        return annonceRepository.countNumberOfAnnonceByYear()
-                .stream()
-                .collect(Collectors.toList());
+        return annonceRepository.countNumberOfAnnonceByYear();
     }
 
     @Override
-    public Page<AnnonceDto> findAnnonceByPageable(Pageable pageable) {
-        return annonceRepository.findAll(pageable)
-                .map(AnnonceDto::fromEntityToDto);
+    public Page<Annonce> findAnnonceByPageable(Pageable pageable) {
+        return annonceRepository.findAll(pageable);
     }
 
     @Override
-    public Page<AnnonceDto> findAnnonceByMetierByPageable(Long metierId, Pageable pageable) {
-        return annonceRepository.findAnnonceByMetierPageables(metierId, pageable)
-                .map(AnnonceDto::fromEntityToDto);
+    public Page<Annonce> findAnnonceByMetierByPageable(Long metierId, Pageable pageable) {
+        return annonceRepository.findAnnonceByMetierPageables(metierId, pageable);
     }
 
     @Override

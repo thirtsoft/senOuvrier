@@ -1,14 +1,13 @@
 package com.ouvriers.controllers;
 
 import com.ouvriers.controllers.api.MetierApi;
-import com.ouvriers.dtos.MetierDto;
+import com.ouvriers.models.Metier;
 import com.ouvriers.services.MetierService;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -18,48 +17,40 @@ public class MetierController implements MetierApi {
     private final MetierService metierService;
 
     @Override
-    public ResponseEntity<MetierDto> save(MetierDto metierDto) {
-        return ResponseEntity.ok(metierService.save(metierDto));
+    public ResponseEntity<Metier> save(Metier metier) {
+        Metier metierResult = metierService.save(metier);
+        return new ResponseEntity<>(metierResult, HttpStatus.CREATED);
     }
 
     @Override
-    public ResponseEntity<MetierDto> update(Long id, MetierDto metierDto) {
-        metierDto.setId(id);
-        return ResponseEntity.ok(metierService.save(metierDto));
+    public ResponseEntity<Metier> update(Long id, Metier metier) {
+        metier.setId(id);
+        Metier metierResult = metierService.save(metier);
+        return new ResponseEntity<>(metierResult, HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<MetierDto> getMetierById(Long id) {
-        return ResponseEntity.ok(metierService.findById(id));
+    public ResponseEntity<Metier> getMetierById(Long id) {
+        Metier metierResult = metierService.findById(id);
+        return new ResponseEntity<>(metierResult, HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<MetierDto> getMetierByRerefence(String reference) {
-        return ResponseEntity.ok(metierService.findByReference("%" + reference + "%"));
+    public ResponseEntity<List<Metier>> getAllMetiers() {
+        List<Metier> metierResults = metierService.findAll();
+        return new ResponseEntity<>(metierResults, HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<List<MetierDto>> getAllMetiers() {
-        return ResponseEntity.ok(metierService.findAll());
+    public ResponseEntity<List<Metier>> getAllMetiersOrderByIdDesc() {
+        List<Metier> metierResults = metierService.findByMetierByIdDesc();
+        return new ResponseEntity<>(metierResults, HttpStatus.OK);
     }
 
-    @Override
-    public ResponseEntity<List<MetierDto>> getListOfMetiersByKeyword(String keyword) {
-        return ResponseEntity.ok(metierService.findListMetierByReference("%" + keyword + "%"));
-    }
 
     @Override
-    public BigDecimal getNumbersOfMetiers() {
+    public long getNumbersOfMetiers() {
         return metierService.countNumbersOfMetiers();
     }
 
-    @Override
-    public Page<MetierDto> getListMetierByPageable(int page, int size) {
-        return null;
-    }
-
-    @Override
-    public Page<MetierDto> getMetierByLocalityPageables(Long addId, int page, int size) {
-        return null;
-    }
 }

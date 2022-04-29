@@ -45,6 +45,9 @@ public class Annonce implements Serializable {
     @Column(name = "typeContrat")
     private String typeContrat;
 
+    @Column(name = "status")
+    private String status;
+
     @Column(name = "isSelected")
     private boolean selected;
 
@@ -58,29 +61,9 @@ public class Annonce implements Serializable {
     @Column(name = "dateCloture", length = 70)
     private Date dateCloture;
 
-    @Enumerated(EnumType.STRING)
-    @NaturalId
-    @Column(length = 90)
-    private StatusAnnonce statusAnnonce;
-
-    @Column(name = "status")
-    private String status;
-
     @ManyToOne
     @JoinColumn(name = "metierId")
     private Metier metier;
-
-    @ManyToOne
-    @JoinColumn(name = "recrId")
-    private Recruteur recruteur;
-
-/*    @ManyToOne
-    @JoinColumn(name = "villeId")
-    private Ville ville;*/
-
-    @ManyToOne
-    @JoinColumn(name = "addresseId")
-    private Addresse addresse;
 
     @ManyToOne
     @JoinColumn(name = "userId")

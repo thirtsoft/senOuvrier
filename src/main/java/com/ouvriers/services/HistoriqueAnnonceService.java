@@ -1,23 +1,22 @@
 package com.ouvriers.services;
 
-import com.ouvriers.dtos.HistoriqueAnnonceDto;
+import com.ouvriers.models.HistoriqueAnnonce;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public interface HistoriqueAnnonceService {
 
-    HistoriqueAnnonceDto save(HistoriqueAnnonceDto historiqueAnnonceDto);
+    HistoriqueAnnonce save(HistoriqueAnnonce historiqueAnnonce);
 
-    HistoriqueAnnonceDto update(Long id, HistoriqueAnnonceDto historiqueAnnonceDto);
+    HistoriqueAnnonce update(Long id, HistoriqueAnnonce historiqueAnnonce);
 
-    HistoriqueAnnonceDto findById(Long id);
+    HistoriqueAnnonce findById(Long id);
 
-    List<HistoriqueAnnonceDto> findAll();
+    List<HistoriqueAnnonce> findAll();
 
-    List<HistoriqueAnnonceDto> findHistoriqueAnnonceByOrderByIdDesc();
+    List<HistoriqueAnnonce> findHistoriqueAnnonceByOrderByIdDesc();
 
-    BigDecimal countNumbersOfHistoriqueAnnonces();
+    long countNumbersOfHistoriqueAnnonces();
 
     void delete(Long id);
 }

@@ -1,0 +1,27 @@
+package com.ouvriers.repository;
+
+import com.ouvriers.models.Rating;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+@Repository
+public interface RatingRepository extends JpaRepository<Rating, Long> {
+
+    List<Rating> findTop3ByOrderByCreatedDateDesc();
+
+    @Query("select count(c) from Rating c where month(c.createdDate) = month(current_date)")
+    BigDecimal countNumberOfRating();
+
+    List<Rating> findByOrderByIdDesc();
+
+    @Query("select count(c) from Rating c where c.ouvrier.reference =:ouv")
+    BigDecimal countNumberOfRatingByOuvrierId(@Param("ouv") String ouvRef);
+
+    @Query("select n from Rating n where n.chauffeur.id =:num")
+    List<Rating> findTop4RatingOrderByCreatedDateDesc(@Param("num") Long ouvRef);
+}

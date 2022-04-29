@@ -1,21 +1,21 @@
 package com.ouvriers.services;
 
-import com.ouvriers.dtos.UtilisateurDto;
 import com.ouvriers.enums.RoleName;
+import com.ouvriers.models.Utilisateur;
 
 import java.util.List;
 
 public interface UtilisateurService {
 
-    UtilisateurDto save(UtilisateurDto utilisateurDto);
+    Utilisateur save(Utilisateur utilisateur);
 
-    UtilisateurDto update(Long id, UtilisateurDto utilisateurDto);
+    Utilisateur update(Long id, Utilisateur utilisateur);
 
     void addRoleToUser(String username, RoleName roleName);
 
-    UtilisateurDto findById(Long id);
+    Utilisateur findById(Long id);
 
-    UtilisateurDto findByUsername(String username);
+    Utilisateur findByUsername(String username);
 
     boolean updateUsernameOfUtilisateurByUsername(String username, String newUsername);
 
@@ -27,9 +27,9 @@ public interface UtilisateurService {
 
     boolean updateCustomerProfileByUsername(String username, String name, String newUsername, String email, String mobile);
 
-    List<UtilisateurDto> findAll();
+    List<Utilisateur> findAll();
 
-    List<UtilisateurDto> findByOrderByIdDesc();
+    List<Utilisateur> findByOrderByIdDesc();
 
     void delete(Long id);
 

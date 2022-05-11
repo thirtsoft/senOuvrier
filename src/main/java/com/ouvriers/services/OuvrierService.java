@@ -26,7 +26,7 @@ public interface OuvrierService {
 
     List<Ouvrier> findAll();
 
-    List<Ouvrier> findByOuvrierByIdDesc();
+    List<Ouvrier> findAllOuvriersByIdDesc();
 
     List<Ouvrier> findListOuvrierBySelected();
 
@@ -38,6 +38,10 @@ public interface OuvrierService {
 
     BigDecimal countNumbersOfOuvriers();
 
+    List<?> countNumberOfOuvrierByMonth();
+
+    List<?> countNumberOfOuvrierByYear();
+
     Page<Ouvrier> findOuvriersByPageable(Pageable pageable);
 
     Page<Ouvrier> findOuvriersByKeywordByPageable(String mc, Pageable pageable);
@@ -45,6 +49,19 @@ public interface OuvrierService {
     Page<Ouvrier> findOuvriersByLocalityPageables(Long addId, Pageable pageable);
 
     Page<Ouvrier> findOuvriersByMetierPageables(@Param("permId") Long metierId, Pageable pageable);
+
+
+    List<Ouvrier> getAllOuvrierDtos(int page, int size);
+
+    List<Ouvrier> getAllOuvrierDtosByIdAddress(Long id, int page, int size);
+
+    List<Ouvrier> getAllOuvrierDtosByKey(String disponibility, int page, int size);
+
+    long getAllOuvrierDtosSize();
+
+    long getOuvriersDtosByAddressIdLength(Long id);
+
+    long getOuvrierDtosSizeByKey(String disponibility);
 
     void delete(Long id);
 

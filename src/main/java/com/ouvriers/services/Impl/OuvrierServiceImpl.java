@@ -8,6 +8,7 @@ import com.ouvriers.services.OuvrierService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,7 +27,6 @@ import java.util.stream.Collectors;
 public class OuvrierServiceImpl implements OuvrierService {
 
     private final OuvrierRepository ouvrierRepository;
-
 
     @Override
     public Ouvrier save(Ouvrier ouvrier) {
@@ -115,7 +115,7 @@ public class OuvrierServiceImpl implements OuvrierService {
     }
 
     @Override
-    public List<Ouvrier> findByOuvrierByIdDesc() {
+    public List<Ouvrier> findAllOuvriersByIdDesc() {
         return ouvrierRepository.findOuvrierByOrderByIdDesc();
     }
 
@@ -145,6 +145,16 @@ public class OuvrierServiceImpl implements OuvrierService {
     }
 
     @Override
+    public List<?> countNumberOfOuvrierByMonth() {
+        return ouvrierRepository.countNumberOfOuvrierPeerMonth();
+    }
+
+    @Override
+    public List<?> countNumberOfOuvrierByYear() {
+        return ouvrierRepository.countNumberOfOuvriersPeerYear();
+    }
+
+    @Override
     public Page<Ouvrier> findOuvriersByPageable(Pageable pageable) {
         return ouvrierRepository.findOuvriersByPageable(pageable);
     }
@@ -162,6 +172,41 @@ public class OuvrierServiceImpl implements OuvrierService {
     @Override
     public Page<Ouvrier> findOuvriersByMetierPageables(Long metierId, Pageable pageable) {
         return ouvrierRepository.findOuvriersByMetierPageables(metierId, pageable);
+    }
+
+    @Override
+    public List<Ouvrier> getAllOuvrierDtos(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return ouvrierRepository.findAll(pageable).getContent();
+    }
+
+    @Override
+    public List<Ouvrier> getAllOuvrierDtosByIdAddress(Long id, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return ouvrierRepository.findByAddresseId(id, pageable)
+                .getContent();
+    }
+
+    @Override
+    public List<Ouvrier> getAllOuvrierDtosByKey(String disponibility, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return ouvrierRepository.findByDisponibityContaining(disponibility, pageable)
+                .getContent();
+    }
+
+    @Override
+    public long getAllOuvrierDtosSize() {
+        return ouvrierRepository.count();
+    }
+
+    @Override
+    public long getOuvriersDtosByAddressIdLength(Long id) {
+        return ouvrierRepository.getOuvrierLengthByAddressId(id);
+    }
+
+    @Override
+    public long getOuvrierDtosSizeByKey(String disponibility) {
+        return ouvrierRepository.getOuvrierSizeByKey(disponibility);
     }
 
     @Override

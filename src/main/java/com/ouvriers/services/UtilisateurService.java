@@ -3,6 +3,7 @@ package com.ouvriers.services;
 import com.ouvriers.enums.RoleName;
 import com.ouvriers.models.Utilisateur;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface UtilisateurService {
@@ -27,9 +28,15 @@ public interface UtilisateurService {
 
     boolean updateCustomerProfileByUsername(String username, String name, String newUsername, String email, String mobile);
 
+    Utilisateur activatedUser(String isActive, String id);
+
+    BigDecimal countNumberOfRegisterInMonth();
+
     List<Utilisateur> findAll();
 
     List<Utilisateur> findByOrderByIdDesc();
+
+    List<Utilisateur> findNewsRegisterInMonthByOrderByIdDesc();
 
     void delete(Long id);
 

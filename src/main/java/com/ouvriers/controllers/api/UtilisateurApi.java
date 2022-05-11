@@ -21,63 +21,6 @@ public interface UtilisateurApi {
     @PostMapping(value = APP_ROOT + "/utilisateurs/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<Utilisateur> save(@RequestBody Utilisateur Utilisateur);
 
-    @GetMapping(value = APP_ROOT + "/utilisateurs/findById/{idUtilisateur}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Rechercher et afficher un utilisateur par son ID",
-            notes = "Cette méthode permet de rechercher et d'afficher un utilisateur par son ID")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "La liste est"),
-            @ApiResponse(code = 400, message = "La liste est vide")
-    })
-    ResponseEntity<Utilisateur> getUtilisateurById(@PathVariable("idUtilisateur") Long id);
-
-    @GetMapping(value = APP_ROOT + "/utilisateurs/all", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Rechercher et afficher la liste des utilisateurs",
-            notes = "Cette méthode permet de rechercher et d'afficher la liste des utilisateur")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "La liste est"),
-            @ApiResponse(code = 400, message = "La liste est vide")
-    })
-    ResponseEntity<List<Utilisateur>> getAllUtilisateurs();
-
-    @GetMapping(value = APP_ROOT + "/utilisateurs/searchAllUtilisateurOrderByIdDesc", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Rechercher et afficher la liste des utilisateurs par ordre décroissante",
-            notes = "Cette méthode permet de rechercher et d'afficher la liste des utilisateur par ordre décroissante")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "La liste est"),
-            @ApiResponse(code = 400, message = "La liste est vide")
-    })
-    ResponseEntity<List<Utilisateur>> getAllUtilisateursOrderByIdDesc();
-
-    @GetMapping(value = APP_ROOT + "/utilisateurs/searchAllNewsRecruteursOrderByIdDesc", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Rechercher et afficher la liste des utilisateurs par ordre décroissante",
-            notes = "Cette méthode permet de rechercher et d'afficher la liste des utilisateur par ordre décroissante")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "La liste est"),
-            @ApiResponse(code = 400, message = "La liste est vide")
-    })
-    ResponseEntity<List<Utilisateur>> getAllNewsRegistersOrderByIdDesc();
-
-    @GetMapping(value = APP_ROOT + "/utilisateurs/searchUtilisateurByUsername", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Utilisateur> getUtilisateurByUsername(@RequestParam(value = "username") String username);
-
-    @GetMapping(value = APP_ROOT + "/utilisateurs/avatar/{id}")
-    @ApiOperation(value = "Récupérer et afficher la photo d'un utilisateur par son ID",
-            notes = "Cette méthode permet de récupérer et d'afficher la photo d'un utilisateur par son ID")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Photo uploadé a été modifié"),
-            @ApiResponse(code = 400, message = "Mot de passe non modifié")
-    })
-    byte[] getPhoto(@PathVariable("id") Long id) throws Exception;
-
-    @PostMapping(value = APP_ROOT + "/utilisateurs/uploadUserPhoto/{id}")
-    @ApiOperation(value = "Uploader la photo d'un utilisateur par son ID",
-            notes = "Cette méthode permet d'uploader la photo d'un utilisateur par son ID")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Photo uploadé a été modifié"),
-            @ApiResponse(code = 400, message = "Mot de passe non modifié")
-    })
-    void uploadUserPhoto(MultipartFile file, @PathVariable("id") Long id) throws IOException;
-
     @PutMapping(value = APP_ROOT + "/utilisateurs/update/{idUser}",
             consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Modifier les informations d'un utilisateur par son ID",
@@ -96,7 +39,6 @@ public interface UtilisateurApi {
             @ApiResponse(code = 400, message = "Mot de passe non modifié")
     })
     ResponseEntity<Boolean> updateUserProfil(@RequestBody ObjectNode json);
-
 
     @PatchMapping(value = APP_ROOT + "/utilisateurs/updateUsernameOfUserByUsername")
     @ApiOperation(value = "Modifier le nom utilisateur par son username",
@@ -152,6 +94,45 @@ public interface UtilisateurApi {
     })
     ResponseEntity<?> activatedUser(@RequestParam("isActive") String isActive, @PathVariable("id") String id);
 
+    @GetMapping(value = APP_ROOT + "/utilisateurs/findById/{idUtilisateur}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Rechercher et afficher un utilisateur par son ID",
+            notes = "Cette méthode permet de rechercher et d'afficher un utilisateur par son ID")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La liste est"),
+            @ApiResponse(code = 400, message = "La liste est vide")
+    })
+    ResponseEntity<Utilisateur> getUtilisateurById(@PathVariable("idUtilisateur") Long id);
+
+    @GetMapping(value = APP_ROOT + "/utilisateurs/searchUtilisateurByUsername", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<Utilisateur> getUtilisateurByUsername(@RequestParam(value = "username") String username);
+
+    @GetMapping(value = APP_ROOT + "/utilisateurs/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Rechercher et afficher la liste des utilisateurs",
+            notes = "Cette méthode permet de rechercher et d'afficher la liste des utilisateur")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La liste est"),
+            @ApiResponse(code = 400, message = "La liste est vide")
+    })
+    ResponseEntity<List<Utilisateur>> getAllUtilisateurs();
+
+    @GetMapping(value = APP_ROOT + "/utilisateurs/searchAllUtilisateurOrderByIdDesc", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Rechercher et afficher la liste des utilisateurs par ordre décroissante",
+            notes = "Cette méthode permet de rechercher et d'afficher la liste des utilisateur par ordre décroissante")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La liste est"),
+            @ApiResponse(code = 400, message = "La liste est vide")
+    })
+    ResponseEntity<List<Utilisateur>> getAllUtilisateursOrderByIdDesc();
+
+    @GetMapping(value = APP_ROOT + "/utilisateurs/searchAllNewsRegisterInMonthOrderByIdDesc", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Rechercher et afficher la liste d'inscris dans le moi par ordre décroissante",
+            notes = "Cette méthode permet de rechercher et d'afficher la liste des d'inscris par ordre décroissante")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La liste est"),
+            @ApiResponse(code = 400, message = "La liste est vide")
+    })
+    ResponseEntity<List<Utilisateur>> getAllNewsRegisterInMonthOrderByIdDesc();
+
     @GetMapping(value = APP_ROOT + "/utilisateurs/NumbersOfRecruteurs")
     @ApiOperation(value = "Decompter le nombre total de Recruteurs",
             notes = "Cette méthode permet de compter et d'afficher le nombre total de Recruteurs", response = Utilisateur.class)
@@ -161,6 +142,34 @@ public interface UtilisateurApi {
 
     })
     BigDecimal getNumberOfRecruteurs();
+
+    @GetMapping(value = APP_ROOT + "/utilisateurs/NumbersOfRegisterInMonth")
+    @ApiOperation(value = "Decompter le nombre d'inscris dans le moi",
+            notes = "Cette méthode permet de compter et d'afficher le nombre d'inscris dans le moi", response = Utilisateur.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Le nombre d'inscris"),
+            @ApiResponse(code = 400, message = "Aucun liste Annonce")
+
+    })
+    BigDecimal getNumberOfRegisterInMonth();
+
+    @GetMapping(value = APP_ROOT + "/utilisateurs/avatar/{id}")
+    @ApiOperation(value = "Récupérer et afficher la photo d'un utilisateur par son ID",
+            notes = "Cette méthode permet de récupérer et d'afficher la photo d'un utilisateur par son ID")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Photo uploadé a été modifié"),
+            @ApiResponse(code = 400, message = "Mot de passe non modifié")
+    })
+    byte[] getPhoto(@PathVariable("id") Long id) throws Exception;
+
+    @PostMapping(value = APP_ROOT + "/utilisateurs/uploadUserPhoto/{id}")
+    @ApiOperation(value = "Uploader la photo d'un utilisateur par son ID",
+            notes = "Cette méthode permet d'uploader la photo d'un utilisateur par son ID")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Photo uploadé a été modifié"),
+            @ApiResponse(code = 400, message = "Mot de passe non modifié")
+    })
+    void uploadUserPhoto(MultipartFile file, @PathVariable("id") Long id) throws IOException;
 
     @DeleteMapping(value = APP_ROOT + "/utilisateurs/delete/{idUtilisateur}")
     @ApiOperation(value = "Supprimer un utilisateur par son ID",

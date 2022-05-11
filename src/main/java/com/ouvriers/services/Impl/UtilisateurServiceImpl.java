@@ -9,9 +9,12 @@ import com.ouvriers.repository.UtilisateurRepository;
 import com.ouvriers.services.UtilisateurService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +32,6 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-
 
     @Autowired
     public UtilisateurServiceImpl(UtilisateurRepository utilisateurRepository,
@@ -152,6 +154,20 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     }
 
     @Override
+    public Utilisateur activatedUser(String isActive, String id) {
+        Optional<Utilisateur> optionalUtilisateur = utilisateurRepository.findById(Long.valueOf(id));
+        Utilisateur utilisateur = optionalUtilisateur.get();
+        utilisateur.setActive(Boolean.valueOf(isActive));
+
+        return utilisateurRepository.save(utilisateur);
+    }
+
+    @Override
+    public BigDecimal countNumberOfRegisterInMonth() {
+        return utilisateurRepository.countNumberOfRegisterInMonth();
+    }
+
+    @Override
     public Utilisateur findById(Long id) {
         if (id == null) {
             log.error("Produit Id is null");
@@ -191,6 +207,12 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     public List<Utilisateur> findByOrderByIdDesc() {
         return utilisateurRepository.findByOrderByIdDesc();
     }
+
+    @Override
+    public List<Utilisateur> findNewsRegisterInMonthByOrderByIdDesc() {
+        return utilisateurRepository.findUtilisateursByOrderByIdDesc();
+    }
+
 
     @Override
     public void delete(Long id) {

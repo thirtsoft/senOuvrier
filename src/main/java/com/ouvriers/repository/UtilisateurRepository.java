@@ -20,6 +20,9 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> 
 
     Boolean existsByEmail(String email);
 
+    @Query("select count(p) from Utilisateur p where month(u.dateInscription) = month(current_date)")
+    BigDecimal countNumberOfRegisterInMonth();
+
     List<Utilisateur> findByOrderByIdDesc();
 
     @Query("select u from Utilisateur u where month(u.dateInscription) = month(current_date) order by id Desc")

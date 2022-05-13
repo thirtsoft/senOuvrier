@@ -1,5 +1,7 @@
 package com.ouvriers.controllers.api;
 
+import com.ouvriers.message.request.LoginForm;
+import com.ouvriers.message.request.SignUpForm;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;

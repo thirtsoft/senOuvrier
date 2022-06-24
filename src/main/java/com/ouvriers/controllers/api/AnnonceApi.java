@@ -29,7 +29,7 @@ public interface AnnonceApi {
     })
     ResponseEntity<Annonce> save(@RequestBody Annonce Annonce);
 
-    @PutMapping(value = "/annonces/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/annonces/update/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Modifier un Annonce par son ID",
             notes = "Cette méthode permet de modifier un Annonce par son ID", response = Annonce.class)
     @ApiResponses(value = {
@@ -38,7 +38,7 @@ public interface AnnonceApi {
     })
     ResponseEntity<Annonce> update(@PathVariable("idAnnonce") Long id, @RequestBody Annonce Annonce);
 
-    @GetMapping(value = APP_ROOT + "/annonces/{idAnnonce}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = APP_ROOT + "/annonces/findById/{idAnnonce}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Rechercher un Annonce par ID",
             notes = "Cette méthode permet de chercher un Annonce par son ID", response = Annonce.class
     )

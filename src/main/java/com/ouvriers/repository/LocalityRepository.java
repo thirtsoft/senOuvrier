@@ -13,7 +13,7 @@ public interface LocalityRepository extends JpaRepository<Locality, Long> {
 
     List<Locality> findByOrderByIdDesc();
 
-    @Query("select p from Locality p where p.addresse.code =:code")
+    @Query("select p from Locality p where p.address.code =:code")
     List<Locality> findAllLocalityByAddressCode(@Param("code") String code);
 
 

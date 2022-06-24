@@ -48,18 +48,18 @@ public interface OuvrierRepository extends JpaRepository<Ouvrier, Long> {
     @Query("select ouv from Ouvrier ouv where ouv.disponibity like :dispo")
     Page<Ouvrier> findOuvriersByKeywordByPageable(@Param("dispo") String mc, Pageable pageable);
 
-    @Query("select ouv from Ouvrier ouv where ouv.addresse.id =:add")
+    @Query("select ouv from Ouvrier ouv where ouv.address.id =:add")
     Page<Ouvrier> findOuvriersByLocalityPageables(@Param("add") Long addId, Pageable pageable);
 
     @Query("select ouv from Ouvrier ouv where ouv.metier.id =:metierId")
     Page<Ouvrier> findOuvriersByMetierPageables(@Param("metierId") Long metierId, Pageable pageable);
 
-    Page<Ouvrier> findByAddresseId(Long id, Pageable pageable);
+  //  Page<Ouvrier> findByAddresseId(Long id, Pageable pageable);
 
     // Like  key%  %key  %key%
     Page<Ouvrier> findByDisponibityContaining(String disponibity, Pageable pageable);
 
-    @Query("select count(id) from Ouvrier where addresse.id = ?1")
+    @Query("select count(id) from Ouvrier where address.id = ?1")
     long getOuvrierLengthByAddressId(long id);
 
     @Query("select count(id) from Ouvrier where disponibity LIKE %?1%")

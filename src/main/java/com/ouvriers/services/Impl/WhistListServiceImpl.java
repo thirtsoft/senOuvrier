@@ -1,6 +1,6 @@
 package com.ouvriers.services.Impl;
 
-import com.ouvriers.dtos.WhistListDto;
+
 import com.ouvriers.exceptions.ResourceNotFoundException;
 import com.ouvriers.models.WhistList;
 import com.ouvriers.repository.WhistListRepository;
@@ -24,21 +24,17 @@ public class WhistListServiceImpl implements WhistListService {
     private final WhistListRepository whistListRepository;
 
     @Override
-    public WhistListDto save(WhistListDto whistListDto) {
-        return WhistListDto.fromEntityToDto(
-                whistListRepository.save(
-                        WhistListDto.fromDtoToEntity(whistListDto)
-                )
-        );
+    public WhistList save(WhistList whistList) {
+        return whistListRepository.save(whistList);
     }
 
     @Override
-    public WhistListDto saveNoteToOuvrier(Long idOuv, WhistListDto whistListDto) {
+    public WhistList saveNoteToOuvrier(Long idOuv, WhistList whistList) {
         return null;
     }
 
     @Override
-    public WhistListDto update(Long idWhistList, WhistListDto whistListDto) {
+    public WhistList update(Long idWhistList, WhistList whistList) {
         if (!whistListRepository.existsById(idWhistList)) {
             throw new ResourceNotFoundException("WhistList not found");
         }
@@ -49,20 +45,15 @@ public class WhistListServiceImpl implements WhistListService {
             throw new ResourceNotFoundException("WhistList not found");
         }
 
-        WhistListDto whistListDtoResult = WhistListDto.fromEntityToDto(optionalWhistList.get());
-        whistListDtoResult.setNbreEtoile(whistListDto.getNbreEtoile());
-        whistListDtoResult.setObservation(whistListDto.getObservation());
-        whistListDtoResult.setOuvrierDto(whistListDto.getOuvrierDto());
+        WhistList whistListResult = optionalWhistList.get();
+        whistListResult.setNbreEtoile(whistList.getNbreEtoile());
+        whistListResult.setObservation(whistList.getObservation());
 
-        return WhistListDto.fromEntityToDto(
-                whistListRepository.save(
-                        WhistListDto.fromDtoToEntity(whistListDtoResult)
-                )
-        );
+        return whistListRepository.save(whistListResult);
     }
 
     @Override
-    public WhistListDto findById(Long id) {
+    public WhistList findById(Long id) {
         if (id == null) {
             log.error("Metier Id is null");
             return null;
@@ -70,42 +61,30 @@ public class WhistListServiceImpl implements WhistListService {
 
         Optional<WhistList> optionalWhistList = whistListRepository.findById(id);
 
-        return Optional.of(WhistListDto.fromEntityToDto(optionalWhistList.get())).orElseThrow(() ->
+        return Optional.of(optionalWhistList.get()).orElseThrow(() ->
                 new ResourceNotFoundException(
                         "Aucnun WhistList avec l'Id = " + id + "n'a été trouvé")
         );
     }
 
     @Override
-    public List<WhistListDto> findAll() {
-        return whistListRepository.findAll()
-                .stream()
-                .map(WhistListDto::fromEntityToDto)
-                .collect(Collectors.toList());
+    public List<WhistList> findAll() {
+        return whistListRepository.findAll();
     }
 
     @Override
-    public List<WhistListDto> findTop3RatingOrderByCreatedDateDesc() {
-        return whistListRepository.findTop3ByOrderByCreatedDateDesc()
-                .stream()
-                .map(WhistListDto::fromEntityToDto)
-                .collect(Collectors.toList());
+    public List<WhistList> findTop3RatingOrderByCreatedDateDesc() {
+        return whistListRepository.findTop3ByOrderByCreatedDateDesc();
     }
 
     @Override
-    public List<WhistListDto> findByOrderByIdDesc() {
-        return whistListRepository.findByOrderByIdDesc()
-                .stream()
-                .map(WhistListDto::fromEntityToDto)
-                .collect(Collectors.toList());
+    public List<WhistList> findByOrderByIdDesc() {
+        return whistListRepository.findByOrderByIdDesc();
     }
 
     @Override
-    public List<WhistListDto> findTop4ByOrderByCreatedDateDescByOuvrierId(String ouvRef) {
-        return whistListRepository.findTop4WhistListOrderByCreatedDateDesc(ouvRef)
-                .stream()
-                .map(WhistListDto::fromEntityToDto)
-                .collect(Collectors.toList());
+    public List<WhistList> findTop4ByOrderByCreatedDateDescByOuvrierId(String ouvRef) {
+        return whistListRepository.findTop4WhistListOrderByCreatedDateDesc(ouvRef);
     }
 
     @Override

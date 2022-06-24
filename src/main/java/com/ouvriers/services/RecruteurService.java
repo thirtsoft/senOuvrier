@@ -1,21 +1,21 @@
 package com.ouvriers.services;
 
-import com.ouvriers.dtos.RecruteurDto;
+import com.ouvriers.models.Recruteur;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 public interface RecruteurService {
 
-    RecruteurDto save(RecruteurDto recruteurDto);
+    Recruteur save(Recruteur recruteur);
 
-    RecruteurDto update(Long idRecruteur, RecruteurDto recruteurDto);
+    Recruteur update(Long idRecruteur, Recruteur recruteur);
 
-    RecruteurDto findById(Long id);
+    Recruteur findById(Long id);
 
     BigDecimal countNumbersOfRecruteurs();
 
-    List<RecruteurDto> findAll();
+    List<Recruteur> findAll();
 
     void delete(Long id);
 

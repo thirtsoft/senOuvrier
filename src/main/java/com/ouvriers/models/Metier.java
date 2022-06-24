@@ -24,9 +24,18 @@ public class Metier implements Serializable {
     @Column(name = "designation", length = 90)
     private String designation;
 
+    @Column(name = "photoMetier", length = 90)
+    private String photoMetier;
+
     @Column(name = "description", length = 200)
     @Lob
     private String description;
 
 
+    public Metier(Long id, String reference, String designation, String photoMetier) {
+        this.id = id;
+        this.reference = reference;
+        this.designation = designation;
+        this.photoMetier = photoMetier;
+    }
 }

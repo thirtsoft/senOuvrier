@@ -27,7 +27,7 @@ public interface AddressApi {
     })
     ResponseEntity<Address> save(@RequestBody Address Address);
 
-    @PutMapping(value = "/addresses/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,
+    @PutMapping(value = "/addresses/update/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Modifier un Address par son ID",
             notes = "Cette méthode permet de modifier un Address par son ID", response = Address.class)
@@ -37,7 +37,7 @@ public interface AddressApi {
     })
     ResponseEntity<Address> update(@PathVariable("idAddress") Long id, @RequestBody Address Address);
 
-    @GetMapping(value = APP_ROOT + "/addresses/{idAddress}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = APP_ROOT + "/addresses/findById/{idAddress}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Rechercher un Address par ID",
             notes = "Cette méthode permet de chercher un Address par son ID", response = Address.class
     )

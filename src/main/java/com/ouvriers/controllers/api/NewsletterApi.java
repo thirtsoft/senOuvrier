@@ -14,7 +14,7 @@ import static com.ouvriers.utils.Constants.APP_ROOT;
 
 public interface NewsletterApi {
 
-    @PostMapping(value = APP_ROOT + "/newsleters/create",
+    @PostMapping(value = APP_ROOT + "/newsletters/create",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Enregistrer un Newsleter",
@@ -26,7 +26,7 @@ public interface NewsletterApi {
     })
     ResponseEntity<Newsletter> createNewsleter(@RequestBody Newsletter newsletter);
 
-    @PutMapping(value = APP_ROOT + "/newsleters/update/{idNewsleter}",
+    @PutMapping(value = APP_ROOT + "/newsletters/update/{idNewsleter}",
             consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Modofier un Newsleter  par ID",
             notes = "Cette méthode permet de modifier un Newsleter par ID", response = Newsletter.class)
@@ -38,49 +38,49 @@ public interface NewsletterApi {
     ResponseEntity<Newsletter> updateNewsleter(@PathVariable("idNewsleter") Long idNewsleter,
                                                  @RequestBody Newsletter newsletter);
 
-    @GetMapping(value = APP_ROOT + "/newsleters/findById/{idNewsleter}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = APP_ROOT + "/newsletters/findById/{idNewsleter}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Afficher un Newsleter par son ID",
             notes = "Cette méthode permet d'afficher un Newsleter par son ID",  response = Newsletter.class)
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "La Newsleters a été trouvé"),
-            @ApiResponse(code = 400, message = "Aucun Newsleters")
+            @ApiResponse(code = 200, message = "La newsletters a été trouvé"),
+            @ApiResponse(code = 400, message = "Aucun newsletters")
 
     })
     ResponseEntity<Newsletter> getNewsletterById(@PathVariable("idNewsleter") Long idNewsleter);
 
-    @GetMapping(value = APP_ROOT + "/newsleters/all", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Afficher la liste des Newsleters",
-            notes = "Cette méthode permet d'afficher la liste des Newsleters", responseContainer = "List<Newsletter>")
+    @GetMapping(value = APP_ROOT + "/newsletters/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Afficher la liste des newsletters",
+            notes = "Cette méthode permet d'afficher la liste des newsletters", responseContainer = "List<Newsletter>")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "La liste des Newsleters a été trouvé"),
-            @ApiResponse(code = 400, message = "Aucun liste Newsleters")
+            @ApiResponse(code = 200, message = "La liste des newsletters a été trouvé"),
+            @ApiResponse(code = 400, message = "Aucun liste newsletters")
 
     })
-    ResponseEntity<List<Newsletter>> getAllNewsleters();
+    ResponseEntity<List<Newsletter>> getAllNewsletters();
 
-    @GetMapping(value = APP_ROOT + "/newsleters/searchNewsleterOrderByIdDesc",
+    @GetMapping(value = APP_ROOT + "/newsletters/searchAllNewsletersOrderByIdDesc",
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Afficher la liste des Newsleter par ordre Décroissante",
             notes = "Cette méthode permet d'afficher la liste des Newsleter par ordre Décroissante", responseContainer = "List<Newsletter>")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "La liste des Newsleters a été trouvé"),
-            @ApiResponse(code = 400, message = "Aucun liste Newsleters")
+            @ApiResponse(code = 200, message = "La liste des newsletters a été trouvé"),
+            @ApiResponse(code = 400, message = "Aucun liste newsletters")
 
     })
-    ResponseEntity<List<Newsletter>> getListOfNewsletersOrderByIdDesc();
+    ResponseEntity<List<Newsletter>> getListOfNewslettersOrderByIdDesc();
 
-    @GetMapping(value = APP_ROOT + "/newsleters/NumbersOfNewsleters")
+    @GetMapping(value = APP_ROOT + "/newsletters/NumbersOfNewsletters")
     @ApiOperation(value = "Décompter le nombre de Newsleter",
-            notes = "Cette méthode permet de compter et d'afficher le nombre total de Newsleters",
+            notes = "Cette méthode permet de compter et d'afficher le nombre total de newsletters",
             response = Newsletter.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Le nombre de Newsleter"),
             @ApiResponse(code = 400, message = "nombre null")
 
     })
-    long getNumbersOfNewsleters();
+    long getNumbersOfnewsletters();
 
-    @DeleteMapping(value = APP_ROOT + "/newsleters/delete/{idNewsleter}")
+    @DeleteMapping(value = APP_ROOT + "/newsletters/delete/{idNewsleter}")
     @ApiOperation(value = "Supprimer un Newsleter par son ID",
             notes = "Cette méthode permet de supprimer un Newsleter par son ID")
     @ApiResponses(value = {

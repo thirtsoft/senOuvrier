@@ -49,6 +49,12 @@ public class Ouvrier implements Serializable {
     @Column(name = "disponibility", length = 60)
     private String disponibity;
 
+    @Column(name = "education", length = 60)
+    private String education;
+
+    @Column(name = "description", length = 60)
+    private String description;
+
     private boolean selected;
 
     @Column(name = "mobilite", length = 100)
@@ -72,7 +78,6 @@ public class Ouvrier implements Serializable {
     private Metier metier;
 
     @ManyToOne
-    @JoinColumn(name = "addressId")
     private Address address;
 
     public Ouvrier(Long id, String reference, String firstName, String lastName, String sexe,
@@ -90,6 +95,31 @@ public class Ouvrier implements Serializable {
         this.nbreAnneeExperience = nbreAnneeExperience;
         this.pretentionSalaire = pretentionSalaire;
         this.disponibity = disponibity;
+        this.mobilite = mobilite;
+        this.cvOuvrier = cvOuvrier;
+        this.photoOuvrier = photoOuvrier;
+        this.metier = metier;
+        this.address = address;
+    }
+
+    public Ouvrier(Long id, String reference,
+                   String firstName, String lastName, String sexe,
+                   String addressActuel, String email, String phoneOuvrier,
+                   String nbreAnneeExperience, double pretentionSalaire, String disponibity,
+                   boolean selected, String mobilite, String cvOuvrier,
+                   String photoOuvrier, Metier metier, Address address) {
+        this.id = id;
+        this.reference = reference;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.sexe = sexe;
+        this.addressActuel = addressActuel;
+        this.email = email;
+        this.phoneOuvrier = phoneOuvrier;
+        this.nbreAnneeExperience = nbreAnneeExperience;
+        this.pretentionSalaire = pretentionSalaire;
+        this.disponibity = disponibity;
+        this.selected = selected;
         this.mobilite = mobilite;
         this.cvOuvrier = cvOuvrier;
         this.photoOuvrier = photoOuvrier;

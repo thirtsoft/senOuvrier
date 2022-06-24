@@ -1,27 +1,27 @@
 package com.ouvriers.services;
 
-import com.ouvriers.dtos.WhistListDto;
+import com.ouvriers.models.WhistList;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 public interface WhistListService {
 
-    WhistListDto save(WhistListDto whistListDto);
+    WhistList save(WhistList WhistList);
 
-    WhistListDto saveNoteToOuvrier(Long idOuv, WhistListDto whistListDto);
+    WhistList saveNoteToOuvrier(Long idOuv, WhistList WhistList);
 
-    WhistListDto update(Long idNotification, WhistListDto whistListDto);
+    WhistList update(Long idNotification, WhistList WhistList);
 
-    WhistListDto findById(Long id);
+    WhistList findById(Long id);
 
-    List<WhistListDto> findAll();
+    List<WhistList> findAll();
 
-    List<WhistListDto> findTop3RatingOrderByCreatedDateDesc();
+    List<WhistList> findTop3RatingOrderByCreatedDateDesc();
 
-    List<WhistListDto> findByOrderByIdDesc();
+    List<WhistList> findByOrderByIdDesc();
 
-    List<WhistListDto> findTop4ByOrderByCreatedDateDescByOuvrierId(String ouvRef);
+    List<WhistList> findTop4ByOrderByCreatedDateDescByOuvrierId(String ouvRef);
 
     BigDecimal countNumberOfNotificationByOuvrierId(String ouvRef);
 

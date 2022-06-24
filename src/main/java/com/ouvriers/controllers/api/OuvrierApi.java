@@ -77,7 +77,7 @@ public interface OuvrierApi {
     })
     ResponseEntity<Ouvrier> getOuvrierById(@PathVariable("idOuvrier") Long id);
 
-    @GetMapping(value = "ouvriers/findByReference/searchOuvrierByReference", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = APP_ROOT + "ouvriers/searchOuvrierByReference", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Rechercher un Ouvrier par Reference",
             notes = "Cette méthode permet de chercher un Ouvrier par son Reference", response = Ouvrier.class
     )
@@ -88,7 +88,7 @@ public interface OuvrierApi {
     })
     ResponseEntity<Ouvrier> getOuvrierByRerefence(@RequestParam(name = "ref") String reference);
 
-    @GetMapping(value = "/ouvriers/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = APP_ROOT + "/ouvriers/all", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Renvoi la liste des Ouvriers",
             notes = "Cette méthode permet de chercher et renvoyer la liste des Ouvriers", responseContainer = "List<Ouvrier>")
     @ApiResponses(value = {
@@ -114,7 +114,7 @@ public interface OuvrierApi {
     })
     ResponseEntity<List<Ouvrier>> getListOfOuvriersBySelected();
 
-    @GetMapping(value = "/ouvriers/searchListOfOuvrierByMetier/{metierId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = APP_ROOT + "/ouvriers/searchListOfOuvrierByMetier/{metierId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Renvoi la liste des Ouvriers",
             notes = "Cette méthode permet de chercher et renvoyer la liste des Ouvriers", responseContainer = "List<Ouvrier>")
     @ApiResponses(value = {
@@ -122,7 +122,7 @@ public interface OuvrierApi {
     })
     ResponseEntity<List<Ouvrier>> getListOfOuvriersByMetiers(@PathVariable("metierId") Long pId);
 
-    @GetMapping(value = "/ouvriers/searchListOfOuvrierByKeyword", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = APP_ROOT + "/ouvriers/searchListOfOuvrierByKeyword", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Renvoi la liste des Ouvriers par mot clé",
             notes = "Cette méthode permet de chercher et renvoyer la liste des Ouvriers par mot clé",
             responseContainer = "List<Ouvrier>")
@@ -131,7 +131,7 @@ public interface OuvrierApi {
     })
     ResponseEntity<List<Ouvrier>> getListOfOuvriersByKeyword(@RequestParam(name = "keyword") String keyword);
 
-    @GetMapping(value = "/ouvriers/searchListOfOuvrierByDisponibility", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = APP_ROOT + "/ouvriers/searchListOfOuvrierByDisponibility", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Renvoi la liste des Ouvriers par disponibilit",
             notes = "Cette méthode permet de chercher et renvoyer la liste des Ouvriers par mot clé",
             responseContainer = "List<Ouvrier>")
@@ -197,7 +197,7 @@ public interface OuvrierApi {
             @ApiResponse(code = 200, message = "La photo a été enregistré dans le dossier webapp")
 
     })
-    void uploadPhotoOuvrier(@RequestParam(name = "photoArticle") MultipartFile photoOuvrier,
+    void uploadPhotoOuvrier(@RequestParam(name = "photoOuvrier") MultipartFile photoOuvrier,
                             @PathVariable("idOuvrier") Long idOuvrier) throws IOException;
 
     @PostMapping(path = APP_ROOT + "/ouvriers/uploadPhotoOfOuvrierInFolder/{id}")

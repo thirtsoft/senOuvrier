@@ -1,20 +1,20 @@
 package com.ouvriers.services;
 
-import com.ouvriers.dtos.VilleDto;
+import com.ouvriers.models.Ville;
 
 import java.util.List;
 
 public interface VilleService {
 
-    VilleDto save(VilleDto villeDto);
+    Ville save(Ville ville);
 
-    VilleDto update(Long idVille, VilleDto villeDto);
+    Ville update(Long idVille, Ville ville);
 
-    VilleDto findById(Long id);
+    Ville findById(Long id);
 
-    List<VilleDto> findAll();
+    List<Ville> findAll();
 
-    List<VilleDto> findByVillesByIdDesc();
+    List<Ville> findByVillesByIdDesc();
 
     void delete(Long id);
 

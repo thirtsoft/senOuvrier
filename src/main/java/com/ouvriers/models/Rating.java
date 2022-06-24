@@ -10,7 +10,7 @@ import java.util.Date;
 
 
 @Entity
-@Table(name = "notification")
+@Table(name = "rating")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

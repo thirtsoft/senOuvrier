@@ -182,10 +182,17 @@ public class OuvrierServiceImpl implements OuvrierService {
 
     @Override
     public List<Ouvrier> getAllOuvrierDtosByIdAddress(Long id, int page, int size) {
+        return null;
+    }
+
+    /*
+    @Override
+    public List<Ouvrier> getAllOuvrierDtosByIdAddress(Long id, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return ouvrierRepository.findByAddresseId(id, pageable)
                 .getContent();
     }
+    */
 
     @Override
     public List<Ouvrier> getAllOuvrierDtosByKey(String disponibility, int page, int size) {

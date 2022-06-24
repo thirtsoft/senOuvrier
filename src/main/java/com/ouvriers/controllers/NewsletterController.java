@@ -44,6 +44,22 @@ public class NewsletterController implements NewsletterApi {
     }
 
     @Override
+    public ResponseEntity<List<Newsletter>> getAllNewsletters() {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<List<Newsletter>> getListOfNewslettersOrderByIdDesc() {
+        return null;
+    }
+
+    @Override
+    public long getNumbersOfnewsletters() {
+        return 0;
+    }
+
+    /*
+    @Override
     public ResponseEntity<List<Newsletter>> getAllNewsleters() {
         List<Newsletter> newNewsleterDtos = newsletterService.findAll();
         return new ResponseEntity<>(newNewsleterDtos, HttpStatus.OK);
@@ -59,6 +75,8 @@ public class NewsletterController implements NewsletterApi {
     public long getNumbersOfNewsleters() {
         return newsletterService.countNumbersOfNewsletters();
     }
+
+    */
 
     @Override
     public void delete(Long idNewsleter) {

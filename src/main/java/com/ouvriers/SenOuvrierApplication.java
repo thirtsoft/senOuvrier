@@ -1,13 +1,17 @@
 package com.ouvriers;
 
+import com.ouvriers.enums.RoleName;
 import com.ouvriers.models.*;
 import com.ouvriers.repository.*;
+import com.ouvriers.services.UtilisateurService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -35,6 +39,21 @@ public class SenOuvrierApplication implements CommandLineRunner {
 	private WhistListRepository whistListRepository;
 	@Autowired
 	private AnnonceRepository annonceRepository;
+	@Autowired
+	private ServiceOffertRepository serviceOffertRepository;
+
+	@Autowired
+	RoleRepository roleRepository;
+	@Autowired
+	private UtilisateurRepository utilisateurRepository;
+	@Autowired
+	private UtilisateurService utilisateurService;
+
+	@Autowired
+	PasswordEncoder encoder;
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
 
 	public static void main(String[] args) {
@@ -76,16 +95,16 @@ public class SenOuvrierApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Metier m1 = metierRepository.save(new Metier(1L, "elec", "ELECTRICIEN", "Electricité"));
-		Metier m2 = metierRepository.save(new Metier(2L, "pl", "PLOMBIER", "plomberie"));
-		Metier m3 = metierRepository.save(new Metier(3L, "frig", "FRIGORISTE", "frigo"));
-		Metier m4 = metierRepository.save(new Metier(4L, "mec", "MECANICIEN", "mécanique"));
-		Metier m5 = metierRepository.save(new Metier(5L, "car", "CARROLEUR", "carrolerie"));
-		Metier m6 = metierRepository.save(new Metier(6L, "tech", "TECHNICIEN SURFACE", "technicien"));
-		Metier m7 = metierRepository.save(new Metier(7L, "mac", "MACON", "maçonnerie"));
-		Metier m8 = metierRepository.save(new Metier(8L, "charp", "CHARPANTIER", "charp"));
-		Metier m9 = metierRepository.save(new Metier(9L, "peint", "PEINTRE", "Peint"));
-		Metier m10 = metierRepository.save(new Metier(10L, "chauff", "CHAUFFEUR", "chauff"));
+		Metier m1 = metierRepository.save(new Metier(1L, "elec", "ELECTRICIEN", "photo2.jpg"));
+		Metier m2 = metierRepository.save(new Metier(2L, "pl", "PLOMBIER", "photo3.jpg"));
+		Metier m3 = metierRepository.save(new Metier(3L, "frig", "FRIGORISTE", "photo5.jpg"));
+		Metier m4 = metierRepository.save(new Metier(4L, "mec", "MECANICIEN", "photo10.jpg"));
+		Metier m5 = metierRepository.save(new Metier(5L, "car", "CARROLEUR", "photo7.jpg"));
+		Metier m6 = metierRepository.save(new Metier(6L, "tech", "TECHNICIEN SURFACE", "photo12.jpg"));
+		Metier m7 = metierRepository.save(new Metier(7L, "mac", "MACON", "photo8.jpg"));
+		Metier m8 = metierRepository.save(new Metier(8L, "charp", "CHARPANTIER", "photo11.jpg"));
+		Metier m9 = metierRepository.save(new Metier(9L, "peint", "PEINTRE", "photo13.jpg"));
+		Metier m10 = metierRepository.save(new Metier(10L, "chauff", "CHAUFFEUR", "photo6.jpg"));
 
 		Address a1 = addressRepository.save(new Address("DK", "Dakar"));
 		Address a2 = addressRepository.save(new Address("ZG", "Ziguinchor"));
@@ -93,12 +112,27 @@ public class SenOuvrierApplication implements CommandLineRunner {
 		Address a4 = addressRepository.save(new Address("Th", "Thies"));
 
 		Ouvrier o1 = ouvrierRepository.save(new Ouvrier(1L, "PLOMBIER", "tairou","diallo","Masculin","Hann-Mariste","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo1.jpg","cv1.pdf",m1,a1));
-		Ouvrier o2 = ouvrierRepository.save(new Ouvrier(2L, "ELECTRICIEN", "Saliou","diallo","Masculin","Hann-Mariste","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo1.jpg","cv1.pdf",m1,a1));
-		Ouvrier o3 = ouvrierRepository.save(new Ouvrier(3L, "FRIGORISTE", "fatou","ndiaye","Feminin","Hann-Mariste","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo1.jpg","cv1.pdf",m1,a1));
-		Ouvrier o4 = ouvrierRepository.save(new Ouvrier(4L, "CARROLEUR", "adama","diallo","Masculin","Keur-Massar","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo1.jpg","cv1.pdf",m1,a1));
-		Ouvrier o5 = ouvrierRepository.save(new Ouvrier(5L, "PEINTRE", "ndeye","gueye","Feminin","Parcelle","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo1.jpg","cv1.pdf",m1,a1));
-		Ouvrier o6 = ouvrierRepository.save(new Ouvrier(6L, "MACON", "fallou","tine","Masculin","Guédiawaye","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo1.jpg","cv1.pdf",m1,a1));
-		Ouvrier o7 = ouvrierRepository.save(new Ouvrier(7L, "MECANICIEN", "awa","diouf","Feminin","Almadies","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo1.jpg","cv1.pdf",m1,a1));
+		Ouvrier o2 = ouvrierRepository.save(new Ouvrier(2L, "ELECTRICIEN", "Saliou","diallo","Masculin","Hann-Mariste","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo2.jpg","cv1.pdf",m1,a1));
+		Ouvrier o3 = ouvrierRepository.save(new Ouvrier(3L, "FRIGORISTE", "fatou","ndiaye","Feminin","Hann-Mariste","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo3.jpg","cv1.pdf",m1,a1));
+		Ouvrier o4 = ouvrierRepository.save(new Ouvrier(4L, "CARROLEUR", "adama","diallo","Masculin","Keur-Massar","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo4.jpg","cv1.pdf",m1,a1));
+		Ouvrier o5 = ouvrierRepository.save(new Ouvrier(5L, "PEINTRE", "ndeye","gueye","Feminin","Parcelle","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo5.jpg","cv1.pdf",m1,a1));
+		Ouvrier o6 = ouvrierRepository.save(new Ouvrier(6L, "MACON", "fallou","tine","Masculin","Guédiawaye","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo6.jpg","cv1.pdf",m1,a1));
+		Ouvrier o7 = ouvrierRepository.save(new Ouvrier(7L, "MECANICIEN", "awa","diouf","Feminin","Almadies","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo7.jpg","cv1.pdf",m1,a1));
+		Ouvrier o8 = ouvrierRepository.save(new Ouvrier(8L, "PLOMBIER", "tairou","diallo","Masculin","Hann-Mariste","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo8.jpg","cv1.pdf",m1,a1));
+		Ouvrier o9 = ouvrierRepository.save(new Ouvrier(9L, "ELECTRICIEN", "Saliou","diallo","Masculin","Hann-Mariste","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo9.jpg","cv1.pdf",m1,a1));
+		Ouvrier o10 = ouvrierRepository.save(new Ouvrier(10L, "CHARPANTIER", "fatou","ndiaye","Feminin","Hann-Mariste","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo10.jpg","cv1.pdf",m1,a1));
+		Ouvrier o11 = ouvrierRepository.save(new Ouvrier(11L, "CARROLEUR", "adama","diallo","Masculin","Keur-Massar","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo11.jpg","cv1.pdf",m1,a1));
+		Ouvrier o12 = ouvrierRepository.save(new Ouvrier(12L, "PEINTRE", "ndeye","gueye","Feminin","Parcelle","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo12.jpg","cv1.pdf",m1,a1));
+		Ouvrier o13 = ouvrierRepository.save(new Ouvrier(13L, "MACON", "fallou","tine","Masculin","Guédiawaye","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo1.jpg","cv1.pdf",m1,a1));
+		Ouvrier o14 = ouvrierRepository.save(new Ouvrier(14L, "MECANICIEN", "awa","diouf","Feminin","Almadies","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo2.jpg","cv1.pdf",m1,a1));
+		Ouvrier o15 = ouvrierRepository.save(new Ouvrier(15L, "PLOMBIER", "tairou","diallo","Masculin","Hann-Mariste","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo3.jpg","cv1.pdf",m1,a1));
+		Ouvrier o16 = ouvrierRepository.save(new Ouvrier(16L, "ELECTRICIEN", "Saliou","diallo","Masculin","Hann-Mariste","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo4.jpg","cv1.pdf",m1,a1));
+		Ouvrier o17 = ouvrierRepository.save(new Ouvrier(17L, "FRIGORISTE", "fatou","ndiaye","Feminin","Hann-Mariste","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo5.jpg","cv1.pdf",m1,a1));
+		Ouvrier o18 = ouvrierRepository.save(new Ouvrier(18L, "CARROLEUR", "adama","diallo","Masculin","Keur-Massar","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo6.jpg","cv1.pdf",m1,a1));
+		Ouvrier o19 = ouvrierRepository.save(new Ouvrier(19L, "PEINTRE", "ndeye","gueye","Feminin","Parcelle","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo7.jpg","cv1.pdf",m1,a1));
+		Ouvrier o20 = ouvrierRepository.save(new Ouvrier(20L, "MACON", "fallou","tine","Masculin","Guédiawaye","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo8.jpg","cv1.pdf",m1,a1));
+		Ouvrier o21 = ouvrierRepository.save(new Ouvrier(21L, "MECANICIEN", "awa","diouf","Feminin","Almadies","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo9.jpg","cv1.pdf",m1,a1));
+
 
 		Recruteur r1 = new Recruteur();Recruteur r2 = new Recruteur(); Recruteur r3 = new Recruteur();
 		Recruteur r4 = new Recruteur(); Recruteur r5 = new Recruteur();
@@ -132,38 +166,43 @@ public class SenOuvrierApplication implements CommandLineRunner {
 		annonceRepository.save(an1); annonceRepository.save(an2); annonceRepository.save(an3);
 		annonceRepository.save(an4); annonceRepository.save(an5);
 
-		Tarif t1 = tarifRepository.save(new Tarif(1L,"tarif1",30L, "tarif1",an1));
-		Tarif t2 = tarifRepository.save(new Tarif(2L,"tarif2",40L, "tarif1",an2));
-		Tarif t3 = tarifRepository.save(new Tarif(3L,"tarif3",50L, "tarif1",an3));
-		Tarif t4 = tarifRepository.save(new Tarif(4L,"tarif4",70L, "tarif1",an4));
-
 		Ville v1 = villeRepository.save(new Ville(1L, "ville1", "ville1","ville1"));
 		Ville v2 = villeRepository.save(new Ville(2L, "ville2", "ville2","ville2"));
 		Ville v3 = villeRepository.save(new Ville(3L, "ville3", "ville3","ville3"));
 		Ville v4 = villeRepository.save(new Ville(4L, "ville4", "ville4","ville4"));
 
+		ServiceOffert s1 = serviceOffertRepository.save(new ServiceOffert(1L, "Service01","Service01", o1));
+		ServiceOffert s2 = serviceOffertRepository.save(new ServiceOffert(2L, "Service02","Service02", o2));
+		ServiceOffert s3 = serviceOffertRepository.save(new ServiceOffert(3L, "Service03","Service03", o3));
+		ServiceOffert s4 = serviceOffertRepository.save(new ServiceOffert(4L, "Service04","Service04", o4));
+		ServiceOffert s5 = serviceOffertRepository.save(new ServiceOffert(5L, "Service05","Service05", o5));
 
-
-/*
-        accountService.saveUtilisateur(new Utilisateur(null, "admin", "1234", true, null));
-        accountService.saveUtilisateur(new Utilisateur(null, "user", "1234", true, null));
-
-
-        accountService.saveRole(new Role(null, "ADMIN"));
-        accountService.saveRole(new Role(null, "USER"));
-
-        accountService.addRoleToUtilisateur("admin", "ADMIN");
-        accountService.addRoleToUtilisateur("admin", "USER");
-        accountService.addRoleToUtilisateur("user", "USER");
-*/
-
-
-       /* Role useRole = new Role(RoleName.ROLE_USER);
-        Role vendorRole = new Role(RoleName.ROLE_VENDEUR);
+		/*
+        Role useRole = new Role(RoleName.ROLE_USER);
+		Role moderatorRole = new Role(RoleName.ROLE_MODERATOR);
+        Role managerRole = new Role(RoleName.ROLE_MANAGER);
         Role adminRole = new Role(RoleName.ROLE_ADMIN);
         roleRepository.save(useRole);
-        roleRepository.save(vendorRole);
-        roleRepository.save(adminRole);*/
+		roleRepository.save(moderatorRole);
+		roleRepository.save(managerRole);
+        roleRepository.save(adminRole);
+
+		Utilisateur user = new Utilisateur();
+		user.setId(1L);
+		user.setUsername("User");
+		user.setName("User");
+		user.setPassword(encoder.encode("user1234"));
+		utilisateurRepository.save(user);
+		utilisateurService.addRoleToUser("User", RoleName.ROLE_USER);
+		Utilisateur admin = new Utilisateur();
+		admin.setId(3L);
+		admin.setUsername("Admin");
+		admin.setName("Admin");
+		admin.setPassword(encoder.encode("admin1234"));
+		utilisateurRepository.save(admin);
+		utilisateurService.addRoleToUser("Admin", RoleName.ROLE_ADMIN);
+
+		*/
 
 	}
 

@@ -3,13 +3,19 @@ package com.ouvriers.controllers;
 import com.ouvriers.controllers.api.AddressApi;
 import com.ouvriers.models.Address;
 import com.ouvriers.services.AddressService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+
+@CrossOrigin
+@RestController
 public class AddressController implements AddressApi {
 
     private final AddressService addresseService;

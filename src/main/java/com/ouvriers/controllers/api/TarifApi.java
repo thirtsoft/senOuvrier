@@ -26,7 +26,7 @@ public interface TarifApi {
     })
     ResponseEntity<Tarif> save(@RequestBody Tarif tarif);
 
-    @PutMapping(value = "/tarifs/{idTarif}", consumes = MediaType.APPLICATION_JSON_VALUE,
+    @PutMapping(value = "/tarifs/update/{idTarif}", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Modifier un Tarif par son ID",
             notes = "Cette méthode permet de modifier un Tarif par son ID", response = Tarif.class)
@@ -36,7 +36,7 @@ public interface TarifApi {
     })
     ResponseEntity<Tarif> update(@PathVariable("idTarif") Long id, @RequestBody Tarif tarif);
 
-    @GetMapping(value = APP_ROOT + "/tarifs/{idTarif}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = APP_ROOT + "/tarifs/findById/{idTarif}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Rechercher un Tarif par ID",
             notes = "Cette méthode permet de chercher un Tarif par son ID", response = Tarif.class
     )

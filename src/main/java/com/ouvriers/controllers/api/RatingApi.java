@@ -108,7 +108,7 @@ public interface RatingApi {
     })
     ResponseEntity<List<Rating>> getTop3ByOrderByCreatedDateDesc();
 
-    @GetMapping(value = APP_ROOT + "/ratings/searchTop4RatingOrderByCreatedDateDescByChauffeurId/{idChauff}",
+    @GetMapping(value = APP_ROOT + "/ratings/searchTop4RatingOrderByCreatedDateDescByOuvrierId/{idChauff}",
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Afficher la liste des quatre dernieres ratings d'un chauffeur",
             notes = "Cette méthode permet d'afficher la liste des quatre dernieres ratings d'un chauffeur",
@@ -120,7 +120,7 @@ public interface RatingApi {
     })
     ResponseEntity<List<Rating>> getTop4ByOrderByCreatedDateDescByOuvrierId(@PathVariable("idChauff") Long id);
 
-    @GetMapping(value = APP_ROOT + "/ratings/countNumberOfNotificationByProductId/{idChauff}",
+    @GetMapping(value = APP_ROOT + "/ratings/countNumberOfRatingByOuvrierId/{idChauff}",
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Décompter le nombre de ratings d'un chauffeur",
             notes = "Cette méthode permet de compter et d'afficher le nombre total de ratings d'un chauffeur",

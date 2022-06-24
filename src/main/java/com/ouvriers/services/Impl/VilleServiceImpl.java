@@ -1,6 +1,5 @@
 package com.ouvriers.services.Impl;
 
-import com.ouvriers.dtos.VilleDto;
 import com.ouvriers.exceptions.ResourceNotFoundException;
 import com.ouvriers.models.Ville;
 import com.ouvriers.repository.VilleRepository;
@@ -23,16 +22,12 @@ public class VilleServiceImpl implements VilleService {
     private final VilleRepository villeRepository;
 
     @Override
-    public VilleDto save(VilleDto villeDto) {
-        return VilleDto.fromEntityToDto(
-                villeRepository.save(
-                        VilleDto.fromDtoToEntity(villeDto)
-                )
-        );
+    public Ville save(Ville ville) {
+        return villeRepository.save(ville);
     }
 
     @Override
-    public VilleDto update(Long idVille, VilleDto villeDto) {
+    public Ville update(Long idVille, Ville ville) {
         if (!villeRepository.existsById(idVille)) {
             throw new ResourceNotFoundException("Ville not found");
         }
@@ -43,20 +38,16 @@ public class VilleServiceImpl implements VilleService {
             throw new ResourceNotFoundException("Ville not found");
         }
 
-        VilleDto villeDtoResult = VilleDto.fromEntityToDto(optionalVille.get());
-        villeDtoResult.setReference(villeDto.getReference());
-        villeDtoResult.setNom(villeDto.getNom());
-        villeDtoResult.setPays(villeDto.getPays());
+        Ville villeResult = optionalVille.get();
+        villeResult.setReference(ville.getReference());
+        villeResult.setNom(ville.getNom());
+        villeResult.setPays(ville.getPays());
 
-        return VilleDto.fromEntityToDto(
-                villeRepository.save(
-                        VilleDto.fromDtoToEntity(villeDtoResult)
-                )
-        );
+        return villeRepository.save(villeResult);
     }
 
     @Override
-    public VilleDto findById(Long id) {
+    public Ville findById(Long id) {
         if (id == null) {
             log.error("Metier Id is null");
             return null;
@@ -64,27 +55,20 @@ public class VilleServiceImpl implements VilleService {
 
         Optional<Ville> optionalVille = villeRepository.findById(id);
 
-        return Optional.of(VilleDto.fromEntityToDto(optionalVille.get())).orElseThrow(() ->
+        return Optional.of(optionalVille.get()).orElseThrow(() ->
                 new ResourceNotFoundException(
                         "Aucnun Ville avec l'Id = " + id + "n'a été trouvé")
         );
     }
 
     @Override
-    public List<VilleDto> findAll() {
-        return villeRepository.findAll()
-                .stream()
-                .map(VilleDto::fromEntityToDto)
-                .collect(Collectors.toList());
+    public List<Ville> findAll() {
+        return villeRepository.findAll();
     }
 
     @Override
-    public List<VilleDto> findByVillesByIdDesc() {
-        return villeRepository.findVilleByOrderByIdDesc()
-                .stream()
-                .map(VilleDto::fromEntityToDto)
-                .collect(Collectors.toList());
-
+    public List<Ville> findByVillesByIdDesc() {
+        return villeRepository.findVilleByOrderByIdDesc();
     }
 
     @Override

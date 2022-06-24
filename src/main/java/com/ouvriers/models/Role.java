@@ -24,4 +24,8 @@ public class Role implements Serializable {
     @NaturalId
     @Column(length = 90)
     private RoleName name;
+
+    public Role(RoleName name) {
+        this.name = name;
+    }
 }

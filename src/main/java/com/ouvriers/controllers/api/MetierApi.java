@@ -26,7 +26,7 @@ public interface MetierApi {
     })
     ResponseEntity<Metier> save(@RequestBody Metier metier);
 
-    @PutMapping(value = "/metiers/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,
+    @PutMapping(value = APP_ROOT + "/metiers/update/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Modifier un Metier par son ID",
             notes = "Cette méthode permet de modifier un Metier par son ID", response = Metier.class)
@@ -47,7 +47,7 @@ public interface MetierApi {
     })
     ResponseEntity<Metier> getMetierById(@PathVariable("idMetier") Long id);
 
-    @GetMapping(value = "/metiers/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = APP_ROOT + "/metiers/all", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Renvoi la liste des metiers",
             notes = "Cette méthode permet de chercher et renvoyer la liste des metiers", responseContainer = "List<Metier>")
     @ApiResponses(value = {
@@ -74,5 +74,23 @@ public interface MetierApi {
             @ApiResponse(code = 200, message = "Le nombre d'metiers / une liste vide")
     })
     long getNumbersOfMetiers();
+
+    @GetMapping(value = APP_ROOT + "/metiers/photoMetier/{idMetier}")
+    @ApiOperation(value = "Recuperer la photo d'un Metier",
+            notes = "Cette méthode permet de recuperer et d'afficher la photo d'un Metier")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La photo a été recuperer")
+
+    })
+    byte[] getPhotoMetier(@PathVariable("idMetier") Long id) throws Exception;
+
+    @GetMapping(value = APP_ROOT + "/metiers/photoMetierInFolder/{idMetier}")
+    @ApiOperation(value = "Recuperer la photo d'un Metier depuis le dossier webapp",
+            notes = "Cette méthode permet de recuperer et d'afficher la photo d'un Metier depuis le dossier webapp")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La photo a été recuperer depuis le dossier webapp")
+
+    })
+    byte[] getPhotoMetierInContextFolder(@PathVariable("idMetier") Long id) throws Exception;
 
 }

@@ -111,27 +111,27 @@ public class SenOuvrierApplication implements CommandLineRunner {
 		Address a3 = addressRepository.save(new Address("KL", "Kaolack"));
 		Address a4 = addressRepository.save(new Address("Th", "Thies"));
 
-		Ouvrier o1 = ouvrierRepository.save(new Ouvrier(1L, "PLOMBIER", "tairou","diallo","Masculin","Hann-Mariste","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo1.jpg","cv1.pdf",m1,a1));
-		Ouvrier o2 = ouvrierRepository.save(new Ouvrier(2L, "ELECTRICIEN", "Saliou","diallo","Masculin","Hann-Mariste","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo2.jpg","cv1.pdf",m1,a1));
-		Ouvrier o3 = ouvrierRepository.save(new Ouvrier(3L, "FRIGORISTE", "fatou","ndiaye","Feminin","Hann-Mariste","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo3.jpg","cv1.pdf",m1,a1));
-		Ouvrier o4 = ouvrierRepository.save(new Ouvrier(4L, "CARROLEUR", "adama","diallo","Masculin","Keur-Massar","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo4.jpg","cv1.pdf",m1,a1));
-		Ouvrier o5 = ouvrierRepository.save(new Ouvrier(5L, "PEINTRE", "ndeye","gueye","Feminin","Parcelle","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo5.jpg","cv1.pdf",m1,a1));
-		Ouvrier o6 = ouvrierRepository.save(new Ouvrier(6L, "MACON", "fallou","tine","Masculin","Guédiawaye","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo6.jpg","cv1.pdf",m1,a1));
-		Ouvrier o7 = ouvrierRepository.save(new Ouvrier(7L, "MECANICIEN", "awa","diouf","Feminin","Almadies","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo7.jpg","cv1.pdf",m1,a1));
-		Ouvrier o8 = ouvrierRepository.save(new Ouvrier(8L, "PLOMBIER", "tairou","diallo","Masculin","Hann-Mariste","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo8.jpg","cv1.pdf",m1,a1));
-		Ouvrier o9 = ouvrierRepository.save(new Ouvrier(9L, "ELECTRICIEN", "Saliou","diallo","Masculin","Hann-Mariste","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo9.jpg","cv1.pdf",m1,a1));
-		Ouvrier o10 = ouvrierRepository.save(new Ouvrier(10L, "CHARPANTIER", "fatou","ndiaye","Feminin","Hann-Mariste","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo10.jpg","cv1.pdf",m1,a1));
-		Ouvrier o11 = ouvrierRepository.save(new Ouvrier(11L, "CARROLEUR", "adama","diallo","Masculin","Keur-Massar","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo11.jpg","cv1.pdf",m1,a1));
-		Ouvrier o12 = ouvrierRepository.save(new Ouvrier(12L, "PEINTRE", "ndeye","gueye","Feminin","Parcelle","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo12.jpg","cv1.pdf",m1,a1));
-		Ouvrier o13 = ouvrierRepository.save(new Ouvrier(13L, "MACON", "fallou","tine","Masculin","Guédiawaye","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo1.jpg","cv1.pdf",m1,a1));
-		Ouvrier o14 = ouvrierRepository.save(new Ouvrier(14L, "MECANICIEN", "awa","diouf","Feminin","Almadies","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo2.jpg","cv1.pdf",m1,a1));
-		Ouvrier o15 = ouvrierRepository.save(new Ouvrier(15L, "PLOMBIER", "tairou","diallo","Masculin","Hann-Mariste","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo3.jpg","cv1.pdf",m1,a1));
-		Ouvrier o16 = ouvrierRepository.save(new Ouvrier(16L, "ELECTRICIEN", "Saliou","diallo","Masculin","Hann-Mariste","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo4.jpg","cv1.pdf",m1,a1));
-		Ouvrier o17 = ouvrierRepository.save(new Ouvrier(17L, "FRIGORISTE", "fatou","ndiaye","Feminin","Hann-Mariste","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo5.jpg","cv1.pdf",m1,a1));
-		Ouvrier o18 = ouvrierRepository.save(new Ouvrier(18L, "CARROLEUR", "adama","diallo","Masculin","Keur-Massar","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo6.jpg","cv1.pdf",m1,a1));
-		Ouvrier o19 = ouvrierRepository.save(new Ouvrier(19L, "PEINTRE", "ndeye","gueye","Feminin","Parcelle","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo7.jpg","cv1.pdf",m1,a1));
-		Ouvrier o20 = ouvrierRepository.save(new Ouvrier(20L, "MACON", "fallou","tine","Masculin","Guédiawaye","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo8.jpg","cv1.pdf",m1,a1));
-		Ouvrier o21 = ouvrierRepository.save(new Ouvrier(21L, "MECANICIEN", "awa","diouf","Feminin","Almadies","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time","DK-TH-ZG","photo9.jpg","cv1.pdf",m1,a1));
+		Ouvrier o1 = ouvrierRepository.save(new Ouvrier(1L, "PLOMBIER", "tairou","diallo","Masculin","Hann-Mariste","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time", "Master 2 GL", true,"DK-TH-ZG","photo1.jpg","cv1.pdf",m1,a1));
+		Ouvrier o2 = ouvrierRepository.save(new Ouvrier(2L, "ELECTRICIEN", "Saliou","diallo","Masculin","Hann-Mariste","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time", "Ingénierie", true,"DK-TH-ZG","photo2.jpg","cv1.pdf",m1,a1));
+		Ouvrier o3 = ouvrierRepository.save(new Ouvrier(3L, "FRIGORISTE", "fatou","ndiaye","Feminin","Hann-Mariste","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time", "DESS", false,"DK-TH-ZG","photo3.jpg","cv1.pdf",m1,a1));
+		Ouvrier o4 = ouvrierRepository.save(new Ouvrier(4L, "CARROLEUR", "adama","diallo","Masculin","Keur-Massar","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time", "CAP", true,"DK-TH-ZG","photo4.jpg","cv1.pdf",m1,a1));
+		Ouvrier o5 = ouvrierRepository.save(new Ouvrier(5L, "PEINTRE", "ndeye","gueye","Feminin","Parcelle","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time", "DEUG", false,"DK-TH-ZG","photo5.jpg","cv1.pdf",m1,a1));
+		Ouvrier o6 = ouvrierRepository.save(new Ouvrier(6L, "MACON", "fallou","tine","Masculin","Guédiawaye","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time", "BAC+7", true,"DK-TH-ZG","photo6.jpg","cv1.pdf",m1,a1));
+		Ouvrier o7 = ouvrierRepository.save(new Ouvrier(7L, "MECANICIEN", "awa","diouf","Feminin","Almadies","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time", "CAP", true,"DK-TH-ZG","photo7.jpg","cv1.pdf",m1,a1));
+		Ouvrier o8 = ouvrierRepository.save(new Ouvrier(8L, "PLOMBIER", "tairou","diallo","Masculin","Hann-Mariste","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time", "CAP", false,"DK-TH-ZG","photo8.jpg","cv1.pdf",m1,a1));
+		Ouvrier o9 = ouvrierRepository.save(new Ouvrier(9L, "ELECTRICIEN", "Saliou","diallo","Masculin","Hann-Mariste","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time", "Technicien", true,"DK-TH-ZG","photo9.jpg","cv1.pdf",m1,a1));
+		Ouvrier o10 = ouvrierRepository.save(new Ouvrier(10L, "CHARPANTIER", "fatou","ndiaye","Feminin","Hann-Mariste","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time", "Enseignant", true,"DK-TH-ZG","photo10.jpg","cv1.pdf",m1,a1));
+		Ouvrier o11 = ouvrierRepository.save(new Ouvrier(11L, "CARROLEUR", "adama","diallo","Masculin","Keur-Massar","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time", "Professor", false,"DK-TH-ZG","photo11.jpg","cv1.pdf",m1,a1));
+		Ouvrier o12 = ouvrierRepository.save(new Ouvrier(12L, "PEINTRE", "ndeye","gueye","Feminin","Parcelle","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time", "Elementaire", false,"DK-TH-ZG","photo12.jpg","cv1.pdf",m1,a1));
+		Ouvrier o13 = ouvrierRepository.save(new Ouvrier(13L, "MACON", "fallou","tine","Masculin","Guédiawaye","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time", "Elementaire", true,"DK-TH-ZG","photo1.jpg","cv1.pdf",m1,a1));
+		Ouvrier o14 = ouvrierRepository.save(new Ouvrier(14L, "MECANICIEN", "awa","diouf","Feminin","Almadies","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time", "Doctorant", false,"DK-TH-ZG","photo2.jpg","cv1.pdf",m1,a1));
+		Ouvrier o15 = ouvrierRepository.save(new Ouvrier(15L, "PLOMBIER", "tairou","diallo","Masculin","Hann-Mariste","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time", "Doctorant", true,"DK-TH-ZG","photo3.jpg","cv1.pdf",m1,a1));
+		Ouvrier o16 = ouvrierRepository.save(new Ouvrier(16L, "ELECTRICIEN", "Saliou","diallo","Masculin","Hann-Mariste","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time", "BAC", true,"DK-TH-ZG","photo4.jpg","cv1.pdf",m1,a1));
+		Ouvrier o17 = ouvrierRepository.save(new Ouvrier(17L, "FRIGORISTE", "fatou","ndiaye","Feminin","Hann-Mariste","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time", "BAC", false,"DK-TH-ZG","photo5.jpg","cv1.pdf",m1,a1));
+		Ouvrier o18 = ouvrierRepository.save(new Ouvrier(18L, "CARROLEUR", "adama","diallo","Masculin","Keur-Massar","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time", "Lycée", false,"DK-TH-ZG","photo6.jpg","cv1.pdf",m1,a1));
+		Ouvrier o19 = ouvrierRepository.save(new Ouvrier(19L, "PEINTRE", "ndeye","gueye","Feminin","Parcelle","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time", "CEM", true,"DK-TH-ZG","photo7.jpg","cv1.pdf",m1,a1));
+		Ouvrier o20 = ouvrierRepository.save(new Ouvrier(20L, "MACON", "fallou","tine","Masculin","Guédiawaye","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time", "BEP", true,"DK-TH-ZG","photo8.jpg","cv1.pdf",m1,a1));
+		Ouvrier o21 = ouvrierRepository.save(new Ouvrier(21L, "MECANICIEN", "awa","diouf","Feminin","Almadies","thirdiallo@gmail.com","779440310","1 à 2ans",400000,"Full-Time", "BTS", true,"DK-TH-ZG","photo9.jpg","cv1.pdf",m1,a1));
 
 
 		Recruteur r1 = new Recruteur();Recruteur r2 = new Recruteur(); Recruteur r3 = new Recruteur();
@@ -203,6 +203,8 @@ public class SenOuvrierApplication implements CommandLineRunner {
 		utilisateurService.addRoleToUser("Admin", RoleName.ROLE_ADMIN);
 
 		*/
+
+
 
 	}
 

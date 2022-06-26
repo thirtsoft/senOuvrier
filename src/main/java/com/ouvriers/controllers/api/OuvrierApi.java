@@ -131,14 +131,14 @@ public interface OuvrierApi {
     })
     ResponseEntity<List<Ouvrier>> getListOfOuvriersByKeyword(@RequestParam(name = "keyword") String keyword);
 
-    @GetMapping(value = APP_ROOT + "/ouvriers/searchListOfOuvrierByDisponibility", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = APP_ROOT + "/ouvriers/searchOuvriersByDisponibilite", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Renvoi la liste des Ouvriers par disponibilit",
             notes = "Cette méthode permet de chercher et renvoyer la liste des Ouvriers par mot clé",
             responseContainer = "List<Ouvrier>")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "La liste des Ouvriers / une liste vide")
     })
-    ResponseEntity<List<Ouvrier>> getListOfOuvriersByDisponibility(@RequestParam(name = "disponibility") String disponibility);
+    ResponseEntity<List<Ouvrier>> getListOfOuvriersByDisponibility(@RequestParam(name = "disponible") String disponibility);
 
     @GetMapping(value = APP_ROOT + "/ouvriers/numberOfOuvriersPeerMonth", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Décompter les Ouvrier inscrit par mois",
@@ -267,18 +267,36 @@ public interface OuvrierApi {
                                  @PathVariable("fileName") String fileName) throws IOException;
 
     @GetMapping(value = APP_ROOT + "/ouvriers/searchOuvrierByDisponibityByPageables", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Rechercher une liste d'ouvriers disponible sur des pages",
+            notes = "Cette méthode permet de rechercher une liste d'ouvriers par mot clé sur la plateforme")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La liste des ouvriers est")
+
+    })
     Page<Ouvrier> getOuvrierByKeywordByPageable(@RequestParam(name = "dispo") String mc,
                                                    @RequestParam(name = "page") int page,
                                                    @RequestParam(name = "size") int size);
 
     @GetMapping(value = APP_ROOT + "/ouvriers/searchOuvrierByLocalityPageables", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Rechercher des ouvriers par localité",
+            notes = "Cette méthode permet de rechercher et d'afficher des ouvriers par localité sur la plateforme")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La liste des ouvriers est")
+
+    })
     Page<Ouvrier> getOuvrierByLocalityPageables(@RequestParam("id") Long addId,
                                                    @RequestParam(name = "page") int page,
                                                    @RequestParam(name = "size") int size);
 
     @GetMapping(value = APP_ROOT + "/ouvriers/searchOuvrierByMetierPageables",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    Page<Ouvrier> getOuvrierByMetierPageables(@RequestParam("id") Long permisId,
+    @ApiOperation(value = "Rechercher des ouvriers par metiers",
+            notes = "Cette méthode permet de rechercher et d'afficher des ouvriers par type de metiers sur la plateforme")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La liste des ouvriers est")
+
+    })
+    Page<Ouvrier> getOuvrierByMetierPageables(@RequestParam("id") Long metierId,
                                               @RequestParam(name = "page") int page,
                                               @RequestParam(name = "size") int size);
 
@@ -297,9 +315,17 @@ public interface OuvrierApi {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "La liste des Ouvrier est")
     })
-    ResponseEntity<List<Ouvrier>> getAllOuvriersByAddressId(@RequestParam Long id,@RequestParam int page,@RequestParam int size);
+    ResponseEntity<List<Ouvrier>> getAllOuvriersByAddressId(@RequestParam Long id, @RequestParam int page,@RequestParam int size);
 
-    @GetMapping(value = APP_ROOT + "/ouvriers/Ouvrierkey")
+    @GetMapping(value = APP_ROOT + "/ouvriers/searchAllOuvriersByMetiersByPageable")
+    @ApiOperation(value = "Afficher la listes des Ouvriers par metier par pages",
+            notes = "Cette méthode permet d'afficher des Ouvriers par metier par pages")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La liste des Ouvrier est")
+    })
+    ResponseEntity<List<Ouvrier>> getAllOuvriersByMetierId(@RequestParam Long id, @RequestParam int page,@RequestParam int size);
+
+    @GetMapping(value = APP_ROOT + "/ouvriers/ouvrierKey")
     @ApiOperation(value = "Afficher la listes des Ouvriers par mot clé par pages",
             notes = "Cette méthode permet d'afficher des Ouvriers par mot clé par pages")
     @ApiResponses(value = {
@@ -308,7 +334,7 @@ public interface OuvrierApi {
     })
     ResponseEntity<List<Ouvrier>> getOuvrierDtosByKeyWord(@RequestParam String disponibility,@RequestParam int page,@RequestParam int size);
 
-    @GetMapping(value = APP_ROOT + "/ouvriers/OuvrierDtoSize")
+    @GetMapping(value = APP_ROOT + "/ouvriers/ouvrierDtoSize")
     @ApiOperation(value = "Calculer la longueur des Ouvrier",
             notes = "Cette méthode permet de calculer la taille des Ouvriers")
     @ApiResponses(value = {
@@ -325,6 +351,15 @@ public interface OuvrierApi {
 
     })
     long getOuvriersByIdAddressSize(@RequestParam Long id);
+
+    @GetMapping(value = APP_ROOT + "/ouvriers/ctmetierIdSize")
+    @ApiOperation(value = "Calculer la longueur des Ouvriers par Id metier",
+            notes = "Cette méthode permet de calculer la taille des Ouvriers par Id metier")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La taille est")
+
+    })
+    long getOuvriersByIdMetiersSize(@RequestParam Long id);
 
     @GetMapping(value = APP_ROOT + "/ouvriers/keySize")
     @ApiOperation(value = "Calculer la longueur des Ouvriers par mot clé",

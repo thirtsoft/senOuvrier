@@ -78,6 +78,7 @@ public class Ouvrier implements Serializable {
     private Metier metier;
 
     @ManyToOne
+    @JoinColumn(name = "addressId")
     private Address address;
 
     public Ouvrier(Long id, String reference, String firstName, String lastName, String sexe,
@@ -106,8 +107,8 @@ public class Ouvrier implements Serializable {
                    String firstName, String lastName, String sexe,
                    String addressActuel, String email, String phoneOuvrier,
                    String nbreAnneeExperience, double pretentionSalaire, String disponibity,
-                   boolean selected, String mobilite, String cvOuvrier,
-                   String photoOuvrier, Metier metier, Address address) {
+                   String education, boolean selected, String mobilite, String photoOuvrier,
+                   String cvOuvrier, Metier metier, Address address) {
         this.id = id;
         this.reference = reference;
         this.firstName = firstName;
@@ -119,10 +120,11 @@ public class Ouvrier implements Serializable {
         this.nbreAnneeExperience = nbreAnneeExperience;
         this.pretentionSalaire = pretentionSalaire;
         this.disponibity = disponibity;
+        this.education = education;
         this.selected = selected;
         this.mobilite = mobilite;
-        this.cvOuvrier = cvOuvrier;
         this.photoOuvrier = photoOuvrier;
+        this.cvOuvrier = cvOuvrier;
         this.metier = metier;
         this.address = address;
     }

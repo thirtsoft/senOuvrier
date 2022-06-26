@@ -76,5 +76,10 @@ public class MetierController implements MetierApi {
         return Files.readAllBytes(Paths.get(context.getRealPath("/Metiers/photos/") + metier.getPhotoMetier()));
     }
 
+    @Override
+    public void delete(Long idMetier) {
+        metierService.delete(idMetier);
+    }
+
 
 }

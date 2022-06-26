@@ -2,10 +2,12 @@ package com.ouvriers.controllers;
 
 import com.ouvriers.controllers.api.AddressApi;
 import com.ouvriers.models.Address;
+import com.ouvriers.models.Metier;
 import com.ouvriers.services.AddressService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,8 +49,10 @@ public class AddressController implements AddressApi {
     }
 
     @Override
-    public ResponseEntity<List<Address>> getAlladdresses() {
-        return null;
+    public ResponseEntity<List<Address>> getAllAddresses() {
+        List<Address> addressResults = addresseService.findAll();
+        return new ResponseEntity<>(addressResults, HttpStatus.OK);
+
     }
 
     @Override
@@ -73,5 +77,10 @@ public class AddressController implements AddressApi {
     @Override
     public Page<Address> getAddressByLocalityPageables(Long addId, int page, int size) {
         return null;
+    }
+
+    @Override
+    public void delete(Long idAdd) {
+        addresseService.delete(idAdd);
     }
 }

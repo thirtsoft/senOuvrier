@@ -26,7 +26,7 @@ public interface MetierApi {
     })
     ResponseEntity<Metier> save(@RequestBody Metier metier);
 
-    @PutMapping(value = APP_ROOT + "/metiers/update/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,
+    @PutMapping(value = APP_ROOT + "/metiers/update/{idMetier}", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Modifier un Metier par son ID",
             notes = "Cette méthode permet de modifier un Metier par son ID", response = Metier.class)
@@ -92,5 +92,14 @@ public interface MetierApi {
 
     })
     byte[] getPhotoMetierInContextFolder(@PathVariable("idMetier") Long id) throws Exception;
+
+    @DeleteMapping(value = APP_ROOT + "/metiers/delete/{idMetier}")
+    @ApiOperation(value = "Supprimer un Metier par son ID",
+            notes = "Cette méthode permet de supprimer un Metier par son ID")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Le Metier a été supprimé")
+
+    })
+    void delete(@PathVariable("idMetier") Long idMetier);
 
 }

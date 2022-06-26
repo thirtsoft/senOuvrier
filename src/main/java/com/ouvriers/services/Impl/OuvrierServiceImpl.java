@@ -182,17 +182,18 @@ public class OuvrierServiceImpl implements OuvrierService {
 
     @Override
     public List<Ouvrier> getAllOuvrierDtosByIdAddress(Long id, int page, int size) {
-        return null;
-    }
-
-    /*
-    @Override
-    public List<Ouvrier> getAllOuvrierDtosByIdAddress(Long id, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        return ouvrierRepository.findByAddresseId(id, pageable)
+        return ouvrierRepository.findAllOuvriersByAddressId(id, pageable)
                 .getContent();
     }
-    */
+
+    @Override
+    public List<Ouvrier> getAllOuvriersByMetierId(Long id, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return ouvrierRepository.findAllOuvriersByMetierId(id, pageable)
+                .getContent();
+    }
+
 
     @Override
     public List<Ouvrier> getAllOuvrierDtosByKey(String disponibility, int page, int size) {
@@ -209,6 +210,11 @@ public class OuvrierServiceImpl implements OuvrierService {
     @Override
     public long getOuvriersDtosByAddressIdLength(Long id) {
         return ouvrierRepository.getOuvrierLengthByAddressId(id);
+    }
+
+    @Override
+    public long getOuvriersDtosByMetierIdLength(Long id) {
+        return ouvrierRepository.getOuvrierLengthByMetierId(id);
     }
 
     @Override

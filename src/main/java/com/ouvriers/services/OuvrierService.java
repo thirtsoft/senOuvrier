@@ -48,18 +48,22 @@ public interface OuvrierService {
 
     Page<Ouvrier> findOuvriersByLocalityPageables(Long addId, Pageable pageable);
 
-    Page<Ouvrier> findOuvriersByMetierPageables(@Param("permId") Long metierId, Pageable pageable);
+    Page<Ouvrier> findOuvriersByMetierPageables(Long metierId, Pageable pageable);
 
 
     List<Ouvrier> getAllOuvrierDtos(int page, int size);
 
     List<Ouvrier> getAllOuvrierDtosByIdAddress(Long id, int page, int size);
 
+    List<Ouvrier> getAllOuvriersByMetierId(Long id, int page, int size);
+
     List<Ouvrier> getAllOuvrierDtosByKey(String disponibility, int page, int size);
 
     long getAllOuvrierDtosSize();
 
     long getOuvriersDtosByAddressIdLength(Long id);
+
+    long getOuvriersDtosByMetierIdLength(Long id);
 
     long getOuvrierDtosSizeByKey(String disponibility);
 

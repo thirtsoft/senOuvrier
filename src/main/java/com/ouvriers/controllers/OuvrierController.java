@@ -304,7 +304,7 @@ public class OuvrierController implements OuvrierApi {
     @Override
     public Page<Ouvrier> getOuvrierByMetierPageables(Long permisId, int page, int size) {
         final Pageable pageable = PageRequest.of(page, size);
-        return ouvrierService.findOuvriersByPageable(pageable);
+        return ouvrierService.findOuvriersByMetierPageables(permisId, pageable);
     }
 
     @Override
@@ -316,6 +316,12 @@ public class OuvrierController implements OuvrierApi {
     @Override
     public ResponseEntity<List<Ouvrier>> getAllOuvriersByAddressId(Long id, int page, int size) {
         List<Ouvrier> ouvrierList = ouvrierService.getAllOuvrierDtosByIdAddress(id, page, size);
+        return new ResponseEntity<>(ouvrierList, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<List<Ouvrier>> getAllOuvriersByMetierId(Long id, int page, int size) {
+        List<Ouvrier> ouvrierList = ouvrierService.getAllOuvriersByMetierId(id, page, size);
         return new ResponseEntity<>(ouvrierList, HttpStatus.OK);
     }
 
@@ -333,6 +339,11 @@ public class OuvrierController implements OuvrierApi {
     @Override
     public long getOuvriersByIdAddressSize(Long id) {
         return ouvrierService.getOuvriersDtosByAddressIdLength(id);
+    }
+
+    @Override
+    public long getOuvriersByIdMetiersSize(Long id) {
+        return ouvrierService.getOuvriersDtosByMetierIdLength(id);
     }
 
     @Override

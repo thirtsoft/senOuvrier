@@ -27,7 +27,7 @@ public interface AddressApi {
     })
     ResponseEntity<Address> save(@RequestBody Address Address);
 
-    @PutMapping(value = "/addresses/update/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,
+    @PutMapping(value = APP_ROOT +  "/addresses/update/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Modifier un Address par son ID",
             notes = "Cette méthode permet de modifier un Address par son ID", response = Address.class)
@@ -59,15 +59,15 @@ public interface AddressApi {
     })
     ResponseEntity<Address> getAddressByRerefence(@RequestParam(name = "ref") String reference);
 
-    @GetMapping(value = "/addresses/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = APP_ROOT +  "/addresses/all", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Renvoi la liste des addresses",
             notes = "Cette méthode permet de chercher et renvoyer la liste des addresses", responseContainer = "List<Address>")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "La liste des addresses / une liste vide")
     })
-    ResponseEntity<List<Address>> getAlladdresses();
+    ResponseEntity<List<Address>> getAllAddresses();
 
-    @GetMapping(value = "/addresses/searchListOfAddressByKeyword", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = APP_ROOT +  "/addresses/searchListOfAddressByKeyword", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Renvoi la liste des addresses par mot clé",
             notes = "Cette méthode permet de chercher et renvoyer la liste des addresses par mot clé",
             responseContainer = "List<Address>")
@@ -94,4 +94,13 @@ public interface AddressApi {
     Page<Address> getAddressByLocalityPageables(@RequestParam("id") Long addId,
                                                     @RequestParam(name = "page") int page,
                                                     @RequestParam(name = "size") int size);
+
+    @DeleteMapping(value = APP_ROOT + "/addresses/delete/{idAdd}")
+    @ApiOperation(value = "Supprimer une Addresse par son ID",
+            notes = "Cette méthode permet de supprimer un Addresse par son ID")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Le Metier a été supprimé")
+
+    })
+    void delete(@PathVariable("idAdd") Long idAdd);
 }

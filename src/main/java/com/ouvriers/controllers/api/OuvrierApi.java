@@ -57,7 +57,7 @@ public interface OuvrierApi {
             @RequestParam(name = "photoOuvrier") MultipartFile photoOuvrier,
             @RequestParam(name = "cvOuvrier") MultipartFile cvOuvrier) throws IOException;
 
-    @PutMapping(value = "/ouvriers/update/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = APP_ROOT + "/ouvriers/update/{idOuvrier}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Modifier un ouvrier par son ID",
             notes = "Cette méthode permet de modifier un ouvrier par son ID", response = Ouvrier.class)
     @ApiResponses(value = {

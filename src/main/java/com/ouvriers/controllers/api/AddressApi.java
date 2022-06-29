@@ -27,7 +27,7 @@ public interface AddressApi {
     })
     ResponseEntity<Address> save(@RequestBody Address Address);
 
-    @PutMapping(value = APP_ROOT +  "/addresses/update/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,
+    @PutMapping(value = APP_ROOT +  "/addresses/update/{idAddress}", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Modifier un Address par son ID",
             notes = "Cette méthode permet de modifier un Address par son ID", response = Address.class)

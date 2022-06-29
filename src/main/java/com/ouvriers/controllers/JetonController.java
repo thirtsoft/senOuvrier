@@ -34,6 +34,7 @@ public class JetonController implements JetonApi {
     @Override
     public ResponseEntity<Jeton> updateJeton(Long idJeton, Jeton jeton) {
         jeton.setId(idJeton);
+        jeton.setCreatedDate(new Date());
         Jeton newJetonDto = jetonService.save(jeton);
         return new ResponseEntity<>(newJetonDto, HttpStatus.OK);
     }

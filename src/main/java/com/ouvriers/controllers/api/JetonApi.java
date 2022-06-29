@@ -27,7 +27,11 @@ public interface JetonApi {
     })
     ResponseEntity<Jeton> createJeton(@RequestBody Jeton jeton);
 
+    /*
     @PutMapping(value = APP_ROOT + "/jetons/update/{idJeton}",
+            consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    */
+    @PatchMapping(value = APP_ROOT + "/jetons/update/{idJeton}",
             consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Modofier un Jeton  par ID",
             notes = "Cette méthode permet de modifier un Jeton par ID", response = Jeton.class)

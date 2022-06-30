@@ -19,8 +19,8 @@ public interface RatingRepository extends JpaRepository<Rating, Long> {
 
     List<Rating> findByOrderByIdDesc();
 
-    @Query("select count(c) from Rating c where c.ouvrier.reference =:ouv")
-    BigDecimal countNumberOfRatingByOuvrierId(@Param("ouv") String ouvRef);
+    @Query("select count(c) from Rating c where c.ouvrier.id =:ouv")
+    BigDecimal countNumberOfRatingByOuvrierId(@Param("ouv") Long idOuv);
 
     @Query("select n from Rating n where n.ouvrier.id =:num")
     List<Rating> findTop4RatingOrderByCreatedDateDesc(@Param("num") Long ouvRef);

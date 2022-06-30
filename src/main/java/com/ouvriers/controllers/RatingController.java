@@ -105,8 +105,8 @@ public class RatingController implements RatingApi {
     }
 
     @Override
-    public BigDecimal countNumberOfNotificationByOuvrierId(String ouvRef) {
-        return ratingService.countNumberOfNotificationByOuvrierId(ouvRef);
+    public BigDecimal countNumberOfNotificationByOuvrierId(Long id) {
+        return ratingService.countNumberOfNotificationByOuvrierId(id);
     }
 
     @Override

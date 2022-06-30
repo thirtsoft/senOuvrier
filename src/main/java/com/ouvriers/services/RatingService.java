@@ -23,7 +23,7 @@ public interface RatingService {
 
     List<Rating> findTop4ByOrderByCreatedDateDescByOuvrierId(Long ouvRef);
 
-    BigDecimal countNumberOfNotificationByOuvrierId(String ouvRef);
+    BigDecimal countNumberOfNotificationByOuvrierId(Long idOuv);
 
     BigDecimal countNumberOfRating();
 

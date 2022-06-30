@@ -105,8 +105,8 @@ public class RatingServiceImpl implements RatingService {
     }
 
     @Override
-    public BigDecimal countNumberOfNotificationByOuvrierId(String ouvRef) {
-        return ratingRepository.countNumberOfRatingByOuvrierId(ouvRef);
+    public BigDecimal countNumberOfNotificationByOuvrierId(Long idOuv) {
+        return ratingRepository.countNumberOfRatingByOuvrierId(idOuv);
     }
 
     @Override

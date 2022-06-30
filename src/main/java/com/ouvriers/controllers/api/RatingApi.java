@@ -120,7 +120,7 @@ public interface RatingApi {
     })
     ResponseEntity<List<Rating>> getTop4ByOrderByCreatedDateDescByOuvrierId(@PathVariable("idChauff") Long id);
 
-    @GetMapping(value = APP_ROOT + "/ratings/countNumberOfRatingByOuvrierId/{idChauff}",
+    @GetMapping(value = APP_ROOT + "/ratings/countNumberOfRatingByOuvrierId/{idOuv}",
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Décompter le nombre de ratings d'un chauffeur",
             notes = "Cette méthode permet de compter et d'afficher le nombre total de ratings d'un chauffeur",
@@ -130,7 +130,7 @@ public interface RatingApi {
             @ApiResponse(code = 400, message = "nombre null")
 
     })
-    BigDecimal countNumberOfNotificationByOuvrierId(@PathVariable("idOuv") String ouvRef);
+    BigDecimal countNumberOfNotificationByOuvrierId(@PathVariable("idOuv") Long id);
 
     @GetMapping(value = APP_ROOT + "/ratings/countNumberOfRatings",
             produces = MediaType.APPLICATION_JSON_VALUE)

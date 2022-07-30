@@ -141,7 +141,7 @@ public interface UtilisateurApi {
             @ApiResponse(code = 400, message = "Aucun liste Annonce")
 
     })
-    BigDecimal getNumberOfRecruteurs();
+    long getNumberOfRecruteurs();
 
     @GetMapping(value = APP_ROOT + "/utilisateurs/NumbersOfRegisterInMonth")
     @ApiOperation(value = "Decompter le nombre d'inscris dans le moi",

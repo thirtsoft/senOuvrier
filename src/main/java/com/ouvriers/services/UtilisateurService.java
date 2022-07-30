@@ -30,6 +30,8 @@ public interface UtilisateurService {
 
     Utilisateur activatedUser(String isActive, String id);
 
+    long countNumberOfRegister();
+
     BigDecimal countNumberOfRegisterInMonth();
 
     List<Utilisateur> findAll();

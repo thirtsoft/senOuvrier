@@ -1,5 +1,6 @@
 package com.ouvriers.repository;
 
+import com.ouvriers.models.Jeton;
 import com.ouvriers.models.Rating;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -24,4 +25,7 @@ public interface RatingRepository extends JpaRepository<Rating, Long> {
 
     @Query("select n from Rating n where n.ouvrier.id =:num")
     List<Rating> findTop4RatingOrderByCreatedDateDesc(@Param("num") Long ouvRef);
+
+    @Query("select p from Rating p where p.utilisateur.id =:user order by id Desc")
+    List<Rating> FindListRatingByCustomerId(@Param("user") Long userId);
 }

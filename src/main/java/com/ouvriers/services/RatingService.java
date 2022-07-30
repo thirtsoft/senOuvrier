@@ -1,6 +1,7 @@
 package com.ouvriers.services;
 
 import com.ouvriers.models.Rating;
+import org.springframework.data.repository.query.Param;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -22,6 +23,8 @@ public interface RatingService {
     List<Rating> findByOrderByIdDesc();
 
     List<Rating> findTop4ByOrderByCreatedDateDescByOuvrierId(Long ouvRef);
+
+    List<Rating> FindListRatingByCustomerId(Long userId);
 
     BigDecimal countNumberOfNotificationByOuvrierId(Long idOuv);
 

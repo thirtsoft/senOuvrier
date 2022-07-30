@@ -120,6 +120,10 @@ public class AuthController implements AuthApi {
                     roles.add(roleRepository.findByName(RoleName.ROLE_MANAGER).get());
                     break;
 
+                case "moderator":
+                    roles.add(roleRepository.findByName(RoleName.ROLE_MODERATOR).get());
+                    break;
+
                 case "user":
                     roles.add(roleRepository.findByName(RoleName.ROLE_USER).get());
                     break;

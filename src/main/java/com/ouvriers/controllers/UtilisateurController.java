@@ -220,8 +220,8 @@ public class UtilisateurController implements UtilisateurApi {
     }
 
     @Override
-    public BigDecimal getNumberOfRecruteurs() {
-        return null;
+    public long getNumberOfRecruteurs() {
+        return utilisateurService.countNumberOfRegister();
     }
 
     @Override

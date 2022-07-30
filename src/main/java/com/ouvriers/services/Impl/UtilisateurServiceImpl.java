@@ -163,6 +163,11 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     }
 
     @Override
+    public long countNumberOfRegister() {
+        return utilisateurRepository.count();
+    }
+
+    @Override
     public BigDecimal countNumberOfRegisterInMonth() {
         return utilisateurRepository.countNumberOfRegisterInMonth();
     }

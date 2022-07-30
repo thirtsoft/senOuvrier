@@ -105,6 +105,11 @@ public class RatingServiceImpl implements RatingService {
     }
 
     @Override
+    public List<Rating> FindListRatingByCustomerId(Long userId) {
+        return ratingRepository.FindListRatingByCustomerId(userId);
+    }
+
+    @Override
     public BigDecimal countNumberOfNotificationByOuvrierId(Long idOuv) {
         return ratingRepository.countNumberOfRatingByOuvrierId(idOuv);
     }

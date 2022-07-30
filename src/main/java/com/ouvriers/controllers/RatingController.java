@@ -105,6 +105,12 @@ public class RatingController implements RatingApi {
     }
 
     @Override
+    public ResponseEntity<List<Rating>> getListRatingByCustomerId(Long id) {
+        List<Rating> newNotificationDtos = ratingService.FindListRatingByCustomerId(id);
+        return new ResponseEntity<>(newNotificationDtos, HttpStatus.OK);
+    }
+
+    @Override
     public BigDecimal countNumberOfNotificationByOuvrierId(Long id) {
         return ratingService.countNumberOfNotificationByOuvrierId(id);
     }

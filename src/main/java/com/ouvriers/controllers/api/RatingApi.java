@@ -120,6 +120,18 @@ public interface RatingApi {
     })
     ResponseEntity<List<Rating>> getTop4ByOrderByCreatedDateDescByOuvrierId(@PathVariable("idChauff") Long id);
 
+    @GetMapping(value = APP_ROOT + "/ratings/searchListRatingByCustomerId/{idCustomer}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Afficher la liste des ratings d'un utilisateur",
+            notes = "Cette méthode permet d'afficher la liste des ratings d'un utilisateur",
+            responseContainer = "List<Rating>")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La liste des ratings a été trouvé"),
+            @ApiResponse(code = 400, message = "Aucun liste ratings")
+
+    })
+    ResponseEntity<List<Rating>> getListRatingByCustomerId(@PathVariable("idCustomer") Long id);
+
     @GetMapping(value = APP_ROOT + "/ratings/countNumberOfRatingByOuvrierId/{idOuv}",
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Décompter le nombre de ratings d'un chauffeur",

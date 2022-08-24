@@ -21,6 +21,9 @@ public class Jeton implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "numero", length = 60)
+    private String numero;
+
     @Column(name = "montant")
     private float montant;
 

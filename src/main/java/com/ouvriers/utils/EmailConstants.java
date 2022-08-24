@@ -2,10 +2,10 @@ package com.ouvriers.utils;
 
 public interface EmailConstants {
 
-    String managerName = "Sunuchauffeur";
+    String managerName = "RepareTout";
 
-    String from = "contact@sunuchauffeur.com";
+    String from = "contact@repareTout.com";
 
-    String to = "contact@sunuchauffeur.com";
+    String to = "contact@repareTout.com";
 
 }

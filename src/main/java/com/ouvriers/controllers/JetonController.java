@@ -3,6 +3,7 @@ package com.ouvriers.controllers;
 import com.ouvriers.controllers.api.JetonApi;
 import com.ouvriers.models.Jeton;
 import com.ouvriers.services.JetonService;
+import com.ouvriers.utils.GenerateCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,7 @@ public class JetonController implements JetonApi {
 
     @Override
     public ResponseEntity<Jeton> createJeton(Jeton jeton) {
+        jeton.setNumero(GenerateCode.generateNumberOfCode());
         jeton.setEtat("ENCOURS");
         jeton.setCreatedDate(new Date());
         Jeton newJetonDto = jetonService.save(jeton);

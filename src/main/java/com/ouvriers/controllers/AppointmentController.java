@@ -9,6 +9,7 @@ import com.ouvriers.services.AppointmentService;
 import com.ouvriers.services.HistoriqueAppointmentService;
 import com.ouvriers.services.OuvrierService;
 import com.ouvriers.services.UtilisateurService;
+import com.ouvriers.utils.GenerateCode;
 import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,7 @@ public class AppointmentController implements AppointmentApi {
     @Override
     public ResponseEntity<Appointment> create(Appointment appointment) {
         appointment.setStatusOfAppointment("Encours");
+        appointment.setReference(GenerateCode.generateNumberOfCode());
         appointment.setCreatedDate(new Date());
         Appointment appointmentResult = appointmentService.save(appointment);
 
@@ -65,7 +67,8 @@ public class AppointmentController implements AppointmentApi {
         Ouvrier ouvrier = Optional.of(ouvrierService.findById(idOuv)).get();
         Utilisateur utilisateur = Optional.of(utilisateurService.findById(id)).get();
         appointment.setStatusOfAppointment("Encours");
-        appointment.setReference(this.generateAppointmentReference());
+        //    appointment.setReference(this.generateAppointmentReference());
+        appointment.setReference(GenerateCode.generateNumberOfCode());
         appointment.setCreatedDate(new Date());
         appointment.setOuvrier(ouvrier);
         appointment.setUtilisateur(utilisateur);

@@ -1,6 +1,5 @@
 package com.ouvriers.models;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -27,6 +26,10 @@ public class Prestation implements Serializable {
     @ManyToOne
     @JoinColumn(name = "ouvId", nullable = false)
     private Ouvrier ouvrier;
+
+    @ManyToOne
+    @JoinColumn(name = "locId")
+    private Locality locality;
 
 
 }

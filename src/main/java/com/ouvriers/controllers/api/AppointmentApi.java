@@ -1,7 +1,6 @@
 package com.ouvriers.controllers.api;
 
 import com.ouvriers.models.Appointment;
-import com.ouvriers.models.Rating;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -116,15 +115,39 @@ public interface AppointmentApi {
 
     @GetMapping(value = APP_ROOT + "/appointments/countNumberOfAppointmentByOuvrierId/{idOuv}",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Décompter le nombre de ratings d'un chauffeur",
-            notes = "Cette méthode permet de compter et d'afficher le nombre total de ratings d'un chauffeur",
-            response = Rating.class)
+    @ApiOperation(value = "Décompter le nombre de demande de rv pour un ouvrier",
+            notes = "Cette méthode permet de compter et d'afficher le nombre total de demande de rv pour un ouvrier",
+            response = Appointment.class)
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Le nombre de ratings"),
+            @ApiResponse(code = 200, message = "Le nombre de demande de rv"),
             @ApiResponse(code = 400, message = "nombre null")
 
     })
     BigDecimal getNumberOfAppointmentByOuvrierId(@PathVariable("idOuv") Long id);
+
+    @GetMapping(value = APP_ROOT + "/appointments/countNumberOfAppointmentByCustomerId/{userId}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Décompter le nombre de demande de rv d'un utilisateur",
+            notes = "Cette méthode permet de compter et d'afficher le nombre total de demande de rv d'un utilisateur",
+            response = Appointment.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Le nombre de demande de rv"),
+            @ApiResponse(code = 400, message = "nombre null")
+
+    })
+    BigDecimal getNumberOfAppointmentByCustomerId(@PathVariable("userId") Long id);
+
+    @GetMapping(value = APP_ROOT + "/appointments/countNumberOfAppointmentByCustomerIdAndStatusAccepted/{userId}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Décompter le nombre de demande de rv accepter d'un utilisateur",
+            notes = "Cette méthode permet de compter et d'afficher le nombre total de demande de rv accepter d'un utilisateur",
+            response = Appointment.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Le nombre de demande de rv accepter"),
+            @ApiResponse(code = 400, message = "nombre null")
+
+    })
+    BigDecimal getNumberOfAppointmentByCustomerIdAndStatusAccepted(@PathVariable("userId") Long userId);
 
     @GetMapping(value = APP_ROOT + "/appointments/all", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Renvoi la liste des Appointments",

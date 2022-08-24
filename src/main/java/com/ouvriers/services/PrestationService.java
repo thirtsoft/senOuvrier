@@ -2,6 +2,7 @@ package com.ouvriers.services;
 
 import com.ouvriers.models.Appointment;
 import com.ouvriers.models.Prestation;
+import org.springframework.data.repository.query.Param;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -23,6 +24,8 @@ public interface PrestationService {
     List<Prestation> FindAllPrestationsOrderByOuvrierId(Long ouvId);
 
     List<Prestation> findTop4PrestationsOrderByCreatedDateDesc(Long ouvRef);
+
+    List<Prestation> findTop8PrestationsOrderByCreatedDateDesc(Long ouvRef);
 
     void delete(Long id);
 

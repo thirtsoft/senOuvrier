@@ -1,9 +1,6 @@
 package com.ouvriers.repository;
 
-import com.ouvriers.models.Address;
-import com.ouvriers.models.Annonce;
 import com.ouvriers.models.Appointment;
-import com.ouvriers.models.Rating;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -29,6 +26,12 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
 
     @Query("select count(c) from Appointment c where c.ouvrier.id =:ouv")
     BigDecimal countNumberOfAppointmentByOuvrierId(@Param("ouv") Long idOuv);
+
+    @Query("select count(c) from Appointment c where c.utilisateur.id =:user")
+    BigDecimal countNumberOfAppointmentByCustomerId(@Param("user") Long userId);
+
+    @Query("select count(c) from Appointment c where (c.utilisateur.id =:userId) and (c.statusOfAppointment = 'Accepted') ")
+    BigDecimal countNumberOfAppointmentByCustomerIdAndStatusAccepted(@Param("userId") Long userId);
 
     List<Appointment> findByOrderByIdDesc();
 

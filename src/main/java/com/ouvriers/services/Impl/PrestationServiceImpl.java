@@ -88,6 +88,11 @@ public class PrestationServiceImpl implements PrestationService {
     }
 
     @Override
+    public List<Prestation> findTop8PrestationsOrderByCreatedDateDesc(Long ouvRef) {
+        return prestationRepository.findTop8PrestationOrderByCreatedDateDesc(ouvRef);
+    }
+
+    @Override
     public void delete(Long id) {
         if (id == null) {
             log.error("Prestation Id is null");

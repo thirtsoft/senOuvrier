@@ -16,7 +16,7 @@ public interface ServiceOffertService {
 
     List<ServiceOffert> findByServiceOffertByIdDesc();
 
-    List<ServiceOffert> findListServiceOffertByKeyword(String keyword);
+    List<ServiceOffert> findAllServiceOffertByOuvrierId(Long idOuv);
 
     void delete(Long id);
 }

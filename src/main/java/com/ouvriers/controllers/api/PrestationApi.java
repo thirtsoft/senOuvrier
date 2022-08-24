@@ -91,6 +91,14 @@ public interface PrestationApi {
     })
     ResponseEntity<List<Prestation>> getTop4PrestationByOuvrierIdOrderByCreatedDateDesc(@PathVariable(name = "ouvId") Long ouvId);
 
+    @GetMapping(value = APP_ROOT + "/prestations/searchTop8PrestationsByOuvrierId/{ouvId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Renvoi la liste des prestations par l'ID de l'ouvrier",
+            notes = "Cette méthode permet de chercher et renvoyer la liste des prestations par l'ID de l'ouvrier", responseContainer = "List<Prestation>")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La liste des prestations par l'ID de l'ouvrier / une liste vide")
+    })
+    ResponseEntity<List<Prestation>> getTop8PrestationByOuvrierIdOrderByCreatedDateDesc(@PathVariable(name = "ouvId") Long ouvId);
+
     @DeleteMapping(value = APP_ROOT + "/prestations/delete/{idPrestation}")
     @ApiOperation(value = "Supprimer un Prestation par son ID",
             notes = "Cette méthode permet de supprimer un Prestation par son ID")

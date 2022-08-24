@@ -3,7 +3,6 @@ package com.ouvriers.services.Impl;
 import com.ouvriers.exceptions.ResourceNotFoundException;
 import com.ouvriers.models.Appointment;
 import com.ouvriers.repository.AppointmentRepository;
-import com.ouvriers.repository.UtilisateurRepository;
 import com.ouvriers.services.AppointmentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +20,9 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     private final AppointmentRepository appointmentRepository;
 
-    private final UtilisateurRepository utilisateurRepository;
-
     @Autowired
-    public AppointmentServiceImpl(AppointmentRepository appointmentRepository, UtilisateurRepository utilisateurRepository) {
+    public AppointmentServiceImpl(AppointmentRepository appointmentRepository) {
         this.appointmentRepository = appointmentRepository;
-        this.utilisateurRepository = utilisateurRepository;
     }
 
     @Override
@@ -118,6 +114,16 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public BigDecimal countNumberOfAppointmentByOuvrierId(Long idOuv) {
         return appointmentRepository.countNumberOfAppointmentByOuvrierId(idOuv);
+    }
+
+    @Override
+    public BigDecimal countNumberOfAppointmentByCustomerId(Long userId) {
+        return appointmentRepository.countNumberOfAppointmentByCustomerId(userId);
+    }
+
+    @Override
+    public BigDecimal countNumberOfAppointmentByCustomerIdAndStatusAccepted(Long userId) {
+        return appointmentRepository.countNumberOfAppointmentByCustomerIdAndStatusAccepted(userId);
     }
 
     @Override

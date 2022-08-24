@@ -68,6 +68,12 @@ public class PrestationController implements PrestationApi {
     }
 
     @Override
+    public ResponseEntity<List<Prestation>> getTop8PrestationByOuvrierIdOrderByCreatedDateDesc(Long ouvId) {
+        List<Prestation> prestationList = prestationService.findTop8PrestationsOrderByCreatedDateDesc(ouvId);
+        return new ResponseEntity<>(prestationList, HttpStatus.OK);
+    }
+
+    @Override
     public void delete(Long id) {
         prestationService.delete(id);
 

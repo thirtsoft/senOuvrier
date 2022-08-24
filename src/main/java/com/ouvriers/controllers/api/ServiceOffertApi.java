@@ -1,5 +1,6 @@
 package com.ouvriers.controllers.api;
 
+import com.ouvriers.models.Prestation;
 import com.ouvriers.models.ServiceOffert;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -62,14 +63,22 @@ public interface ServiceOffertApi {
     })
     ResponseEntity<List<ServiceOffert>> getAllserviceOffertsOrderByIdDesc();
 
+    @GetMapping(value = APP_ROOT + "/serviceOfferts/searchAllServiceOffertsByOuvrierId/{ouvId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Renvoi la liste des serviceOfferts par l'ID de l'ouvrier",
+            notes = "Cette méthode permet de chercher et renvoyer la liste des serviceOfferts par l'ID de l'ouvrier", responseContainer = "List<ServiceOffert>")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La liste des prestations par l'ID de l'ouvrier / une liste vide")
+    })
+    ResponseEntity<List<ServiceOffert>> getAllServiceOffertByOuvrierId(@PathVariable(name = "ouvId") Long ouvId);
 
-    @DeleteMapping(value = APP_ROOT + "/serviceOfferts/delete/{idTaf}")
+
+    @DeleteMapping(value = APP_ROOT + "/serviceOfferts/delete/{idServiceOffert}")
     @ApiOperation(value = "Supprimer un Notification par son ID",
             notes = "Cette méthode permet de supprimer un Notification par son ID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Le Notification a été supprimé")
 
     })
-    void delete(@PathVariable("idTaf") Long id);
+    void delete(@PathVariable("idServiceOffert") Long id);
 
 }

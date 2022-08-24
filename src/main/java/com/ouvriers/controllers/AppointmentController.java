@@ -144,6 +144,16 @@ public class AppointmentController implements AppointmentApi {
     }
 
     @Override
+    public BigDecimal getNumberOfAppointmentByCustomerId(Long id) {
+        return appointmentService.countNumberOfAppointmentByCustomerId(id);
+    }
+
+    @Override
+    public BigDecimal getNumberOfAppointmentByCustomerIdAndStatusAccepted(Long userId) {
+        return appointmentService.countNumberOfAppointmentByCustomerIdAndStatusAccepted(userId);
+    }
+
+    @Override
     public ResponseEntity<List<Appointment>> getAllAppointments() {
         List<Appointment> appointmentList = appointmentService.findAll();
         return new ResponseEntity<>(appointmentList, HttpStatus.OK);

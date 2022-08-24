@@ -50,6 +50,12 @@ public class ServiceOffertController implements ServiceOffertApi {
     }
 
     @Override
+    public ResponseEntity<List<ServiceOffert>> getAllServiceOffertByOuvrierId(Long ouvId) {
+        List<ServiceOffert> serviceOffertList = serviceOffertService.findAllServiceOffertByOuvrierId(ouvId);
+        return new ResponseEntity<>(serviceOffertList, HttpStatus.OK);
+    }
+
+    @Override
     public void delete(Long id) {
         serviceOffertService.delete(id);
     }

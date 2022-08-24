@@ -74,8 +74,8 @@ public class ServiceOffertServiceImpl implements ServiceOffertService {
     }
 
     @Override
-    public List<ServiceOffert> findListServiceOffertByKeyword(String keyword) {
-        return null;
+    public List<ServiceOffert> findAllServiceOffertByOuvrierId(Long idOuv) {
+        return serviceOffertRepository.findAllServiceOffertByOuvrierID(idOuv);
     }
 
     @Override

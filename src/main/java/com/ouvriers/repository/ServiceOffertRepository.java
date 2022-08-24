@@ -20,5 +20,8 @@ public interface ServiceOffertRepository extends JpaRepository<ServiceOffert, Lo
     BigDecimal countNumberOfServiceByOuvrierId(@Param("ouv") String ouvRef);
 
     @Query("select n from ServiceOffert n where n.ouvrier.id =:num")
-    List<Rating> findTop4ServiceOffertOrderByCreatedDateDesc(@Param("num") Long ouvRef);
+    List<ServiceOffert> findTop4ServiceOffertOrderByCreatedDateDesc(@Param("num") Long ouvRef);
+
+    @Query("select n from ServiceOffert n where n.ouvrier.id =:ouv")
+    List<ServiceOffert> findAllServiceOffertByOuvrierID(@Param("ouv") Long ouvRef);
 }

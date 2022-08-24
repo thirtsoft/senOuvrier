@@ -25,4 +25,7 @@ public interface PrestationRepository extends JpaRepository<Prestation, Long>  {
 
     @Query("select n from Prestation n where n.ouvrier.id =:num")
     List<Prestation> findTop4PrestationOrderByCreatedDateDesc(@Param("num") Long ouvRef);
+
+    @Query("select n from Prestation n where n.ouvrier.id =:num")
+    List<Prestation> findTop8PrestationOrderByCreatedDateDesc(@Param("num") Long ouvRef);
 }

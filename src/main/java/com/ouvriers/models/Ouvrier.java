@@ -52,7 +52,7 @@ public class Ouvrier implements Serializable {
     @Column(name = "education", length = 60)
     private String education;
 
-    @Column(name = "description", length = 60)
+    @Column(name = "description")
     private String description;
 
     private boolean selected;

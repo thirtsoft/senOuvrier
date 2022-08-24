@@ -19,7 +19,7 @@ public class Locality extends PublicData {
     @Column(name = "codePostal", length = 70)
     private String codePostal;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "addresseId")
     private Address address;
 

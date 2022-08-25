@@ -6,10 +6,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Repository
 public interface JetonRepository extends JpaRepository<Jeton, Long> {
+
+
+    @Query("select sum(c.montant) from Jeton c where year(c.createdDate) = year(current_date) ")
+    BigDecimal sumTotalOfJetonInYear();
 
     List<Jeton> findListOfJetonByOrderByIdDesc();
 

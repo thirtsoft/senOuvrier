@@ -25,6 +25,8 @@ public interface AppointmentService {
 
     BigDecimal countNumberOfAppointmentByStatusAccepted();
 
+    BigDecimal countNumberOfAcceptedAppointmentInYear();
+
     BigDecimal countNumberOfAppointmentByOuvrierId(Long idOuv);
 
     BigDecimal countNumberOfAppointmentByCustomerId(Long userId);

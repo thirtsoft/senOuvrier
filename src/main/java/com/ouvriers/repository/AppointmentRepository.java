@@ -24,6 +24,9 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     @Query("select count(c) from Appointment c where c.statusOfAppointment = 'Accepted' ")
     BigDecimal countNumberOfAppointmentByStatusAccepted();
 
+    @Query("select count(c) from Appointment c where (c.statusOfAppointment = 'Accepted') and (year(c.createdDate) = year(current_date)) ")
+    BigDecimal countNumberOfAcceptedAppointmentInYear();
+
     @Query("select count(c) from Appointment c where c.ouvrier.id =:ouv")
     BigDecimal countNumberOfAppointmentByOuvrierId(@Param("ouv") Long idOuv);
 

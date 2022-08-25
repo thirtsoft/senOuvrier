@@ -172,6 +172,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**/jetons/searchJetonsByIdDesc").permitAll()
                 .antMatchers("/**/jetons/searchJetonsByCustomerId/*").permitAll()
                 .antMatchers("/**/jetons/NumbersOfjetons").permitAll()
+                .antMatchers("/**/jetons/sumTotalOfJetonInYear").permitAll()
                 .antMatchers("/**/jetons/delete/{idJet}").permitAll()
 
                 .antMatchers("/**/localities/create").permitAll()
@@ -238,6 +239,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**/appointments/numbersOfAppointmentsInMonth").permitAll()
                 .antMatchers("/**/appointments/numbersOfAppointmentsByStatusPending").permitAll()
                 .antMatchers("/**/appointments/numbersOfAppointmentsByStatusAccepted").permitAll()
+                .antMatchers("/**/appointments/numbersOfAcceptedAppointmentsInYear").permitAll()
                 .antMatchers("/**/appointments/countNumberOfAppointmentByOuvrierId/{idOuv}").permitAll()
                 .antMatchers("/**/appointments/countNumberOfAppointmentByCustomerId/{userId}").permitAll()
                 .antMatchers("/**/appointments/countNumberOfAppointmentByCustomerIdAndStatusAccepted/{userId}").permitAll()

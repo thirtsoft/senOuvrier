@@ -106,12 +106,19 @@ public interface AppointmentApi {
 
     @GetMapping(value = APP_ROOT + "/appointments/numbersOfAppointmentsByStatusAccepted")
     @ApiOperation(value = "Renvoi le nombre total d'Appointments accepted",
-            notes = "Cette méthode permet de chercher et renvoyer le nombre total d'Appointments accepted",
-            responseContainer = "List<Appointment>")
+            notes = "Cette méthode permet de chercher et renvoyer le nombre total d'Appointments accepted")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Le nombre d'Appointments accepted / une liste vide")
     })
     BigDecimal getNumberOfAppointmentByStatusAccepted();
+
+    @GetMapping(value = APP_ROOT + "/appointments/numbersOfAcceptedAppointmentsInYear")
+    @ApiOperation(value = "Renvoi le nombre total d'Appointments accepted dans une annees",
+            notes = "Cette méthode permet de chercher et renvoyer le nombre total d'Appointments accepted dans une annee")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Le nombre d'Appointments accepted dans une annee / une liste vide")
+    })
+    BigDecimal getNumberOfAcceptedAppointmentInYear();
 
     @GetMapping(value = APP_ROOT + "/appointments/countNumberOfAppointmentByOuvrierId/{idOuv}",
             produces = MediaType.APPLICATION_JSON_VALUE)

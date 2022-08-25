@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -51,6 +52,11 @@ public class JetonController implements JetonApi {
     public ResponseEntity<Jeton> getJetonById(Long idJeton) {
         Jeton newJetonDto = jetonService.findById(idJeton);
         return new ResponseEntity<>(newJetonDto, HttpStatus.OK);
+    }
+
+    @Override
+    public BigDecimal getSumTotalOfJetonInYear() {
+        return jetonService.sumTotalOfJetonInYear();
     }
 
     @Override

@@ -112,6 +112,11 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
+    public BigDecimal countNumberOfAcceptedAppointmentInYear() {
+        return appointmentRepository.countNumberOfAcceptedAppointmentInYear();
+    }
+
+    @Override
     public BigDecimal countNumberOfAppointmentByOuvrierId(Long idOuv) {
         return appointmentRepository.countNumberOfAppointmentByOuvrierId(idOuv);
     }

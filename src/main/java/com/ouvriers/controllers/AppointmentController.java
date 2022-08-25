@@ -142,6 +142,11 @@ public class AppointmentController implements AppointmentApi {
     }
 
     @Override
+    public BigDecimal getNumberOfAcceptedAppointmentInYear() {
+        return appointmentService.countNumberOfAcceptedAppointmentInYear();
+    }
+
+    @Override
     public BigDecimal getNumberOfAppointmentByOuvrierId(Long id) {
         return appointmentService.countNumberOfAppointmentByOuvrierId(id);
     }

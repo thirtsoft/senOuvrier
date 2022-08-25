@@ -62,6 +62,16 @@ public interface JetonApi {
     })
     ResponseEntity<Jeton> getJetonById(@PathVariable("idJeton") Long idJeton);
 
+    @GetMapping(value = APP_ROOT + "/jetons/sumTotalOfJetonInYear", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Rechercher le montant total des Jeton dans une annee",
+            notes = "Cette méthode permet de rechercher le montant total des Jeton dans une annee")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "le montant total des Jeton dans une annee est "),
+            @ApiResponse(code = 400, message = "Aucun Jeton  avec cet ID")
+
+    })
+    BigDecimal getSumTotalOfJetonInYear();
+
     @GetMapping(value = APP_ROOT + "/jetons/all", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Afficher la liste des Jetons",
             notes = "Cette méthode permet d'afficher la liste des Jetonsr", responseContainer = "List<Jeton>")

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 
 @CrossOrigin
@@ -20,20 +21,21 @@ public class ServiceOffertController implements ServiceOffertApi {
 
     @Override
     public ResponseEntity<ServiceOffert> save(ServiceOffert serviceOffert) {
-        ServiceOffert serviceOffertResult =serviceOffertService.save(serviceOffert);
+        serviceOffert.setCreatedDate(new Date());
+        ServiceOffert serviceOffertResult = serviceOffertService.save(serviceOffert);
         return new ResponseEntity<>(serviceOffertResult, HttpStatus.CREATED);
     }
 
     @Override
     public ResponseEntity<ServiceOffert> update(Long id, ServiceOffert serviceOffert) {
         serviceOffert.setId(id);
-        ServiceOffert serviceOffertResult =serviceOffertService.save(serviceOffert);
+        ServiceOffert serviceOffertResult = serviceOffertService.save(serviceOffert);
         return new ResponseEntity<>(serviceOffertResult, HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<ServiceOffert> getServiceOffertById(Long id) {
-        ServiceOffert serviceOffertResult =serviceOffertService.findById(id);
+        ServiceOffert serviceOffertResult = serviceOffertService.findById(id);
         return new ResponseEntity<>(serviceOffertResult, HttpStatus.OK);
     }
 
@@ -44,7 +46,7 @@ public class ServiceOffertController implements ServiceOffertApi {
     }
 
     @Override
-    public ResponseEntity<List<ServiceOffert>> getAllserviceOffertsOrderByIdDesc() {
+    public ResponseEntity<List<ServiceOffert>> getAllServiceOffertsOrderByIdDesc() {
         List<ServiceOffert> serviceOffertList = serviceOffertService.findByServiceOffertByIdDesc();
         return new ResponseEntity<>(serviceOffertList, HttpStatus.OK);
     }

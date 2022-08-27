@@ -1,6 +1,5 @@
 package com.ouvriers.controllers.api;
 
-import com.ouvriers.models.Prestation;
 import com.ouvriers.models.ServiceOffert;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -26,7 +25,7 @@ public interface ServiceOffertApi {
     })
     ResponseEntity<ServiceOffert> save(@RequestBody ServiceOffert serviceOffert);
 
-    @PutMapping(value = "/serviceOfferts/update/{idServiceOffert}", consumes = MediaType.APPLICATION_JSON_VALUE,
+    @PutMapping(value = APP_ROOT + "/serviceOfferts/update/{idServiceOffert}", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Modifier un ServiceOffert par son ID",
             notes = "Cette méthode permet de modifier un ServiceOffert par son ID", response = ServiceOffert.class)
@@ -47,7 +46,7 @@ public interface ServiceOffertApi {
     })
     ResponseEntity<ServiceOffert> getServiceOffertById(@PathVariable("idServiceOffert") Long id);
 
-    @GetMapping(value = "/serviceOfferts/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = APP_ROOT + "/serviceOfferts/all", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Renvoi la liste des serviceOfferts",
             notes = "Cette méthode permet de chercher et renvoyer la liste des serviceOfferts", responseContainer = "List<ServiceOffert>")
     @ApiResponses(value = {
@@ -55,13 +54,13 @@ public interface ServiceOffertApi {
     })
     ResponseEntity<List<ServiceOffert>> getAllServiceOfferts();
 
-    @GetMapping(value = "/serviceOfferts/searchAllServiceOffertsOrderByIdDesc", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = APP_ROOT + "/serviceOfferts/searchAllServiceOffertsOrderByIdDesc", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Renvoi la liste des serviceOfferts",
             notes = "Cette méthode permet de chercher et renvoyer la liste des serviceOfferts", responseContainer = "List<ServiceOffert>")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "La liste des serviceOfferts / une liste vide")
     })
-    ResponseEntity<List<ServiceOffert>> getAllserviceOffertsOrderByIdDesc();
+    ResponseEntity<List<ServiceOffert>> getAllServiceOffertsOrderByIdDesc();
 
     @GetMapping(value = APP_ROOT + "/serviceOfferts/searchAllServiceOffertsByOuvrierId/{ouvId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Renvoi la liste des serviceOfferts par l'ID de l'ouvrier",

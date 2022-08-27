@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 @CrossOrigin
@@ -21,6 +22,7 @@ public class PrestationController implements PrestationApi {
 
     @Override
     public ResponseEntity<Prestation> create(Prestation prestation) {
+        prestation.setCreatedDate(new Date());
         Prestation prestationResult = prestationService.save(prestation);
         return new ResponseEntity<>(prestationResult, HttpStatus.CREATED);
     }

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "serviceOffert")
@@ -27,6 +28,8 @@ public class ServiceOffert implements Serializable {
     @Column(name = "description", length = 200)
     @Lob
     private String description;
+
+    private Date createdDate;
 
     @ManyToOne
     @JoinColumn(name = "ouvId")

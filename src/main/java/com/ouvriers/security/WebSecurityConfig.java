@@ -181,7 +181,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**/localities/all").permitAll()
                 .antMatchers("/**/localities/searchAlllocalitiesOrderByIdDesc").permitAll()
                 .antMatchers("/**/localities/searchLocalityByAddressCode/*").permitAll()
-                .antMatchers("/**/localities/countNumberOfFournisseur").permitAll()
                 .antMatchers("/**/localities/delete/*").permitAll()
 
                 .antMatchers("/**/blogs/findById/{blogId}").permitAll()
@@ -257,7 +256,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
                 .antMatchers("/**/prestations/create").permitAll()
-                .antMatchers("/**/prestations/update/{id}").permitAll()
+                .antMatchers("/**/prestations/update/{idPrestation}").permitAll()
                 .antMatchers("/**/prestations/findById/{idAppointment}").permitAll()
                 .antMatchers("/**/prestations/countNumberOfPrestationByOuvrierId/{idOuv}").permitAll()
                 .antMatchers("/**/prestations/all").permitAll()

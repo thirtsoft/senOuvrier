@@ -1,7 +1,6 @@
 package com.ouvriers.controllers.api;
 
 import com.ouvriers.models.Prestation;
-import com.ouvriers.models.Prestation;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -27,7 +26,7 @@ public interface PrestationApi {
     })
     ResponseEntity<Prestation> create(@RequestBody Prestation prestation);
 
-    @PutMapping(value = "/prestations/update/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = APP_ROOT + "/prestations/update/{idPrestation}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Modifier un Prestation par son ID",
             notes = "Cette méthode permet de modifier un Prestation par son ID", response = Prestation.class)
     @ApiResponses(value = {

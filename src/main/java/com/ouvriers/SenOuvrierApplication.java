@@ -94,7 +94,7 @@ public class SenOuvrierApplication implements CommandLineRunner {
 */
 	@Override
 	public void run(String... args) throws Exception {
-
+/*
 		Metier m1 = metierRepository.save(new Metier(1L, "elec", "ELECTRICIEN", "photo2.jpg"));
 		Metier m2 = metierRepository.save(new Metier(2L, "pl", "PLOMBIER", "photo3.jpg"));
 		Metier m3 = metierRepository.save(new Metier(3L, "frig", "FRIGORISTE", "photo5.jpg"));

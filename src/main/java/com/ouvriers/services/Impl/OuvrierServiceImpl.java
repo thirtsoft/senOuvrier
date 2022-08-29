@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -67,8 +66,8 @@ public class OuvrierServiceImpl implements OuvrierService {
 
     @Override
     public Ouvrier saveOuvrierWithFiles(String ouvrier,
-                                           MultipartFile photoOuvrier,
-                                           MultipartFile cvOuvrier) throws IOException {
+                                        MultipartFile photoOuvrier,
+                                        MultipartFile cvOuvrier) throws IOException {
 
         Ouvrier ouvrierMapper = new ObjectMapper().readValue(ouvrier, Ouvrier.class);
 
@@ -170,6 +169,11 @@ public class OuvrierServiceImpl implements OuvrierService {
     }
 
     @Override
+    public Page<Ouvrier> findOuvriersByLocalityIdPageables(Long locId, Pageable pageable) {
+        return ouvrierRepository.findOuvriersByLocalityIdPageable(locId, pageable);
+    }
+
+    @Override
     public Page<Ouvrier> findOuvriersByMetierPageables(Long metierId, Pageable pageable) {
         return ouvrierRepository.findOuvriersByMetierPageables(metierId, pageable);
     }
@@ -184,6 +188,13 @@ public class OuvrierServiceImpl implements OuvrierService {
     public List<Ouvrier> getAllOuvrierDtosByIdAddress(Long id, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return ouvrierRepository.findAllOuvriersByAddressId(id, pageable)
+                .getContent();
+    }
+
+    @Override
+    public List<Ouvrier> getAllOuvriersByLocalityId(Long id, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return ouvrierRepository.findAllOuvriersByLocalityId(id, pageable)
                 .getContent();
     }
 
@@ -210,6 +221,11 @@ public class OuvrierServiceImpl implements OuvrierService {
     @Override
     public long getOuvriersDtosByAddressIdLength(Long id) {
         return ouvrierRepository.getOuvrierLengthByAddressId(id);
+    }
+
+    @Override
+    public long getOuvriersByLocalityIdLength(Long id) {
+        return ouvrierRepository.getOuvrierLengthByLocalityId(id);
     }
 
     @Override

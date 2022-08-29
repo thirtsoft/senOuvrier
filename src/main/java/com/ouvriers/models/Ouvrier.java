@@ -81,6 +81,10 @@ public class Ouvrier implements Serializable {
     @JoinColumn(name = "addressId")
     private Address address;
 
+    @ManyToOne
+    @JoinColumn(name = "localityId")
+    private Locality locality;
+
     public Ouvrier(Long id, String reference, String firstName, String lastName, String sexe,
                    String addressActuel, String email, String phoneOuvrier,
                    String nbreAnneeExperience, double pretentionSalaire, String disponibity,

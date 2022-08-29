@@ -3,7 +3,6 @@ package com.ouvriers.services;
 import com.ouvriers.models.Ouvrier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -17,8 +16,8 @@ public interface OuvrierService {
     Ouvrier update(Long idOuvrier, Ouvrier ouvrier);
 
     Ouvrier saveOuvrierWithFiles(String ouvrier,
-                                    MultipartFile photoOuvrier,
-                                    MultipartFile cvOuvrier) throws IOException;
+                                 MultipartFile photoOuvrier,
+                                 MultipartFile cvOuvrier) throws IOException;
 
     Ouvrier findById(Long id);
 
@@ -48,12 +47,16 @@ public interface OuvrierService {
 
     Page<Ouvrier> findOuvriersByLocalityPageables(Long addId, Pageable pageable);
 
+    Page<Ouvrier> findOuvriersByLocalityIdPageables(Long locId, Pageable pageable);
+
     Page<Ouvrier> findOuvriersByMetierPageables(Long metierId, Pageable pageable);
 
 
     List<Ouvrier> getAllOuvrierDtos(int page, int size);
 
     List<Ouvrier> getAllOuvrierDtosByIdAddress(Long id, int page, int size);
+
+    List<Ouvrier> getAllOuvriersByLocalityId(Long id, int page, int size);
 
     List<Ouvrier> getAllOuvriersByMetierId(Long id, int page, int size);
 
@@ -62,6 +65,8 @@ public interface OuvrierService {
     long getAllOuvrierDtosSize();
 
     long getOuvriersDtosByAddressIdLength(Long id);
+
+    long getOuvriersByLocalityIdLength(Long id);
 
     long getOuvriersDtosByMetierIdLength(Long id);
 

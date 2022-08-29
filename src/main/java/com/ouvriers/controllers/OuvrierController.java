@@ -54,17 +54,17 @@ public class OuvrierController implements OuvrierApi {
 
     @Override
     public ResponseEntity<Ouvrier> saveOuvrierWithFiles(String ouvrier,
-                                                           MultipartFile photoOuvrier,
-                                                           MultipartFile cvOuvrier) throws IOException {
+                                                        MultipartFile photoOuvrier,
+                                                        MultipartFile cvOuvrier) throws IOException {
         Ouvrier ouvrierResult = ouvrierService.saveOuvrierWithFiles(ouvrier, photoOuvrier, cvOuvrier);
         return new ResponseEntity<>(ouvrierResult, HttpStatus.CREATED);
     }
 
     @Override
     public ResponseEntity<Ouvrier> saveOuvrierrWithFilesInContextFolder(
-                                        String ouvrier,
-                                        MultipartFile photoOuvrier,
-                                        MultipartFile cvOuvrier) throws IOException {
+            String ouvrier,
+            MultipartFile photoOuvrier,
+            MultipartFile cvOuvrier) throws IOException {
         Ouvrier ouvrierDto = new ObjectMapper().readValue(ouvrier, Ouvrier.class);
         ouvrierDto.setDateInscription(new Date());
 
@@ -82,6 +82,7 @@ public class OuvrierController implements OuvrierApi {
             String newFileName = FilenameUtils.getBaseName(fileCV) + "." + FilenameUtils.getExtension(fileCV);
             File serverFile = new File(context.getRealPath("/Ouvriers/cvs/" + File.separator + newFileName));
             FileUtils.writeByteArrayToFile(serverFile, cvOuvrier.getBytes());
+            ouvrierDto.setCvOuvrier(fileCV);
 
         }
         Ouvrier ouvrierResult = ouvrierService.save(ouvrierDto);
@@ -237,7 +238,7 @@ public class OuvrierController implements OuvrierApi {
         Ouvrier ouvrier = ouvrierService.findById(id);
         String filename = file.getOriginalFilename();
         String newFileName = FilenameUtils.getBaseName(filename) + "." + FilenameUtils.getExtension(filename);
-        File serverFile = new File(context.getRealPath("/Chauffeurs/cvs/" + File.separator + newFileName));
+        File serverFile = new File(context.getRealPath("/Ouvriers/cvs/" + File.separator + newFileName));
         try {
             System.out.println("Image");
             FileUtils.writeByteArrayToFile(serverFile, file.getBytes());
@@ -302,6 +303,12 @@ public class OuvrierController implements OuvrierApi {
     }
 
     @Override
+    public Page<Ouvrier> getOuvriersByLocalityIdByPageables(Long locId, int page, int size) {
+        final Pageable pageable = PageRequest.of(page, size);
+        return ouvrierService.findOuvriersByLocalityIdPageables(locId, pageable);
+    }
+
+    @Override
     public Page<Ouvrier> getOuvrierByMetierPageables(Long permisId, int page, int size) {
         final Pageable pageable = PageRequest.of(page, size);
         return ouvrierService.findOuvriersByMetierPageables(permisId, pageable);
@@ -316,6 +323,12 @@ public class OuvrierController implements OuvrierApi {
     @Override
     public ResponseEntity<List<Ouvrier>> getAllOuvriersByAddressId(Long id, int page, int size) {
         List<Ouvrier> ouvrierList = ouvrierService.getAllOuvrierDtosByIdAddress(id, page, size);
+        return new ResponseEntity<>(ouvrierList, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<List<Ouvrier>> getAllOuvriersByLocalityId(Long id, int page, int size) {
+        List<Ouvrier> ouvrierList = ouvrierService.getAllOuvriersByLocalityId(id, page, size);
         return new ResponseEntity<>(ouvrierList, HttpStatus.OK);
     }
 
@@ -339,6 +352,11 @@ public class OuvrierController implements OuvrierApi {
     @Override
     public long getOuvriersByIdAddressSize(Long id) {
         return ouvrierService.getOuvriersDtosByAddressIdLength(id);
+    }
+
+    @Override
+    public long getOuvriersByLocalityIdSize(Long id) {
+        return ouvrierService.getOuvriersByLocalityIdLength(id);
     }
 
     @Override

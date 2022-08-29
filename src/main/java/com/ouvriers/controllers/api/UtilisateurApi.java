@@ -21,7 +21,7 @@ public interface UtilisateurApi {
     @PostMapping(value = APP_ROOT + "/utilisateurs/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<Utilisateur> save(@RequestBody Utilisateur Utilisateur);
 
-    @PutMapping(value = APP_ROOT + "/utilisateurs/update/{idUser}",
+    @PatchMapping(value = APP_ROOT + "/utilisateurs/update/{idUser}",
             consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Modifier les informations d'un utilisateur par son ID",
             notes = "Cette méthode permet de modifier les information d'un utilisateur par son ID")

@@ -249,6 +249,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**/appointments/searchAllAppointmentsByCustomerId/{userId}").permitAll()
                 .antMatchers("/**/appointments/searchAllAppointmentsByOuvrierId/{ouvId}").permitAll()
                 .antMatchers("/**/appointments/searchTop4AppointmentsByOuvrierId/{ouvId}").permitAll()
+                .antMatchers("/**/appointments/searchTop10PendingAppointmentsOrderByIdDesc").permitAll()
                 .antMatchers("/**/appointments/countNumberTotalOfAppointmentsPeerMonth").permitAll()
                 .antMatchers("/**/appointments/countNumberTotalOfAppointmentsPeerYear").permitAll()
                 .antMatchers("/**/appointments/delete/{idAppointment}").permitAll()

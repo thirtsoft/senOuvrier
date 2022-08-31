@@ -220,6 +220,14 @@ public interface AppointmentApi {
     })
     ResponseEntity<List<Appointment>> getTop4AppointmentByOuvrierIdOrderByCreatedDateDesc(@PathVariable(name = "ouvId") Long ouvId);
 
+    @GetMapping(value = APP_ROOT + "/appointments/searchTop10PendingAppointmentsOrderByIdDesc", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Renvoi la liste des 10 derniers Appointments par l'ID de l'ouvrier",
+            notes = "Cette méthode permet de chercher et renvoyer la liste des 10 derniers Appointments par l'ID de l'ouvrier", responseContainer = "List<Appointment>")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La liste des 10 derniers Appointments par l'ID de l'ouvrier / une liste vide")
+    })
+    ResponseEntity<List<Appointment>> getTop10PendingAppointmentOrderByCreatedDateDesc();
+
     @GetMapping(value = APP_ROOT + "/appointments/countNumberTotalOfAppointmentsPeerMonth", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Renvoi le nombre total d'Appointments par mois",
             notes = "Cette méthode permet de chercher et renvoyer le nombre total d'Appointments par mois", responseContainer = "List<Appointment>")

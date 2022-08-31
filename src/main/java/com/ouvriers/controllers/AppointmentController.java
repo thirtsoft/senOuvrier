@@ -210,6 +210,12 @@ public class AppointmentController implements AppointmentApi {
     }
 
     @Override
+    public ResponseEntity<List<Appointment>> getTop10PendingAppointmentOrderByCreatedDateDesc() {
+        List<Appointment> appointmentList = appointmentService.findTop10PendingAppointmentOrderByCreatedDateDesc();
+        return new ResponseEntity<>(appointmentList, HttpStatus.OK);
+    }
+
+    @Override
     public List<?> getNumberTotalOfAppointmentPeerMonth() {
         return appointmentService.countNumberTotalOfAppointmentPeerMonth();
     }

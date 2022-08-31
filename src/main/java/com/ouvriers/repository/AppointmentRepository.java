@@ -53,6 +53,9 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     @Query("select n from Appointment n where n.ouvrier.id =:num")
     List<Appointment> findTop4AppointmentOrderByCreatedDateDesc(@Param("num") Long ouvRef);
 
+    @Query("select a from Appointment a where a.statusOfAppointment like 'Encours'")
+    List<Appointment> findTop10PendingAppointmentOrderByCreatedDateDesc();
+
     @Query("select a from Appointment a where a.utilisateur.id = :id")
     List<Appointment> findAppointmentsByUserId(@Param("id") Long userId);
 

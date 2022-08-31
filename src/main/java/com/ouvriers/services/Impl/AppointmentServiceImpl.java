@@ -157,6 +157,11 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
+    public List<Appointment> findTop10PendingAppointmentOrderByCreatedDateDesc() {
+        return appointmentRepository.findTop10PendingAppointmentOrderByCreatedDateDesc();
+    }
+
+    @Override
     public List<Appointment> findListAppointmentByStatusPending() {
         return appointmentRepository.findAppointmentsByStatusWaiting();
     }

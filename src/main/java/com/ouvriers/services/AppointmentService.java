@@ -43,6 +43,8 @@ public interface AppointmentService {
 
     List<Appointment> findTop4AppointmentOrderByCreatedDateDesc(Long ouvId);
 
+    List<Appointment> findTop10PendingAppointmentOrderByCreatedDateDesc();
+
     List<Appointment> findListAppointmentByStatusPending();
 
     List<Appointment> findListAppointmentByStatusAccepted();

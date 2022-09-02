@@ -25,6 +25,10 @@ public interface JetonService {
 
     long countNumbersOfJetons();
 
+    List<?> sumTotalOfJetonPeerMonth();
+
+    List<?> sumTotalOfJetonPeerYear();
+
     void delete(Long id);
 
 }

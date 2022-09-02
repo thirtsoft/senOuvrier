@@ -116,6 +116,22 @@ public interface JetonApi {
     })
     long getNumbersOfjetons();
 
+    @GetMapping(value = APP_ROOT + "/jetons/sumTotalOfJetonPeerMonth", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Renvoi le montant total de Jeton par mois",
+            notes = "Cette méthode permet de chercher et renvoyer le montant total de Jeton par mois", responseContainer = "List<Jeton>")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "le montant total de Jeton par mois / une liste vide")
+    })
+    List<?> getSumTotalOfJetonPeerMonth();
+
+    @GetMapping(value = APP_ROOT + "/jetons/sumTotalOfJetonPeerYear", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Renvoi le montant total de Jeton par annee",
+            notes = "Cette méthode permet de chercher et renvoyer le montant total de Jeton par annee", responseContainer = "List<Jeton>")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "le montant total de Jeton par annee / une liste vide")
+    })
+    List<?> getSumTotalOfJetonPeerYear();
+
     @DeleteMapping(value = APP_ROOT + "/jetons/delete/{idJeton}")
     @ApiOperation(value = "Supprimer un Jeton par son ID",
             notes = "Cette méthode permet de supprimer un Jeton par son ID")

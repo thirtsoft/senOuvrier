@@ -172,6 +172,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**/jetons/searchJetonsByCustomerId/*").permitAll()
                 .antMatchers("/**/jetons/NumbersOfjetons").permitAll()
                 .antMatchers("/**/jetons/sumTotalOfJetonInYear").permitAll()
+                .antMatchers("/**/jetons/sumTotalOfJetonPeerMonth").permitAll()
+                .antMatchers("/**/jetons/sumTotalOfJetonPeerYear").permitAll()
                 .antMatchers("/**/jetons/delete/{idJet}").permitAll()
 
                 .antMatchers("/**/localities/create").permitAll()

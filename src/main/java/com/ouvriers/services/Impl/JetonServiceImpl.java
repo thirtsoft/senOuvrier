@@ -98,6 +98,16 @@ public class JetonServiceImpl implements JetonService {
     }
 
     @Override
+    public List<?> sumTotalOfJetonPeerMonth() {
+        return jetonRepository.sumTotalOfJetonPeerMonth();
+    }
+
+    @Override
+    public List<?> sumTotalOfJetonPeerYear() {
+        return jetonRepository.sumTotalOfJetonPeerYear();
+    }
+
+    @Override
     public void delete(Long id) {
         if (id == null) {
             log.error("Jeton not found");

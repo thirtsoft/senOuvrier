@@ -21,5 +21,11 @@ public interface JetonRepository extends JpaRepository<Jeton, Long> {
     @Query("select p from Jeton p where p.utilisateur.id =:user order by id Desc")
     List<Jeton> FindListJetonByCustomerId(@Param("user") Long userId);
 
+    @Query("select EXTRACT(month from(c.createdDate)), sum(c.montant) from Jeton c group by EXTRACT(month from(c.createdDate))")
+    List<?> sumTotalOfJetonPeerMonth();
+
+    @Query("select EXTRACT(year from(c.createdDate)), sum(c.montant) from Jeton c group by EXTRACT(year from(c.createdDate))")
+    List<?> sumTotalOfJetonPeerYear();
+
 }
 

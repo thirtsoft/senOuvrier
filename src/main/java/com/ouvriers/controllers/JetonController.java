@@ -83,6 +83,16 @@ public class JetonController implements JetonApi {
     }
 
     @Override
+    public List<?> getSumTotalOfJetonPeerMonth() {
+        return jetonService.sumTotalOfJetonPeerMonth();
+    }
+
+    @Override
+    public List<?> getSumTotalOfJetonPeerYear() {
+        return jetonService.sumTotalOfJetonPeerYear();
+    }
+
+    @Override
     public void delete(Long idJeton) {
         jetonService.delete(idJeton);
     }

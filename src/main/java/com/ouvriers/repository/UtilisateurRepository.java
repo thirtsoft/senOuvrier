@@ -28,5 +28,11 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> 
     @Query("select u from Utilisateur u where month(u.dateInscription) = month(current_date) order by id Desc")
     List<Utilisateur> findUtilisateursByOrderByIdDesc();
 
+    @Query("select EXTRACT(month from(u.dateInscription)), count(u) from Utilisateur u group by EXTRACT(month from(u.dateInscription))")
+    List<?> countNumberOfRegisterPeerMonth();
+
+    @Query("select EXTRACT(year from(u.dateInscription)), count(u) from Utilisateur u group by EXTRACT(year from(u.dateInscription))")
+    List<?> countNumberOfRegisterPeerYear();
+
 
 }

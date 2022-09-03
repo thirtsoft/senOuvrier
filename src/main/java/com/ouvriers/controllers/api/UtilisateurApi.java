@@ -171,6 +171,23 @@ public interface UtilisateurApi {
     })
     void uploadUserPhoto(MultipartFile file, @PathVariable("id") Long id) throws IOException;
 
+    @GetMapping(value = APP_ROOT + "/utilisateurs/countNumberTotalOfRegisterPeerMonth", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Renvoi le nombre total d'inscription des client par mois",
+            notes = "Cette méthode permet de chercher et renvoyer le nombre total d'inscription des client par mois", responseContainer = "List<Utilisateur>")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "le nombre total d'inscription par mois / une liste vide")
+    })
+    List<?> getNumberTotalOfRegisterPeerMonth();
+
+    @GetMapping(value = APP_ROOT + "/utilisateurs/countNumberTotalOfRegisterPeerYear", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Renvoi le nombre total d'inscription des client par annee",
+            notes = "Cette méthode permet de chercher et renvoyer le nombre total d'inscription des client par annee", responseContainer = "List<Utilisateur>")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "le nombre total d'inscription par anne / une liste vide")
+    })
+    List<?> getNumberTotalOfRegisterPeerYear();
+
+
     @DeleteMapping(value = APP_ROOT + "/utilisateurs/delete/{idUtilisateur}")
     @ApiOperation(value = "Supprimer un utilisateur par son ID",
             notes = "Cette méthode permet de supprimer un utilisateur par son ID")

@@ -40,6 +40,10 @@ public interface UtilisateurService {
 
     List<Utilisateur> findNewsRegisterInMonthByOrderByIdDesc();
 
+    List<?> countNumberTotalOfRegisterPeerMonth();
+
+    List<?> countNumberTotalOfRegisterPeerYear();
+
     void delete(Long id);
 
 

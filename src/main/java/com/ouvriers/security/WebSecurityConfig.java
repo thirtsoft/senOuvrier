@@ -93,7 +93,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**/ouvriers/searchListOfOuvrierByKeyword/**").permitAll()
                 .antMatchers("/**/ouvriers/searchOuvriersByDisponibilite").permitAll()
                 .antMatchers("/**/ouvriers/numberOfOuvriersPeerMonth").permitAll()
-                .antMatchers("/**/ouvriers/numberOfOuvrierPeerYeer").permitAll()
+                .antMatchers("/**/ouvriers/numberOfOuvriersPeerYear").permitAll()
                 .antMatchers("/**/ouvriers/searchOuvrierBySelectedIsTrue").permitAll()
                 .antMatchers("/**/ouvriers/NumbersOfOuvriers").permitAll()
                 .antMatchers("/**/ouvriers/delete/{idProduct}").permitAll()
@@ -314,6 +314,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**/utilisateurs/*").permitAll()
                 .antMatchers("/**/utilisateurs/updateCustomerProfileByUsername").permitAll()
                 .antMatchers("/**/utilisateurs/NumbersOfRecruteurs").permitAll()
+                .antMatchers("/**/utilisateurs/countNumberTotalOfRegisterPeerMonth").permitAll()
+                .antMatchers("/**/utilisateurs/countNumberTotalOfRegisterPeerYear").permitAll()
 
                 .antMatchers("/**/historiqueLogins/create").permitAll()
                 .antMatchers("/**/historiqueLogins/update/{idhistLog}").permitAll()

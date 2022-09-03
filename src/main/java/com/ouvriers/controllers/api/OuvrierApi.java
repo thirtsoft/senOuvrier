@@ -149,7 +149,7 @@ public interface OuvrierApi {
     })
     List<?> countNumberOfOuvrierPeerMonth();
 
-    @GetMapping(value = APP_ROOT + "/ouvriers/numberOfOuvrierPeerYeer", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = APP_ROOT + "/ouvriers/numberOfOuvriersPeerYear", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Décompter les Ouvrier inscrit par années",
             notes = "Cette méthode permet de recuperer et d'afficher le nombre de Ouvrier inscrit par années sur un graphe")
     @ApiResponses(value = {

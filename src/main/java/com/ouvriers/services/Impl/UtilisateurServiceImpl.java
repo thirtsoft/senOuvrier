@@ -218,6 +218,16 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         return utilisateurRepository.findUtilisateursByOrderByIdDesc();
     }
 
+    @Override
+    public List<?> countNumberTotalOfRegisterPeerMonth() {
+        return utilisateurRepository.countNumberOfRegisterPeerMonth();
+    }
+
+    @Override
+    public List<?> countNumberTotalOfRegisterPeerYear() {
+        return utilisateurRepository.countNumberOfRegisterPeerYear();
+    }
+
 
     @Override
     public void delete(Long id) {

@@ -97,6 +97,16 @@ public class UtilisateurController implements UtilisateurApi {
     }
 
     @Override
+    public List<?> getNumberTotalOfRegisterPeerMonth() {
+        return utilisateurService.countNumberTotalOfRegisterPeerMonth();
+    }
+
+    @Override
+    public List<?> getNumberTotalOfRegisterPeerYear() {
+        return utilisateurService.countNumberTotalOfRegisterPeerYear();
+    }
+
+    @Override
     public ResponseEntity<Utilisateur> updateUtilisateur(Long idUser, Utilisateur utilisateur) {
         utilisateur.setId(idUser);
         Utilisateur utilisateurResult = utilisateurService.save(utilisateur);

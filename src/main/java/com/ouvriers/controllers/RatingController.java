@@ -82,20 +82,26 @@ public class RatingController implements RatingApi {
 
     @Override
     public ResponseEntity<List<Rating>> getAllRatings() {
-        List<Rating> newNotificationDtos = ratingService.findAll();
-        return new ResponseEntity<>(newNotificationDtos, HttpStatus.OK);
+        List<Rating> ratingList = ratingService.findAll();
+        return new ResponseEntity<>(ratingList, HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<List<Rating>> getAllRatingsOrderByIdDesc() {
-        List<Rating> newNotificationDtos = ratingService.findByOrderByIdDesc();
-        return new ResponseEntity<>(newNotificationDtos, HttpStatus.OK);
+        List<Rating> ratingList = ratingService.findByOrderByIdDesc();
+        return new ResponseEntity<>(ratingList, HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<List<Rating>> getTop3ByOrderByCreatedDateDesc() {
-        List<Rating> newNotificationDtos = ratingService.findTop3RatingOrderByCreatedDateDesc();
-        return new ResponseEntity<>(newNotificationDtos, HttpStatus.OK);
+        List<Rating> ratingList = ratingService.findTop3RatingOrderByCreatedDateDesc();
+        return new ResponseEntity<>(ratingList, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<List<Rating>> getTop30ByOrderByCreatedDateDesc() {
+        List<Rating> ratingList = ratingService.findTop30RatingsOrderByCreatedDateDesc();
+        return new ResponseEntity<>(ratingList, HttpStatus.OK);
     }
 
     @Override

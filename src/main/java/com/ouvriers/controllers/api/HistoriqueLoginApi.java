@@ -73,6 +73,18 @@ public interface HistoriqueLoginApi {
     })
     ResponseEntity<List<HistoriqueLogin>> getAllHistoriqueLoginOrderByIdDesc();
 
+    @GetMapping(value = APP_ROOT + "/historiqueLogins/searchTop30HistoriqueLoginByIdDesc",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Afficher la liste des HistoriqueLogins par order Décroissante",
+            notes = "Cette méthode permet d'afficher la liste des HistoriqueLogins par order Décroissante",
+            responseContainer = "List<HistoriqueLogin>")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La liste des HistoriqueLogins a été trouvé"),
+            @ApiResponse(code = 400, message = "Liste vide")
+
+    })
+    ResponseEntity<List<HistoriqueLogin>> getTop30HistoriqueLoginOrderByIdDesc();
+
     @GetMapping(value = APP_ROOT + "/historiqueLogins/NumbersOfHistoriqueLogins")
     @ApiOperation(value = "Décompter le nombre d'HistoriqueLogin",
             notes = "Cette méthode permet de compter et d'afficher le nombre total d'HistoriqueLogins",

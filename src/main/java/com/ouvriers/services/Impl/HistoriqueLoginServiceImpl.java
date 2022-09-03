@@ -74,6 +74,11 @@ public class HistoriqueLoginServiceImpl implements HistoriqueLoginService {
     }
 
     @Override
+    public List<HistoriqueLogin> findTop30HistoriqueLoginsOrderByCreatedDateDesc() {
+        return historiqueLoginRepository.findTop30ByOrderByIdDesc();
+    }
+
+    @Override
     public long countNumbersOfHistoriqueLogins() {
         return historiqueLoginRepository.count();
     }

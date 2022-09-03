@@ -16,6 +16,8 @@ public interface HistoriqueLoginService {
 
     List<HistoriqueLogin> findHistoriqueLoginByOrderByIdDesc();
 
+    List<HistoriqueLogin> findTop30HistoriqueLoginsOrderByCreatedDateDesc();
+
     long countNumbersOfHistoriqueLogins();
 
     void delete(Long id);

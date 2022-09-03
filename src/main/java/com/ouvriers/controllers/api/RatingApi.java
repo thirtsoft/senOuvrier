@@ -108,6 +108,18 @@ public interface RatingApi {
     })
     ResponseEntity<List<Rating>> getTop3ByOrderByCreatedDateDesc();
 
+    @GetMapping(value = APP_ROOT + "/ratings/searchTop30RatingOrderByCreatedDateDesc",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Afficher la liste des 30 dernieres ratings",
+            notes = "Cette méthode permet d'afficher la liste des 30 dernieres ratings",
+            responseContainer = "List<Rating>")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "La liste des ratings a été trouvé"),
+            @ApiResponse(code = 400, message = "Aucun liste ratings")
+
+    })
+    ResponseEntity<List<Rating>> getTop30ByOrderByCreatedDateDesc();
+
     @GetMapping(value = APP_ROOT + "/ratings/searchTop4RatingOrderByCreatedDateDescByOuvrierId/{idChauff}",
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Afficher la liste des quatre dernieres ratings d'un chauffeur",

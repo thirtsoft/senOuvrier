@@ -1,5 +1,6 @@
 package com.ouvriers.services;
 
+import com.ouvriers.models.HistoriqueLogin;
 import com.ouvriers.models.Rating;
 import org.springframework.data.repository.query.Param;
 
@@ -25,6 +26,8 @@ public interface RatingService {
     List<Rating> findTop4ByOrderByCreatedDateDescByOuvrierId(Long ouvRef);
 
     List<Rating> FindListRatingByCustomerId(Long userId);
+
+    List<Rating> findTop30RatingsOrderByCreatedDateDesc();
 
     BigDecimal countNumberOfNotificationByOuvrierId(Long idOuv);
 

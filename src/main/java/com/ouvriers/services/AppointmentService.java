@@ -45,6 +45,8 @@ public interface AppointmentService {
 
     List<Appointment> findTop10PendingAppointmentOrderByCreatedDateDesc();
 
+    List<Appointment> findTop30AppointmentOrderByCreatedDateDesc();
+
     List<Appointment> findListAppointmentByStatusPending();
 
     List<Appointment> findListAppointmentByStatusAccepted();

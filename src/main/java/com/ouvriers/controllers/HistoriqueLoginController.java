@@ -54,6 +54,12 @@ public class HistoriqueLoginController implements HistoriqueLoginApi {
     }
 
     @Override
+    public ResponseEntity<List<HistoriqueLogin>> getTop30HistoriqueLoginOrderByIdDesc() {
+        List<HistoriqueLogin> historiqueLoginResultDtos = historiqueLoginService.findTop30HistoriqueLoginsOrderByCreatedDateDesc();
+        return new ResponseEntity<>(historiqueLoginResultDtos, HttpStatus.OK);
+    }
+
+    @Override
     public long getNumbersOfHistoriqueLogins() {
         return historiqueLoginService.countNumbersOfHistoriqueLogins();
     }

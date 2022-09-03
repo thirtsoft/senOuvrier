@@ -226,6 +226,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**/ratings/countNumberOfRatings").permitAll()
                 .antMatchers("/**/ratings/countNumberOfRatingByOuvrierId/{idOuv}").permitAll()
                 .antMatchers("/**/ratings/searchTop3RatingOrderByCreatedDateDesc").permitAll()
+                .antMatchers("/**/ratings/searchTop30RatingOrderByCreatedDateDesc").permitAll()
                 .antMatchers("/**/ratings/searchTop4RatingOrderByCreatedDateDescByOuvrierId/{idProd}").permitAll()
                 .antMatchers("/**/ratings/searchListRatingByCustomerId/{idCustomer}").permitAll()
                 .antMatchers("/**/ratings/delete/{idRating}").permitAll()
@@ -252,6 +253,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**/appointments/searchAllAppointmentsByOuvrierId/{ouvId}").permitAll()
                 .antMatchers("/**/appointments/searchTop4AppointmentsByOuvrierId/{ouvId}").permitAll()
                 .antMatchers("/**/appointments/searchTop10PendingAppointmentsOrderByIdDesc").permitAll()
+                .antMatchers("/**/appointments/searchTop30AppointmentsOrderByIdDesc").permitAll()
                 .antMatchers("/**/appointments/countNumberTotalOfAppointmentsPeerMonth").permitAll()
                 .antMatchers("/**/appointments/countNumberTotalOfAppointmentsPeerYear").permitAll()
                 .antMatchers("/**/appointments/delete/{idAppointment}").permitAll()
@@ -322,6 +324,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**/historiqueLogins/findById/{idhistLog}").permitAll()
                 .antMatchers("/**/historiqueLogins/searchHistoriqueLoginByIdDesc").permitAll()
                 .antMatchers("/**/historiqueLogins/searchAllHistoriqueLoginsOrderByIdDesc").permitAll()
+                .antMatchers("/**/historiqueLogins/searchTop30HistoriqueLoginByIdDesc").permitAll()
                 .antMatchers("/**/historiqueLogins/delete/{idHistLog}").permitAll()
 
                 .anyRequest().authenticated();

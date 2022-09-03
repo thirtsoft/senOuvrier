@@ -110,6 +110,11 @@ public class RatingServiceImpl implements RatingService {
     }
 
     @Override
+    public List<Rating> findTop30RatingsOrderByCreatedDateDesc() {
+        return ratingRepository.findTop30ByOrderByIdDesc();
+    }
+
+    @Override
     public BigDecimal countNumberOfNotificationByOuvrierId(Long idOuv) {
         return ratingRepository.countNumberOfRatingByOuvrierId(idOuv);
     }

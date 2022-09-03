@@ -112,7 +112,6 @@ public class EmailServiceImpl implements EmailService {
         mimeMessageHelper.setSubject(ouvrier.getSubject());
         mimeMessageHelper.setText(ouvrier.getMessage());
 
-
         javaMailSender.send(mimeMessage);
     }
 

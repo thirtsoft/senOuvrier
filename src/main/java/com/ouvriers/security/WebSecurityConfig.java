@@ -293,18 +293,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**/newsletters/all").permitAll()
                 .antMatchers("/**/newsletters/delete/{idNewsletter}").permitAll()
 
-                .antMatchers("/**/emails/all").permitAll()
-                .antMatchers("/**/emails/findById/*").permitAll()
-                .antMatchers("/**/emails/searchAllEmailssOrderByIdDesc").permitAll()
-
-                .antMatchers("/**/emails/sendEmail").permitAll()
-                .antMatchers("/**/emails/sendToFournisseur").permitAll()
+                .antMatchers("/**/emails/responseMailToCustomer").permitAll()
+                .antMatchers("/**/emails/sendMailToManager").permitAll()
+                .antMatchers("/**/emails/sendToRecruteur").permitAll()
+                .antMatchers("/**/emails/sendToOuvrier").permitAll()
                 .antMatchers("/**/emails/sendToNewsletter").permitAll()
                 .antMatchers("/**/emails/sendMailToAllCustomers").permitAll()
-                .antMatchers("/**/emails/sendMailToManager").permitAll()
                 .antMatchers("/**/emails/findById/{idEmail}").permitAll()
                 .antMatchers("/**/emails/searchAllEmailsOrderByIdDesc").permitAll()
-                .antMatchers("/**/emails/countNumberOfEmail").permitAll()
+                .antMatchers("/**/emails/countNumberOfEmailInMonth").permitAll()
                 .antMatchers("/**/emails/delete/{idEmail}").permitAll()
 
                 .antMatchers("/**/utilisateurs/all").permitAll()

@@ -1,15 +1,13 @@
 package com.ouvriers;
 
-import com.ouvriers.enums.RoleName;
-import com.ouvriers.models.*;
 import com.ouvriers.repository.*;
-import com.ouvriers.services.UtilisateurService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -21,79 +19,72 @@ import java.nio.file.Paths;
 @SpringBootApplication
 public class SenOuvrierApplication implements CommandLineRunner {
 
-	private static final Logger LOG = LoggerFactory.getLogger(SenOuvrierApplication.class);
-
-	@Autowired
-	private AddressRepository addressRepository;
-	@Autowired
-	private MetierRepository metierRepository;
-	@Autowired
-	private OuvrierRepository ouvrierRepository;
-	@Autowired
-	private RecruteurRepository recruteurRepository;
-	@Autowired
-	private TarifRepository tarifRepository;
-	@Autowired
-	private VilleRepository villeRepository;
-	@Autowired
-	private WhistListRepository whistListRepository;
-	@Autowired
-	private AnnonceRepository annonceRepository;
-	@Autowired
-	private ServiceOffertRepository serviceOffertRepository;
-
-	@Autowired
-	RoleRepository roleRepository;
-	@Autowired
-	private UtilisateurRepository utilisateurRepository;
-	@Autowired
-	private UtilisateurService utilisateurService;
-
-	@Autowired
-	PasswordEncoder encoder;
-	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private static final Logger LOG = LoggerFactory.getLogger(SenOuvrierApplication.class);
+    @Autowired
+    RoleRepository roleRepository;
+    @Autowired
+    PasswordEncoder encoder;
+    @Autowired
+    private AddressRepository addressRepository;
+    @Autowired
+    private MetierRepository metierRepository;
+    @Autowired
+    private OuvrierRepository ouvrierRepository;
+    @Autowired
+    private VilleRepository villeRepository;
+    @Autowired
+    private ServiceOffertRepository serviceOffertRepository;
+    @Autowired
+    private UtilisateurRepository utilisateurRepository;
+    //  @Autowired
+    //  private UtilisateurService utilisateurService;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
+    public static void main(String[] args) {
+        SpringApplication.run(SenOuvrierApplication.class, args);
+        createPhotoDirectoryIfItDoesntExist();
+        createCvDirectoryIfItDoesntExist();
+    }
 
-	public static void main(String[] args) {
-		SpringApplication.run(SenOuvrierApplication.class, args);
-		createPhotoDirectoryIfItDoesntExist();
-		createCvDirectoryIfItDoesntExist();
-	}
+    private static void createPhotoDirectoryIfItDoesntExist() {
+        Path path = Paths.get(System.getProperty("user.home") + "/senouvrier/ouvrier/photos/");
 
-	private static void createPhotoDirectoryIfItDoesntExist() {
-		Path path = Paths.get(System.getProperty("user.home") + "/senouvrier/ouvrier/photos/");
+        if (Files.notExists(path)) {
+            try {
+                Files.createDirectories(path);
+            } catch (IOException ie) {
+                LOG.error(String.format("Problem creating directory %s", path));
+            }
+        }
+    }
 
-		if (Files.notExists(path)) {
-			try {
-				Files.createDirectories(path);
-			} catch (IOException ie) {
-				LOG.error(String.format("Problem creating directory %s", path));
-			}
-		}
-	}
+    private static void createCvDirectoryIfItDoesntExist() {
+        Path path = Paths.get(System.getProperty("user.home") + "/senouvrier/ouvrier/cvs/");
 
-	private static void createCvDirectoryIfItDoesntExist() {
-		Path path = Paths.get(System.getProperty("user.home") + "/senouvrier/ouvrier/cvs/");
+        if (Files.notExists(path)) {
+            try {
+                Files.createDirectories(path);
+            } catch (IOException ie) {
+                LOG.error(String.format("Problem creating directory %s", path));
+            }
+        }
+    }
 
-		if (Files.notExists(path)) {
-			try {
-				Files.createDirectories(path);
-			} catch (IOException ie) {
-				LOG.error(String.format("Problem creating directory %s", path));
-			}
-		}
-	}
+    @Bean
+    PasswordEncoder passwordEncoder() { // NEEDED TO ALLOW PASSWORD ENCODER INSIDE SECURITY
+        return new BCryptPasswordEncoder();
+    }
 
 
-	// @Bean
+    // @Bean
   /*  public BCryptPasswordEncoder getBCPE() {
         return new BCryptPasswordEncoder();
     }
 */
-	@Override
-	public void run(String... args) throws Exception {
+    @Override
+    public void run(String... args) throws Exception {
 /*
 		Metier m1 = metierRepository.save(new Metier(1L, "elec", "ELECTRICIEN", "photo2.jpg"));
 		Metier m2 = metierRepository.save(new Metier(2L, "pl", "PLOMBIER", "photo3.jpg"));
@@ -205,7 +196,6 @@ public class SenOuvrierApplication implements CommandLineRunner {
 		*/
 
 
-
-	}
+    }
 
 }

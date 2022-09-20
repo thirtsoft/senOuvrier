@@ -31,11 +31,12 @@ public class Metier implements Serializable {
     @Lob
     private String description;
 
-
+/*
     public Metier(Long id, String reference, String designation, String photoMetier) {
         this.id = id;
         this.reference = reference;
         this.designation = designation;
         this.photoMetier = photoMetier;
     }
+    */
 }

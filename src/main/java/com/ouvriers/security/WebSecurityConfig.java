@@ -14,7 +14,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -35,6 +34,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtAuthEntryPoint unauthorizedHandler;
 
+    @Autowired
+    private final BCryptPasswordEncoder bcpe; // ENCODING PASSWORDS
+
+    public WebSecurityConfig(JwtAuthEntryPoint unauthorizedHandler, BCryptPasswordEncoder bcpe) {
+        this.unauthorizedHandler = unauthorizedHandler;
+        this.bcpe = bcpe;
+    }
+
+
     @Bean
     public JwtAuthTokenFilter authenticationJwtTokenFilter() {
         return new JwtAuthTokenFilter();
@@ -44,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder
                 .userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder());
+                .passwordEncoder(bcpe);
     }
 
 
@@ -54,10 +62,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+    /*
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+    */
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {

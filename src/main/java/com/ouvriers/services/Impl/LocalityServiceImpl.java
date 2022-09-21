@@ -28,7 +28,7 @@ public class LocalityServiceImpl implements LocalityService {
     @Override
     public Locality update(Long locId, Locality locality) {
         if (!localityRepository.existsById(locId)) {
-            throw new ResourceNotFoundException("Jeton not found");
+            throw new ResourceNotFoundException("Locality not found");
         }
 
         Optional<Locality> optionalLocality = localityRepository.findById(locId);
@@ -50,9 +50,9 @@ public class LocalityServiceImpl implements LocalityService {
             return null;
         }
 
-        Optional<Locality> optionalJLocality = localityRepository.findById(id);
+        Optional<Locality> optionalLocality = localityRepository.findById(id);
 
-        return optionalJLocality.get();
+        return optionalLocality.get();
     }
 
     @Override

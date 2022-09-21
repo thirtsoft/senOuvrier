@@ -1,8 +1,6 @@
 package com.ouvriers.services;
 
-import com.ouvriers.models.Appointment;
 import com.ouvriers.models.Prestation;
-import org.springframework.data.repository.query.Param;
 
 import java.math.BigDecimal;
 import java.util.List;

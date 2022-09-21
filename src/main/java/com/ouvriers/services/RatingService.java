@@ -1,8 +1,6 @@
 package com.ouvriers.services;
 
-import com.ouvriers.models.HistoriqueLogin;
 import com.ouvriers.models.Rating;
-import org.springframework.data.repository.query.Param;
 
 import java.math.BigDecimal;
 import java.util.List;

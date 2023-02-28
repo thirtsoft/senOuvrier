@@ -1,6 +1,7 @@
 package com.ouvriers.controllers;
 
 import com.ouvriers.controllers.api.AppointmentApi;
+import com.ouvriers.enums.StatusAnnonce;
 import com.ouvriers.models.Appointment;
 import com.ouvriers.models.HistoriqueAppointment;
 import com.ouvriers.models.Ouvrier;
@@ -10,8 +11,6 @@ import com.ouvriers.services.HistoriqueAppointmentService;
 import com.ouvriers.services.OuvrierService;
 import com.ouvriers.services.UtilisateurService;
 import com.ouvriers.utils.GenerateCode;
-import org.joda.time.LocalDateTime;
-import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,8 +47,10 @@ public class AppointmentController implements AppointmentApi {
 
     @Override
     public ResponseEntity<Appointment> create(Appointment appointment) {
-        appointment.setStatusOfAppointment("Encours");
-        appointment.setReference(GenerateCode.generateNumberOfCode());
+     //   appointment.setStatusOfAppointment("Encours");
+    //    appointment.setReference(GenerateCode.generateNumberOfCode());
+        appointment.setStatusOfAppointment(String.valueOf(StatusAnnonce.ENCOURS));
+        appointment.setReference("REF_" +  (System.currentTimeMillis() * 10000) );
         appointment.setCreatedDate(new Date());
         Appointment appointmentResult = appointmentService.save(appointment);
 
@@ -66,9 +67,12 @@ public class AppointmentController implements AppointmentApi {
     public ResponseEntity<Appointment> createAppointment(Appointment appointment, Long idOuv, Long id) {
         Ouvrier ouvrier = Optional.of(ouvrierService.findById(idOuv)).get();
         Utilisateur utilisateur = Optional.of(utilisateurService.findById(id)).get();
+        /*
         appointment.setStatusOfAppointment("Encours");
-        //    appointment.setReference(this.generateAppointmentReference());
         appointment.setReference(GenerateCode.generateNumberOfCode());
+        */
+        appointment.setStatusOfAppointment(String.valueOf(StatusAnnonce.ENCOURS));
+        appointment.setReference("REF_" +  (System.currentTimeMillis() * 10000) );
         appointment.setCreatedDate(new Date());
         appointment.setOuvrier(ouvrier);
         appointment.setUtilisateur(utilisateur);
@@ -236,9 +240,11 @@ public class AppointmentController implements AppointmentApi {
         appointmentService.delete(id);
     }
 
+    /*
     public String generateAppointmentReference() {
         final String FORMAT = "yyyyMMddHHmmss";
         return String.valueOf(DateTimeFormat.forPattern(FORMAT).print(LocalDateTime.now()));
     }
 
+    */
 }

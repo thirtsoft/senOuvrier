@@ -327,7 +327,7 @@ public interface OuvrierApi {
     })
     ResponseEntity<List<Ouvrier>> getAllOuvriersByAddressId(@RequestParam Long id, @RequestParam int page, @RequestParam int size);
 
-    @GetMapping(value = APP_ROOT + "/ouvriers/locality")
+    @GetMapping(value = APP_ROOT + "/ouvriers/searchAllOuvriersByLocalitiesByPageable")
     @ApiOperation(value = "Afficher la listes des Ouvrier par localité par pages",
             notes = "Cette méthode permet d'afficher la liste des Ouvriers par localité par pages")
     @ApiResponses(value = {

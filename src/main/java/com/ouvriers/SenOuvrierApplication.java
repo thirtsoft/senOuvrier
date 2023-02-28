@@ -1,15 +1,10 @@
 package com.ouvriers;
 
-import com.ouvriers.repository.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -20,10 +15,11 @@ import java.nio.file.Paths;
 public class SenOuvrierApplication implements CommandLineRunner {
 
     private static final Logger LOG = LoggerFactory.getLogger(SenOuvrierApplication.class);
-    @Autowired
-    RoleRepository roleRepository;
-    @Autowired
-    PasswordEncoder encoder;
+    //  @Autowired
+    //  RoleRepository roleRepository;
+    //  @Autowired
+    //  PasswordEncoder encoder;
+    /*
     @Autowired
     private AddressRepository addressRepository;
     @Autowired
@@ -36,10 +32,11 @@ public class SenOuvrierApplication implements CommandLineRunner {
     private ServiceOffertRepository serviceOffertRepository;
     @Autowired
     private UtilisateurRepository utilisateurRepository;
+    */
     //  @Autowired
     //  private UtilisateurService utilisateurService;
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    //   @Autowired
+    //  private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
     public static void main(String[] args) {
@@ -72,17 +69,13 @@ public class SenOuvrierApplication implements CommandLineRunner {
         }
     }
 
+    /*
     @Bean
     PasswordEncoder passwordEncoder() { // NEEDED TO ALLOW PASSWORD ENCODER INSIDE SECURITY
         return new BCryptPasswordEncoder();
     }
+    */
 
-
-    // @Bean
-  /*  public BCryptPasswordEncoder getBCPE() {
-        return new BCryptPasswordEncoder();
-    }
-*/
     @Override
     public void run(String... args) throws Exception {
 /*
